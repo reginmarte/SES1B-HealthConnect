@@ -6,13 +6,62 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <TableLayout
+        android:layout_width="384dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        tools:layout_editor_absoluteX="0dp" >
+
+        <TextView
+            android:id="@+id/logo"
+            android:text="HealthConnect logo"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_margin="70dp"
+            android:layout_gravity="center" />
+
+        <EditText
+            android:id="@+id/usernameET"
+            android:layout_marginHorizontal="30dp"
+            android:hint="Username or Email" />
+
+        <EditText
+            android:id="@+id/passwordET"
+            android:layout_marginHorizontal="30dp"
+            android:hint="Password"
+            android:inputType="textPassword" />
+
+            <TableRow
+                android:layout_height="wrap_content"
+                android:layout_width="250dp">
+
+                <Button
+                    android:id="@+id/registerBtn"
+                    android:text="Sign up"
+                    android:layout_height="wrap_content"
+                    android:layout_width="120dp"
+                    android:layout_marginHorizontal="50dp"
+                    android:textSize="12sp"
+                    android:textAllCaps="false"
+                    android:background="@android:color/transparent"/>
+
+                <Button
+                    android:id="@+id/forgotPasswordBtn"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:text="Forgot password?"
+                    android:textAllCaps="false"
+                    android:textSize="12sp" />
+
+            </TableRow>
+
+        <Button
+            android:id="@+id/loginBtn"
+            android:layout_marginVertical="50dp"
+            android:layout_marginHorizontal="120dp"
+            android:text="Login" />
+
+    </TableLayout>
 
 </android.support.constraint.ConstraintLayout>
