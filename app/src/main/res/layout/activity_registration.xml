@@ -6,4 +6,52 @@
     android:layout_height="match_parent"
     tools:context=".RegistrationActivity">
 
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_marginHorizontal="50dp"
+        >
+
+        <TextView
+            android:id="@+id/registration_title"
+            android:text="HealthAppLogo"/>
+
+        <EditText
+            android:id="@+id/nameET"
+            android:hint="Name"
+            />
+
+        <EditText
+            android:id="@+id/birthdayET"
+            android:hint="Birthday (dd/mm/yyyy)"
+            android:inputType="date"
+            />
+
+        <EditText
+            android:id="@+id/emailET"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            />
+
+        <EditText
+            android:id="@+id/numberET"
+            android:hint="Number"
+            android:inputType="number"
+            />
+
+        <EditText
+            android:id="@+id/passwordET"
+            android:hint="Password"
+            android:inputType="textPassword"
+            />
+
+        <Button
+            android:id="@+id/nextBtn"
+            android:text="@string/next_button"
+            android:layout_marginVertical="20dp"
+            android:layout_marginHorizontal="70dp"/>
+
+    </TableLayout>
+
 </android.support.constraint.ConstraintLayout>
