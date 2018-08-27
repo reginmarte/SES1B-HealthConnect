@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Registration2Activity">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_marginHorizontal="40dp">
+
+        <TextView
+            android:id="@+id/registration_title"
+            android:text="@string/logo_text"
+            android:layout_margin="20dp"
+            android:gravity="center"/>
+
+        <TableRow>
+            <Button
+                android:id="@+id/dateOfBirthBtn"
+                android:text="@string/action_date_of_birth"
+                android:layout_marginBottom="5dp"
+                android:textAllCaps="false"
+                android:gravity="center_vertical"
+                android:onClick="showDatePickerDialog" />
+
+            <TextView
+                android:id="@+id/showDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"/>
+        </TableRow>
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/genderTV"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:text="@string/prompt_gender"/>
+
+            <RadioButton
+                android:id="@+id/maleRB"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@string/action_male_radioBtn"
+                android:layout_marginHorizontal="10dp"/>
+
+            <RadioButton
+                android:id="@+id/femaleRB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/action_female_radioBtn"
+                android:layout_marginHorizontal="10dp"/>
+
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/heightET"
+            android:hint="@string/hint_height"
+            android:inputType="number"
+            android:layout_margin="5dp" />
+
+        <EditText
+            android:id="@+id/weightET"
+            android:hint="@string/hint_weight"
+            android:inputType="number"
+            android:layout_margin="5dp" />
+
+        <Button
+            android:id="@+id/submitBtn"
+            android:text="@string/action_confirm"
+            android:layout_marginVertical="20dp"
+            android:layout_marginHorizontal="70dp" />
+
+    </TableLayout>
+
+</android.support.constraint.ConstraintLayout>

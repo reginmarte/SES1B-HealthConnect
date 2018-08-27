@@ -4,17 +4,30 @@
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
+    <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
+    <string name="action_sign_in_short">Login</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions." </string>
-    <string name="login">Login</string>
-    <string name="sign_up">"Sign up</string>
-    <string name="forgot_password">"Forgot password?</string>
-    <string name="next_button">"Next"</string>
+    <string name="logo_text">HealthAppLogo</string>
+    <string name="action_register_short">"Sign up</string>
+    <string name="action_forgot_password">"Forgot password?</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_number">Phone number</string>
+    <string name="hint_confirm_password">Confirm password</string>
+    <string name="action_next">"Next"</string>
+    <string name="action_confirm">Confirm</string>
+    <string name="prompt_gender">Gender: </string>
+    <string name="action_male_radioBtn">Male</string>
+    <string name="action_female_radioBtn">Female</string>
+    <string name="action_date_of_birth">Date of Birth</string>
+    <string name="hint_height">Height (cm)</string>
+    <string name="hint_weight">Weight (kg)</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

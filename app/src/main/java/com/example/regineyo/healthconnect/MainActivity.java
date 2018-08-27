@@ -9,7 +9,7 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText usernameET;
+    private EditText emailET;
     private EditText passwordET;
     private Button forgotPasswordBtn;
     private Button loginBtn;
@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        usernameET = findViewById(R.id.usernameET);
+        emailET = findViewById(R.id.emailET);
         passwordET = findViewById(R.id.passwordET);
 
         findViewById(R.id.registerBtn).setOnClickListener(this);
