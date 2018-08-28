@@ -60,7 +60,9 @@
             android:id="@+id/loginBtn"
             android:layout_marginVertical="25dp"
             android:layout_marginHorizontal="120dp"
-            android:text="@string/action_sign_in_short" />
+            android:text="@string/action_sign_in_short"
+            android:onClick="goToMain"
+            />
 
         <Button
             android:id="@+id/mapBtn"
@@ -70,32 +72,4 @@
 
     </TableLayout>
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="86dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="14dp"
-        android:layout_marginEnd="148dp"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="195dp"
-        android:onClick="goToLogin"
-        android:text="Login"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="206dp"
-        android:layout_marginEnd="148dp"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="14dp"
-        android:text="Register"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
 </android.support.constraint.ConstraintLayout>

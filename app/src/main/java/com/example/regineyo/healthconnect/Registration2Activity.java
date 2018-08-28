@@ -59,5 +59,9 @@ public class Registration2Activity extends AppCompatActivity implements View.OnC
         }
 
     }
+    public void goToMain(View view) {
+        Intent intent = new Intent(this, HomePage.class);
+        startActivity(intent);
+    }
 
 }

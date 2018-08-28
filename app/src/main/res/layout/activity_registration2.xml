@@ -79,7 +79,9 @@
             android:id="@+id/submitBtn"
             android:text="@string/action_confirm"
             android:layout_marginVertical="20dp"
-            android:layout_marginHorizontal="70dp" />
+            android:layout_marginHorizontal="70dp"
+            android:onClick="goToMain"
+            />
 
     </TableLayout>
 
