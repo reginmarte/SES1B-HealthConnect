@@ -44,6 +44,17 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             mMap.getUiSettings().setMyLocationButtonEnabled(true);
 
         }
+
+        MarkerOptions location1 = new MarkerOptions()
+                .position(new LatLng(-33.8839015,151.2012293))
+                .title("location 1");
+        MarkerOptions location2 = new MarkerOptions()
+                .position(new LatLng(-33.8843093,151.1958323))
+                .title("location 2");
+        mMap.addMarker(location1);
+        mMap.addMarker(location2);
+
+
     }
 
     private static final String TAG = "MapActivity";
@@ -102,14 +113,14 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude );
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
 
-        MarkerOptions location1 = new MarkerOptions()
-                .position(new LatLng(-33.8839015,151.2012293))
-                .title("location 1");
-        MarkerOptions location2 = new MarkerOptions()
-                .position(new LatLng(-33.8843093,151.1958323))
-                .title("location 2");
-        mMap.addMarker(location1);
-        mMap.addMarker(location2);
+//        MarkerOptions location1 = new MarkerOptions()
+//                .position(new LatLng(-33.8839015,151.2012293))
+//                .title("location 1");
+//        MarkerOptions location2 = new MarkerOptions()
+//                .position(new LatLng(-33.8843093,151.1958323))
+//                .title("location 2");
+//        mMap.addMarker(location1);
+//        mMap.addMarker(location2);
     }
 
     private void initMap(){
