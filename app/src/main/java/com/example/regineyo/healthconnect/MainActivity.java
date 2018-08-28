@@ -30,4 +30,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(RegisterIntent);
     }
 
+
+    public void goToLogin(View view) {
+        Intent intent = new Intent(this, Login.class);
+        startActivity(intent);
+    }
 }
