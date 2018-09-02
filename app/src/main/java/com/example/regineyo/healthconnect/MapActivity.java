@@ -23,6 +23,12 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -45,6 +51,27 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         }
 
+        databaseReference.child("health_care_centre").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (final DataSnapshot ds : dataSnapshot.getChildren()) {
+                    double lat = ds.child("lat").getValue(double.class);
+                    double lng = ds.child("lng").getValue(double.class);
+                    String locationName = ds.child("name").getValue(String.class);
+                    MarkerOptions location = new MarkerOptions()
+                            .position(new LatLng(lat,lng))
+                            .title(locationName);
+                    mMap.addMarker(location);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
 
     }
 
@@ -55,6 +82,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private static final float DEFAULT_ZOOM = 15f;
 
+    //firebase
+    private FirebaseAuth mAuth;
+    DatabaseReference databaseReference;
+
+
     //vars
     private Boolean mLocationPermissionsGranted = false;
     private GoogleMap mMap;
@@ -64,6 +96,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+
+//        mAuth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference();
 
         getLocationPermission();
 
@@ -104,14 +139,17 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude );
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
 
-        MarkerOptions location1 = new MarkerOptions()
-                .position(new LatLng(-33.8839015,151.2012293))
-                .title("location 1");
-        MarkerOptions location2 = new MarkerOptions()
-                .position(new LatLng(-33.8843093,151.1958323))
-                .title("location 2");
-        mMap.addMarker(location1);
-        mMap.addMarker(location2);
+//        MarkerOptions location1 = new MarkerOptions()
+//                .position(new LatLng(-33.8839015,151.2012293))
+//                .title("location 1");
+//        MarkerOptions location2 = new MarkerOptions()
+//                .position(new LatLng(-33.8843093,151.1958323))
+//                .title("location 2");
+//        mMap.addMarker(location1);
+//        mMap.addMarker(location2);
+
+
+
     }
 
     private void initMap(){
