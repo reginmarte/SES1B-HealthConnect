@@ -23,7 +23,6 @@
         </activity>
         <activity android:name=".LoginActivity2" />
         <activity android:name=".RegistrationActivity" />
-        <activity android:name=".Registration2Activity" />
         <activity
             android:name=".Login"
             android:label="@string/title_activity_login"
