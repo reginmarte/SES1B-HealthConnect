@@ -59,12 +59,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-
     @Override
     public void onClick(View v) {
     }
 
-    public void login(String email, String password){
+    public void loginUser(String email, String password){
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -77,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(MainActivity.this, "Login failed",
+                            Toast.makeText(MainActivity.this, "Email and password does not match. Please try again.",
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
@@ -89,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(user != null) {
             Intent intent = new Intent(this, HomePage.class);
             startActivity(intent);
+            finish();
         }
     }
 
@@ -114,7 +114,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return;
         }
 
-        login(email, password);
+        loginUser(email, password);
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
     }
 
 }

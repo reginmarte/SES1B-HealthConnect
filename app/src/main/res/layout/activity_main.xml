@@ -78,7 +78,6 @@
             android:id="@+id/loginBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="goToMain"
             android:text="@string/action_sign_in_short" />
 
         <Button

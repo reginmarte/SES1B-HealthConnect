@@ -62,19 +62,10 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                 checkInputs();
             }
         });
-
     }
 
     @Override
     public void onClick(View v) {
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
     }
 
     private void checkInputs() {
@@ -167,6 +158,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         if(user != null) {
             Intent intent = new Intent(this, HomePage.class);
             startActivity(intent);
+            finish();
         }
     }
 
