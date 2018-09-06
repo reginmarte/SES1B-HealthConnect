@@ -170,6 +170,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                             String height = heightET.getText().toString().trim();
                             String weight = weightET.getText().toString().trim();
 
+                            //adds user to database
                             Map newUser = new HashMap();
                             newUser.put("name", name);
                             newUser.put("number", number);
@@ -179,6 +180,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                             newUser.put("weight", weight);
 
                             currentUser_db.setValue(newUser);
+
                             updateUI(user);
 
                         } else {
