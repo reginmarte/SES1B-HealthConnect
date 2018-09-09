@@ -22,14 +22,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegistrationActivity" />
-
         <activity
             android:name=".HomePage"
             android:label="@string/title_activity_home_page" />
         <activity
             android:name=".EditProfileActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
+        <activity android:name=".ChangePasswordActivity" />
+        <activity android:name=".ForgotPasswordActivity"></activity>
     </application>
 
 </manifest>

@@ -177,7 +177,6 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                             newUser.put("name", name);
                             newUser.put("email", email);
                             newUser.put("number", number);
-                            newUser.put("age", age);
                             newUser.put("birthday", birthday);
                             newUser.put("gender", genderSelect);
                             newUser.put("height", height);
@@ -197,19 +196,6 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                     }
                 });
     }
-
-//    private void saveAccountDetails(FirebaseUser user) {
-//        final String age = ageET.getText().toString();
-//        String height = Height.getText().toString();
-//        String weight = Weight.getText().toString();
-//        int genderID = Gender.getCheckedRadioButtonId();
-//        String name = Name.getText().toString();
-//        Male_Female = (RadioButton) findViewById(genderID);
-//
-//        if(user != null) {
-//            userRef = mDatabase.getReference().child("Users").child(user.getUid()).child(nameET.getText().toString().trim());
-//        }
-//    }
 
     private void updateUI(FirebaseUser user) {
         if(user != null) {

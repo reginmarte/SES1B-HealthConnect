@@ -42,7 +42,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     private RadioGroup genderRadioGroup;
     private RadioButton genderRadioButton;
     private TextView dateOfBirthTV;
-    private int currentAge, newAge;
+    private int age;
     private String birthday;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -76,6 +76,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                 nameET.setText(name);
                 emailET.setText(email);
                 numberET.setText(number);
+                age = 1;
                 dateOfBirthTV.setText(birthday);
                 if(gender.equalsIgnoreCase("male")){
                     maleBtn.setChecked(true);
@@ -105,6 +106,14 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         heightET = findViewById(R.id.heightET);
         weightET = findViewById(R.id.weightET);
 
+        findViewById(R.id.passwordBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent RegisterIntent = new Intent(EditProfileActivity.this, ChangePasswordActivity.class);
+                startActivity(RegisterIntent);
+            }
+        });
+
         findViewById(R.id.confirmBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,7 +138,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         String email = emailET.getText().toString().trim();
 
-        if (nameET.getText().toString().trim().isEmpty()) {
+        if (nameET.getText().toString().isEmpty()) {
             nameTIL.setError("Please enter your name");
             nameET.requestFocus();
             return;
@@ -141,27 +150,27 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             return;
         }
 
-        if (numberET.getText().toString().trim().isEmpty()
+        if (numberET.getText().toString().isEmpty()
                 || numberET.getText().length() < 8) {
             numberTIL.setError("Please enter a valid contact number");
             numberET.requestFocus();
             return;
         }
 
-        if (currentAge < 1) {
+        if (age <= 0 || dateOfBirthTV.getText().toString().isEmpty()) {
             dateOfBirthTV.setError("Please select date of birth");
             dateOfBirthTV.requestFocus();
             return;
         }
 
-        if (heightET.getText().toString().trim().isEmpty()
+        if (heightET.getText().toString().isEmpty()
                 || Integer.parseInt(heightET.getText().toString().trim()) <= 0) {
             heightTIL.setError("Please enter your height");
             heightET.requestFocus();
             return;
         }
 
-        if (weightET.getText().toString().trim().isEmpty()
+        if (weightET.getText().toString().isEmpty()
                 || Integer.parseInt(weightET.getText().toString().trim()) <= 0) {
             weightTIL.setError("Please enter your weight");
             weightET.requestFocus();
@@ -185,7 +194,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         String name = nameET.getText().toString().trim();
         String email = emailET.getText().toString().trim();
         String number = numberET.getText().toString().trim();
-
+        String birthday = dateOfBirthTV.getText().toString().trim();
         int genderID = genderRadioGroup.getCheckedRadioButtonId();
         genderRadioButton = findViewById(genderID);
         String genderSelect = genderRadioButton.getText().toString();
@@ -197,7 +206,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         childUpdates.put("name", name);
         childUpdates.put("email", email);
         childUpdates.put("number", number);
-        childUpdates.put("age", newAge);
         childUpdates.put("birthday", birthday);
         childUpdates.put("gender", genderSelect);
         childUpdates.put("height", height);
@@ -230,7 +238,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         Calendar cal = new GregorianCalendar(year, month, dayOfMonth);
 //        ageTV.setText(calculateAge(year,month,dayOfMonth));
-        newAge = calculateAge(year, month,dayOfMonth);
+        age = calculateAge(year, month,dayOfMonth);
         setDate(cal);
     }
 
