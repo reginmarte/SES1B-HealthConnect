@@ -23,6 +23,7 @@
     <string name="action_change_password">Change password</string>
     <string name="action_next">"Next"</string>
     <string name="action_confirm">Confirm</string>
+    <string name="action_save">Save</string>
     <string name="action_send">Send</string>
     <string name="prompt_gender">Gender: </string>
     <string name="action_male_radioBtn">Male</string>

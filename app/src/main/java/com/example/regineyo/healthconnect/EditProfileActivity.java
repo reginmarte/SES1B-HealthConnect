@@ -201,6 +201,16 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         String height = heightET.getText().toString().trim();
         String weight = weightET.getText().toString().trim();
 
+        user.updateEmail(email)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "User email address updated.");
+                        }
+                    }
+                });
+
         //adds user to database
         Map childUpdates = new HashMap();
         childUpdates.put("name", name);

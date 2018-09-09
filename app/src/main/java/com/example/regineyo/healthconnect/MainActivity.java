@@ -55,7 +55,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.forgotPasswordBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent RegisterIntent = new Intent(MainActivity.this, ForgotPasswordActivity.class);
+                startActivity(RegisterIntent);
             }
         });
     }
