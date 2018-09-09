@@ -19,6 +19,7 @@
     <string name="hint_name">Name</string>
     <string name="hint_number">Phone number</string>
     <string name="hint_confirm_password">Confirm password</string>
+    <string name="action_change_password">Change password</string>
     <string name="action_next">"Next"</string>
     <string name="action_confirm">Confirm</string>
     <string name="prompt_gender">Gender: </string>

@@ -21,18 +21,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity2" />
         <activity android:name=".RegistrationActivity" />
-        <activity
-            android:name=".Login"
-            android:label="@string/title_activity_login"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".MainScreen"
-            android:label="@string/title_activity_main_screen" />
+
         <activity
             android:name=".HomePage"
-            android:label="@string/title_activity_home_page"></activity>
+            android:label="@string/title_activity_home_page" />
+        <activity
+            android:name=".EditProfileActivity"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>

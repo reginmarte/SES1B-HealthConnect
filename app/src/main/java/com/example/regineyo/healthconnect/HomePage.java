@@ -57,6 +57,14 @@ public class HomePage extends AppCompatActivity {
                 finish();
             }
         });
+
+        findViewById(R.id.profileBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent RegisterIntent = new Intent(HomePage.this, EditProfileActivity.class);
+                startActivity(RegisterIntent);
+            }
+        });
     }
 
 }

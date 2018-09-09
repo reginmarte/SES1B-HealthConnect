@@ -1,11 +1,17 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorButtonNormal">@color/button</item>
+
+        <!--<item name="colorControlNormal">@android:color/white</item>-->
+        <!--<item name="colorControlActivated">@android:color/white</item>-->
+        <!--<item name="colorControlHighlight">@android:color/white</item>-->
+
         <item name="android:dialogTheme">@style/MyDialogTheme</item>
         <item name="android:datePickerStyle">@style/MyDatePicker</item>
     </style>
@@ -24,7 +30,6 @@
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

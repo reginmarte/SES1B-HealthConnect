@@ -3,12 +3,12 @@ package com.example.regineyo.healthconnect;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -23,8 +23,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -32,14 +35,14 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RegistrationActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
+public class EditProfileActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
-    private static final String TAG = "RegistrationActivity";
-    private TextInputEditText nameET, emailET, numberET, passwordET, heightET, weightET;
+    private static final String TAG = "EditProfileActivity";
+    private TextInputEditText nameET, emailET, numberET, heightET, weightET;
     private RadioGroup genderRadioGroup;
     private RadioButton genderRadioButton;
     private TextView dateOfBirthTV;
-    private int age;
+    private int currentAge, newAge;
     private String birthday;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -50,21 +53,57 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registration);
+        setContentView(R.layout.activity_edit_profile);
         mAuth = FirebaseAuth.getInstance();
+
+        FirebaseUser user = mAuth.getCurrentUser();
+        final String userID = user.getUid();
+        DatabaseReference mRef = FirebaseDatabase.getInstance().getReference();
+
+        ValueEventListener patientDetailsListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String name = dataSnapshot.child("patients").child(userID).child("name").getValue(String.class);
+                String email = dataSnapshot.child("patients").child(userID).child("email").getValue(String.class);
+                String number = dataSnapshot.child("patients").child(userID).child("number").getValue(String.class);
+                String birthday = dataSnapshot.child("patients").child(userID).child("birthday").getValue(String.class);
+                String gender = dataSnapshot.child("patients").child(userID).child("gender").getValue(String.class);
+                String height = dataSnapshot.child("patients").child(userID).child("height").getValue(String.class);
+                String weight = dataSnapshot.child("patients").child(userID).child("weight").getValue(String.class);
+                RadioButton maleBtn = findViewById(R.id.maleRB);
+                RadioButton femaleBtn = findViewById(R.id.femaleRB);
+
+                nameET.setText(name);
+                emailET.setText(email);
+                numberET.setText(number);
+                dateOfBirthTV.setText(birthday);
+                if(gender.equalsIgnoreCase("male")){
+                    maleBtn.setChecked(true);
+                } else {
+                    femaleBtn.setChecked(true);
+                }
+                heightET.setText(height);
+                weightET.setText(weight);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+                // ...
+            }
+        };
+        mRef.addValueEventListener(patientDetailsListener);
 
         nameET = findViewById(R.id.nameET);
         emailET = findViewById(R.id.emailET);
-        numberET = findViewById(R.id.numberET);
-        passwordET = findViewById(R.id.passwordET);
+        numberET = findViewById(R.id.numberET);//
         dateOfBirthTV = findViewById(R.id.showDate);
         genderRadioGroup = findViewById(R.id.genderRG);
 //        ageTV = findViewById(R.id.showAge);
         heightET = findViewById(R.id.heightET);
         weightET = findViewById(R.id.weightET);
-
-        RadioButton maleBtn = findViewById(R.id.maleRB);
-        maleBtn.setChecked(true);
 
         findViewById(R.id.confirmBtn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,145 +113,102 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         });
     }
 
-    @Override
-    public void onClick(View v) {
-    }
-
     private void checkInputs() {
         TextInputLayout nameTIL = findViewById(R.id.TIL_name);
         TextInputLayout emailTIL = findViewById(R.id.TIL_email);
         TextInputLayout numberTIL = findViewById(R.id.TIL_number);
-        TextInputLayout passwordTIL = findViewById(R.id.TIL_password);
         TextInputLayout heightTIL = findViewById(R.id.TIL_height);
         TextInputLayout weightTIL = findViewById(R.id.TIL_weight);
 
         nameTIL.setError(null);
         emailTIL.setError(null);
         numberTIL.setError(null);
-        passwordTIL.setError(null);
         dateOfBirthTV.setError(null);
         heightTIL.setError(null);
         weightTIL.setError(null);
 
         String email = emailET.getText().toString().trim();
-        String password = passwordET.getText().toString().trim();
 
-        if(nameET.getText().toString().trim().isEmpty()){
+        if (nameET.getText().toString().trim().isEmpty()) {
             nameTIL.setError("Please enter your name");
             nameET.requestFocus();
             return;
         }
 
-        if(email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()){   // THIS METHOD CHECKS IF ITS A REAL EMAIL
+        if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {   // THIS METHOD CHECKS IF ITS A REAL EMAIL
             emailTIL.setError("Please enter a valid email");
             emailET.requestFocus();
             return;
         }
 
-        if(password.isEmpty()){
-            passwordTIL.setError("Please enter a password");
-            passwordET.requestFocus();
-            return;
-        }
-
-        if(password.length() < 6){
-            passwordTIL.setError("Minimum of 6 characters required");
-            passwordET.requestFocus();
-            return;
-        }
-
-        if(numberET.getText().toString().trim().isEmpty()
-                || numberET.getText().length() < 8){
+        if (numberET.getText().toString().trim().isEmpty()
+                || numberET.getText().length() < 8) {
             numberTIL.setError("Please enter a valid contact number");
             numberET.requestFocus();
             return;
         }
 
-        if(age <= 0 || dateOfBirthTV.getText().toString().equalsIgnoreCase("day/month/year")) {
+        if (currentAge < 1) {
             dateOfBirthTV.setError("Please select date of birth");
             dateOfBirthTV.requestFocus();
             return;
         }
 
-        if(heightET.getText().toString().trim().isEmpty()
-                || Integer.parseInt(heightET.getText().toString().trim()) <= 0){
+        if (heightET.getText().toString().trim().isEmpty()
+                || Integer.parseInt(heightET.getText().toString().trim()) <= 0) {
             heightTIL.setError("Please enter your height");
             heightET.requestFocus();
             return;
         }
 
-        if(weightET.getText().toString().trim().isEmpty()
-                || Integer.parseInt(weightET.getText().toString().trim()) <= 0){
+        if (weightET.getText().toString().trim().isEmpty()
+                || Integer.parseInt(weightET.getText().toString().trim()) <= 0) {
             weightTIL.setError("Please enter your weight");
             weightET.requestFocus();
             return;
         }
 
-        createAccount(email, password);
+        saveDetails();
     }
 
-    private void createAccount(String email, String password) {
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(RegistrationActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            String userID = mAuth.getCurrentUser().getUid();
-                            DatabaseReference currentUser_db = FirebaseDatabase.getInstance().getReference().child("patients").child(userID);
+    @Override
+    public void onClick(View v) {
 
-                            String name = nameET.getText().toString().trim();
-                            String email = emailET.getText().toString().trim();
-                            String number = numberET.getText().toString().trim();
-                            int genderID = genderRadioGroup.getCheckedRadioButtonId();
-                            genderRadioButton = findViewById(genderID);
-                            String genderSelect = genderRadioButton.getText().toString();
-                            String height = heightET.getText().toString().trim();
-                            String weight = weightET.getText().toString().trim();
-
-                            //adds user to database
-                            Map newUser = new HashMap();
-                            newUser.put("name", name);
-                            newUser.put("email", email);
-                            newUser.put("number", number);
-                            newUser.put("age", age);
-                            newUser.put("birthday", birthday);
-                            newUser.put("gender", genderSelect);
-                            newUser.put("height", height);
-                            newUser.put("weight", weight);
-
-                            currentUser_db.setValue(newUser);
-
-                            updateUI(user);
-
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(RegistrationActivity.this, "Registration failed",
-                                    Toast.LENGTH_SHORT).show();
-                            updateUI(null);
-                        }
-                    }
-                });
     }
 
-//    private void saveAccountDetails(FirebaseUser user) {
-//        final String age = ageET.getText().toString();
-//        String height = Height.getText().toString();
-//        String weight = Weight.getText().toString();
-//        int genderID = Gender.getCheckedRadioButtonId();
-//        String name = Name.getText().toString();
-//        Male_Female = (RadioButton) findViewById(genderID);
-//
-//        if(user != null) {
-//            userRef = mDatabase.getReference().child("Users").child(user.getUid()).child(nameET.getText().toString().trim());
-//        }
-//    }
+    private void saveDetails() {
+
+        FirebaseUser user = mAuth.getCurrentUser();
+        String userID = mAuth.getCurrentUser().getUid();
+        DatabaseReference currentUser_db = FirebaseDatabase.getInstance().getReference().child("patients").child(userID);
+
+        String name = nameET.getText().toString().trim();
+        String email = emailET.getText().toString().trim();
+        String number = numberET.getText().toString().trim();
+
+        int genderID = genderRadioGroup.getCheckedRadioButtonId();
+        genderRadioButton = findViewById(genderID);
+        String genderSelect = genderRadioButton.getText().toString();
+        String height = heightET.getText().toString().trim();
+        String weight = weightET.getText().toString().trim();
+
+        //adds user to database
+        Map childUpdates = new HashMap();
+        childUpdates.put("name", name);
+        childUpdates.put("email", email);
+        childUpdates.put("number", number);
+        childUpdates.put("age", newAge);
+        childUpdates.put("birthday", birthday);
+        childUpdates.put("gender", genderSelect);
+        childUpdates.put("height", height);
+        childUpdates.put("weight", weight);
+
+        currentUser_db.updateChildren(childUpdates);
+        updateUI(user);
+    }
 
     private void updateUI(FirebaseUser user) {
-        if(user != null) {
+        if (user != null) {
             Intent intent = new Intent(this, HomePage.class);
             startActivity(intent);
             finish();
@@ -220,7 +216,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     }
 
     public void showDatePickerDialog(View v) {
-        DialogFragment newFragment = new RegistrationActivity.DatePickerFragment();
+        DialogFragment newFragment = new EditProfileActivity.DatePickerFragment();
         newFragment.show(getSupportFragmentManager(),"datePicker" );
     }
 
@@ -234,7 +230,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         Calendar cal = new GregorianCalendar(year, month, dayOfMonth);
 //        ageTV.setText(calculateAge(year,month,dayOfMonth));
-        age = calculateAge(year, month, dayOfMonth);
+        newAge = calculateAge(year, month,dayOfMonth);
         setDate(cal);
     }
 
@@ -264,7 +260,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 //        Integer ageInt = new Integer(age);
 //        String ageS = ageInt.toString();
 //        return ageS;
-
         return age;
     }
+
 }
