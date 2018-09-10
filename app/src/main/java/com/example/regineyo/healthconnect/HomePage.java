@@ -32,6 +32,11 @@ public class HomePage extends AppCompatActivity {
                     return true;
                 case R.id.navigation_profile:
                     mTextMessage.setText(R.string.title_profile);
+                {
+                    Intent RegisterIntent = new Intent(HomePage.this, EditProfileActivity.class);
+                    startActivity(RegisterIntent);
+                }
+
                     return true;
                 case R.id.navigation_setting:
                     mTextMessage.setText(R.string.title_setting);

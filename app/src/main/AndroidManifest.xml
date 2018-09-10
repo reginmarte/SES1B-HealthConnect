@@ -30,6 +30,7 @@
             android:exported="true" />
         <activity android:name=".ChangePasswordActivity" />
         <activity android:name=".ForgotPasswordActivity"></activity>
+
     </application>
 
 </manifest>
