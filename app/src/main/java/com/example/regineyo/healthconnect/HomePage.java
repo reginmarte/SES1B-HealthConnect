@@ -26,6 +26,10 @@ public class HomePage extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_messages:
                     mTextMessage.setText(R.string.title_messages);
+                {
+                    Intent RegisterIntent = new Intent(HomePage.this, MessagingActivity.class);
+                    startActivity(RegisterIntent);
+                }
                     return true;
                 case R.id.navigation_map:
                     mTextMessage.setText(R.string.title_map);
@@ -41,9 +45,6 @@ public class HomePage extends AppCompatActivity {
                     startActivity(RegisterIntent);
                 }
 
-                    return true;
-                case R.id.navigation_setting:
-                    mTextMessage.setText(R.string.title_setting);
                     return true;
             }
             return false;
@@ -70,13 +71,6 @@ public class HomePage extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.profileBtn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent RegisterIntent = new Intent(HomePage.this, EditProfileActivity.class);
-                startActivity(RegisterIntent);
-            }
-        });
     }
 
 }

@@ -6,12 +6,10 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-
-
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -25,7 +23,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyD1AZs0PxyEIw4ezqoGlDaf8ADfnJ65Zu4"/>
+            android:value="AIzaSyD1AZs0PxyEIw4ezqoGlDaf8ADfnJ65Zu4" />
 
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -42,8 +40,11 @@
             android:name=".EditProfileActivity"
             android:exported="true" />
         <activity android:name=".ChangePasswordActivity" />
-        <activity android:name=".ForgotPasswordActivity"></activity>
-
+        <activity android:name=".MapActivity" />
+        <activity android:name=".ForgotPasswordActivity" />
+        <activity
+            android:name=".MessagingActivity"
+            android:label="@string/title_activity_messaging"></activity>
     </application>
 
 </manifest>
