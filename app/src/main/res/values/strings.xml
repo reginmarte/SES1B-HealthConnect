@@ -12,7 +12,8 @@
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions." </string>
+    <string name="google_maps_API_key">AIzaSyD1AZs0PxyEIw4ezqoGlDaf8ADfnJ65Zu4</string>
+
     <string name="prompt_enter_email">"Enter your email to reset password.</string>
     <string name="patient_register_title">PATIENT INFORMATION</string>
     <string name="action_register_short">Sign up</string>
