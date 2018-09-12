@@ -42,6 +42,7 @@
             android:name=".EditProfileActivity"
             android:exported="true" />
         <activity android:name=".ChangePasswordActivity" />
+        <activity android:name=".MapActivity" />
         <activity android:name=".ForgotPasswordActivity"></activity>
 
     </application>
