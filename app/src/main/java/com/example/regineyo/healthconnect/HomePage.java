@@ -29,6 +29,10 @@ public class HomePage extends AppCompatActivity {
                     return true;
                 case R.id.navigation_map:
                     mTextMessage.setText(R.string.title_map);
+                {
+                    Intent RegisterIntent = new Intent(HomePage.this, MapActivity.class);
+                    startActivity(RegisterIntent);
+                }
                     return true;
                 case R.id.navigation_profile:
                     mTextMessage.setText(R.string.title_profile);

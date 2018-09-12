@@ -11,7 +11,7 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
+    <string name="permission_rationale">"Contacts permissions are needed for providing email"</string>
     <string name="google_maps_API_key">AIzaSyD1AZs0PxyEIw4ezqoGlDaf8ADfnJ65Zu4</string>
 
     <string name="prompt_enter_email">"Enter your email to reset password.</string>
