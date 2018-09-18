@@ -44,7 +44,8 @@
         <activity android:name=".ForgotPasswordActivity" />
         <activity
             android:name=".MessagingActivity"
-            android:label="@string/title_activity_messaging"></activity>
+            android:label="@string/title_activity_messaging"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>
