@@ -30,7 +30,6 @@ import com.google.firebase.auth.FirebaseAuth;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "MainActivity" ;
-    private TextInputEditText emailET, passwordET;
     private FirebaseAuth mAuth;
 
     @Override
@@ -39,31 +38,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
 
-        emailET = findViewById(R.id.emailET);
-        passwordET = findViewById(R.id.passwordET);
-
-        //user selects login
-        findViewById(R.id.loginBtn).setOnClickListener(new View.OnClickListener() {
+        //user selects patient button
+        findViewById(R.id.patientBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkInputs();
-            }
-        });
-
-        //user selects register button
-        findViewById(R.id.registerBtn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent RegisterIntent = new Intent(MainActivity.this, RegistrationActivity.class);
+                Intent RegisterIntent = new Intent(MainActivity.this, PatientLoginActivity.class);
                 startActivity(RegisterIntent);
             }
         });
 
-        //user selects forgot password button
-        findViewById(R.id.forgotPasswordBtn).setOnClickListener(new View.OnClickListener() {
+        //user selects register button
+        findViewById(R.id.doctorBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent RegisterIntent = new Intent(MainActivity.this, ForgotPasswordActivity.class);
+                Intent RegisterIntent = new Intent(MainActivity.this, DoctorLoginActivity.class);
                 startActivity(RegisterIntent);
             }
         });
@@ -73,67 +61,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
     }
 
-    public void loginUser(String email, String password){
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(MainActivity.this, "Email and password does not match. Please try again.",
-                                    Toast.LENGTH_SHORT).show();
-                            updateUI(null);
-                        }
-                    }
-                });
-    }
-
-    private void updateUI(FirebaseUser user) {
-        if(user != null) {
-            Intent intent = new Intent(this, HomePage.class);
-            startActivity(intent);
-            finish();
-        }
-    }
-
-    public void checkInputs() {
-        TextInputLayout til = findViewById(R.id.TIL_email);
-        TextInputLayout til2 = findViewById(R.id.TIL_password);
-        til.setError(null);
-        til2.setError(null);
-
-        String email = emailET.getText().toString().trim();
-        String password = passwordET.getText().toString().trim();
-
-        // checks for valid input
-        if (email.isEmpty()
-                || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            til.setError("Please enter a valid email");
-            emailET.requestFocus();
-            return;
-        }
-        if (password.isEmpty()) {
-            til2.setError("Please enter password");
-            passwordET.requestFocus();
-            return;
-        }
-
-        loginUser(email, password);
-    }
-
-
     @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
+        if(currentUser != null) {
+            updateUI(currentUser);
+        }
+    }
+
+    private void updateUI(FirebaseUser currentUser) {
+        Intent intent = new Intent(this, HomePage.class);
+        startActivity(intent);
+        finish();
     }
 
 }

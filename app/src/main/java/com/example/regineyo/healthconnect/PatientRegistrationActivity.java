@@ -32,7 +32,7 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RegistrationActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
+public class PatientRegistrationActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
     private static final String TAG = "RegistrationActivity";
     private TextInputEditText nameET, emailET, numberET, passwordET, heightET, weightET;
@@ -50,7 +50,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registration);
+        setContentView(R.layout.activity_patient_registration);
         mAuth = FirebaseAuth.getInstance();
 
         nameET = findViewById(R.id.nameET);
@@ -153,7 +153,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
     private void createAccount(String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(RegistrationActivity.this, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(PatientRegistrationActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
@@ -181,6 +181,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                             newUser.put("gender", genderSelect);
                             newUser.put("height", height);
                             newUser.put("weight", weight);
+                            newUser.put("type", "patient");
 
                             currentUser_db.setValue(newUser);
 
@@ -189,7 +190,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(RegistrationActivity.this, "Registration failed",
+                            Toast.makeText(PatientRegistrationActivity.this, "Registration failed",
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
@@ -206,7 +207,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     }
 
     public void showDatePickerDialog(View v) {
-        DialogFragment newFragment = new RegistrationActivity.DatePickerFragment();
+        DialogFragment newFragment = new PatientRegistrationActivity.DatePickerFragment();
         newFragment.show(getSupportFragmentManager(),"datePicker" );
     }
 

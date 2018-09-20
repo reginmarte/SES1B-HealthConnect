@@ -15,17 +15,22 @@
     <string name="google_maps_API_key">AIzaSyD1AZs0PxyEIw4ezqoGlDaf8ADfnJ65Zu4</string>
 
     <string name="prompt_enter_email">"Enter your email to reset password.</string>
-    <string name="patient_register_title">PATIENT INFORMATION</string>
-    <string name="action_register_short">Sign up</string>
+    <string name="patient_register_title">COMPANY LOGO</string>
+    <string name="prompt_patient_doctor">"Are you a patient or doctor?"</string>
+    <string name="action_select_patient">Patient</string>
+    <string name="action_select_doctor">Doctor</string>
+    <string name="prompt_register">"Don't have an account?"</string>
+    <string name="action_register_short">Sign up.</string>
     <string name="action_forgot_password">Forgot password?</string>
     <string name="hint_name">Name</string>
-    <string name="hint_number">Phone number</string>
+    <string name="hint_number">Contact number</string>
     <string name="hint_confirm_password">Confirm password</string>
     <string name="action_change_password">Change password</string>
     <string name="action_next">"Next"</string>
     <string name="action_confirm">Confirm</string>
     <string name="action_save">Save</string>
     <string name="action_send">Send</string>
+    <string name="hint_sCode">Clinic code</string>
     <string name="prompt_gender">Gender: </string>
     <string name="action_male_radioBtn">Male</string>
     <string name="action_female_radioBtn">Female</string>

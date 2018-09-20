@@ -23,6 +23,30 @@
           }
         },
         {
+          "client_id": "440103445119-cjrcfl8r6nppd12kntoro8vtbmiom447.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.regineyo.healthconnect",
+            "certificate_hash": "25db56642a95035c9f0d0efed25ae3f08c0be291"
+          }
+        },
+        {
+          "client_id": "440103445119-gegajn3fela39u33n8rgqe639tadg2v8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.regineyo.healthconnect",
+            "certificate_hash": "3b2458d5387abf3dc1934190a235feebb096602c"
+          }
+        },
+        {
+          "client_id": "440103445119-t738412q5tusbsecjsatv7p19idkvblv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.regineyo.healthconnect",
+            "certificate_hash": "6da5b313a7f5aae0a48fabf0302e455c74aea99c"
+          }
+        },
+        {
           "client_id": "440103445119-biq80vf5dfot718bf634c75te0v95ifn.apps.googleusercontent.com",
           "client_type": 3
         }

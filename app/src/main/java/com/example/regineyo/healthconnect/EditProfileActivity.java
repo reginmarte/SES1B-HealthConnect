@@ -60,6 +60,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         final String userID = user.getUid();
         DatabaseReference mRef = FirebaseDatabase.getInstance().getReference();
 
+        //gets user data from database
         ValueEventListener patientDetailsListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

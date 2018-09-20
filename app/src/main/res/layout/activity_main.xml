@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -20,68 +19,41 @@
             android:text="@string/patient_register_title"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:layout_margin="40dp"
+            android:layout_margin="20dp"
             android:layout_gravity="center" />
 
-        <!--email-->
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/TIL_email"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/prompt_register"
+            android:text="@string/prompt_patient_doctor"
             android:layout_height="wrap_content"
-            app:errorEnabled="true">
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/emailET"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/prompt_email"
-                android:inputType="textEmailAddress" />
-
-        </android.support.design.widget.TextInputLayout>
-
-        <!--password-->
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/TIL_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:errorEnabled="true"
-            app:passwordToggleEnabled="true">
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/passwordET"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/prompt_password"
-                android:inputType="textPassword" />
-        </android.support.design.widget.TextInputLayout>
+            android:layout_width="wrap_content"
+            android:gravity="right" />
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:id="@+id/registerBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:text="@string/action_register_short"
-                android:textSize="12sp" />
-
-            <Button
-                android:id="@+id/forgotPasswordBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="95dp"
-                android:background="@android:color/transparent"
-                android:text="@string/action_forgot_password"
-                android:textSize="12sp" />
-        </TableRow>
-
-        <Button
-            android:id="@+id/loginBtn"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:textColor="#8470ff"
-            android:text="@string/action_sign_in_short" />
+            android:gravity="center"
+            android:layout_marginTop="20dp">
+
+            <Button
+                android:id="@+id/patientBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#17A589"
+                android:text="@string/action_select_patient"
+                android:background="@drawable/secondary_patient_button"
+                android:layout_margin="10dp"/>
+
+            <Button
+                android:id="@+id/doctorBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#2E86C1"
+                android:text="@string/action_select_doctor"
+                android:background="@drawable/secondary_doctor_button"
+                android:layout_margin="10dp"/>
+
+        </TableRow>
 
     </LinearLayout>
 
