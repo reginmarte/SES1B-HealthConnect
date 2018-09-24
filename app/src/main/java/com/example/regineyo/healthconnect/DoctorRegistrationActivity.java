@@ -39,7 +39,7 @@ import java.util.Map;
 public class DoctorRegistrationActivity extends AppCompatActivity implements View.OnClickListener {
 //        DatePickerDialog.OnDateSetListener
 
-    private static final String TAG = "RegistrationActivity";
+    private static final String TAG = "DoctorRegistrationActivity";
     private TextInputEditText nameET, emailET, numberET, passwordET, sCodeET;
     private RadioGroup genderRadioGroup;
     private RadioButton genderRadioButton;
@@ -172,9 +172,9 @@ public class DoctorRegistrationActivity extends AppCompatActivity implements Vie
                             String genderSelect = genderRadioButton.getText().toString();
                             String sCode = sCodeET.getText().toString().trim();
 
-                            FirebaseUser user = mAuth.getCurrentUser();
                             String userID = mAuth.getCurrentUser().getUid();
-                            DatabaseReference currentUser_db = FirebaseDatabase.getInstance().getReference()
+                            DatabaseReference currentUser_db = FirebaseDatabase.getInstance().getReference().child("doctors").child(userID);
+                            DatabaseReference clinicRef = FirebaseDatabase.getInstance().getReference()
                                     .child("health_care_centre")
                                     .child(sCode)
                                     .child("doctor")
@@ -187,15 +187,19 @@ public class DoctorRegistrationActivity extends AppCompatActivity implements Vie
                             newUser.put("number", number);
                             newUser.put("gender", genderSelect);
                             newUser.put("clinic", sCode);
-                            newUser.put("type", "doctor");
-
                             currentUser_db.setValue(newUser);
+
+                            //adds doctor to clinic
+                            Map newDoctor = new HashMap();
+                            newDoctor.put("name", name);
+                            clinicRef.setValue(newDoctor);
+
                             updateUI(user);
 
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(DoctorRegistrationActivity.this, "Registration failed",
+                            Toast.makeText(DoctorRegistrationActivity.this, "This email is already registered",
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
@@ -205,7 +209,7 @@ public class DoctorRegistrationActivity extends AppCompatActivity implements Vie
 
     private void updateUI(FirebaseUser user) {
         if (user != null) {
-            Intent intent = new Intent(this, HomePage.class);
+            Intent intent = new Intent(this, DoctorHomePage.class);
             startActivity(intent);
             finish();
         }

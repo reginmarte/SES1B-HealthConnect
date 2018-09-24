@@ -65,8 +65,7 @@ public class PatientLoginActivity extends AppCompatActivity implements View.OnCl
     }
 
     @Override
-    public void onClick(View v) {
-    }
+    public void onClick(View v) {}
 
     public void loginUser(String email, String password){
         mAuth.signInWithEmailAndPassword(email, password)
@@ -138,7 +137,6 @@ public class PatientLoginActivity extends AppCompatActivity implements View.OnCl
         loginUser(email, password);
     }
 
-
     @Override
     public void onStart() {
         super.onStart();
@@ -146,5 +144,4 @@ public class PatientLoginActivity extends AppCompatActivity implements View.OnCl
         FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
     }
-
 }

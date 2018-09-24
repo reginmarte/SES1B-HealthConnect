@@ -35,9 +35,6 @@
         <activity
             android:name=".HomePage"
             android:label="@string/title_activity_home_page" />
-        <activity
-            android:name=".EditProfileActivity"
-            android:exported="true" />
         <activity android:name=".ChangePasswordActivity" />
         <activity android:name=".MapActivity" />
         <activity android:name=".ForgotPasswordActivity" />
@@ -48,7 +45,10 @@
         <activity android:name=".PatientLoginActivity" />
         <activity android:name=".DoctorLoginActivity" />
         <activity android:name=".DoctorRegistrationActivity" />
-        <activity android:name=".PatientRegistrationActivity"></activity>
+        <activity android:name=".PatientRegistrationActivity" />
+        <activity android:name=".PatientEditProfileActivity" />
+        <activity android:name=".DoctorEditProfileActivity" />
+        <activity android:name=".DoctorHomePage"></activity>
     </application>
 
 </manifest>

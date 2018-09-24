@@ -34,7 +34,7 @@ import java.util.Map;
 
 public class PatientRegistrationActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
-    private static final String TAG = "RegistrationActivity";
+    private static final String TAG = "PatientRegistrationActivity";
     private TextInputEditText nameET, emailET, numberET, passwordET, heightET, weightET;
     private RadioGroup genderRadioGroup;
     private RadioButton genderRadioButton;
@@ -181,16 +181,14 @@ public class PatientRegistrationActivity extends AppCompatActivity implements Vi
                             newUser.put("gender", genderSelect);
                             newUser.put("height", height);
                             newUser.put("weight", weight);
-                            newUser.put("type", "patient");
 
                             currentUser_db.setValue(newUser);
-
                             updateUI(user);
 
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(PatientRegistrationActivity.this, "Registration failed",
+                            Toast.makeText(PatientRegistrationActivity.this, "This email is already registered",
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }

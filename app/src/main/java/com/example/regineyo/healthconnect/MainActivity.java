@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onClick(View v) {
                 Intent RegisterIntent = new Intent(MainActivity.this, PatientLoginActivity.class);
                 startActivity(RegisterIntent);
+                finish();
             }
         });
 
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onClick(View v) {
                 Intent RegisterIntent = new Intent(MainActivity.this, DoctorLoginActivity.class);
                 startActivity(RegisterIntent);
+                finish();
             }
         });
     }
@@ -61,20 +63,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null) {
-            updateUI(currentUser);
-        }
-    }
-
-    private void updateUI(FirebaseUser currentUser) {
-        Intent intent = new Intent(this, HomePage.class);
-        startActivity(intent);
-        finish();
-    }
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        // Check if user is signed in (non-null) and update UI accordingly.
+//        FirebaseUser currentUser = mAuth.getCurrentUser();
+//        if(currentUser != null) {
+//            updateUI(currentUser);
+//        }
+//    }
+//
+//    private void updateUI(FirebaseUser currentUser) {
+//        Intent intent = new Intent(this, HomePage.class);
+//        startActivity(intent);
+//        finish();
+//    }
 
 }

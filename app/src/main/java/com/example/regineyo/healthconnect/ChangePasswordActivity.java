@@ -98,7 +98,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser user) {
         if (user != null) {
-            Intent intent = new Intent(this, EditProfileActivity.class);
+            Intent intent = new Intent(this, PatientEditProfileActivity.class);
             startActivity(intent);
             finish();
         }

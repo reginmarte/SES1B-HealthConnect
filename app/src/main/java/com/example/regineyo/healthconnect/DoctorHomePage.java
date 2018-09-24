@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class HomePage extends AppCompatActivity {
+public class DoctorHomePage extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private TextView mTextMessage;
@@ -27,28 +27,26 @@ public class HomePage extends AppCompatActivity {
                 case R.id.navigation_messages:
                     mTextMessage.setText(R.string.title_messages);
                 {
-                    Intent RegisterIntent = new Intent(HomePage.this, MessagingActivity.class);
+                    Intent RegisterIntent = new Intent(DoctorHomePage.this, MessagingActivity.class);
                     startActivity(RegisterIntent);
-                    finish();
                 }
-                    return true;
-                case R.id.navigation_map:
-                    mTextMessage.setText(R.string.title_map);
-                {
-                    Intent RegisterIntent = new Intent(HomePage.this, MapActivity.class);
-                    startActivity(RegisterIntent);
-                    finish();
-                }
-                    return true;
+                return true;
+//                case R.id.navigation_map:
+//                    mTextMessage.setText(R.string.title_map);
+//                {
+//                    Intent RegisterIntent = new Intent(DoctorHomePage.this, MapActivity.class);
+//                    startActivity(RegisterIntent);
+//                }
+//                return true;
+
                 case R.id.navigation_profile:
                     mTextMessage.setText(R.string.title_profile);
                 {
-                    Intent RegisterIntent = new Intent(HomePage.this, PatientEditProfileActivity.class);
+                    Intent RegisterIntent = new Intent(DoctorHomePage.this, DoctorEditProfileActivity.class);
                     startActivity(RegisterIntent);
                     finish();
                 }
-
-                    return true;
+                return true;
             }
             return false;
         }
@@ -57,7 +55,7 @@ public class HomePage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_page);
+        setContentView(R.layout.activity_doctor_home_page);
         mAuth = FirebaseAuth.getInstance();
 
         mTextMessage = (TextView) findViewById(R.id.message);
@@ -68,7 +66,7 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
-                Intent RegisterIntent = new Intent(HomePage.this, MainActivity.class);
+                Intent RegisterIntent = new Intent(DoctorHomePage.this, MainActivity.class);
                 startActivity(RegisterIntent);
                 finish();
             }

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    tools:context=".PatientEditProfileActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="30dp"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <!--<TextView-->
+        <!--android:id="@+id/registration_title"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/patient_register_title" />-->
+
+        <!--name-->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/TIL_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            app:errorTextAppearance="@style/ErrorAppearance">
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/nameET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_name" />
+        </android.support.design.widget.TextInputLayout>
+
+        <!--email-->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/TIL_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            app:errorTextAppearance="@style/ErrorAppearance">
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/emailET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_email"
+                android:inputType="textEmailAddress" />
+        </android.support.design.widget.TextInputLayout>
+
+        <!--password-->
+        <Button
+            android:id="@+id/passwordBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginBottom="10dp"
+            android:text="@string/action_change_password"
+            android:background="@drawable/secondary_patient_button" />
+
+        <!--number-->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/TIL_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            app:errorTextAppearance="@style/ErrorAppearance">
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/numberET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_number"
+                android:inputType="number" />
+        </android.support.design.widget.TextInputLayout>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!--date of birth button-->
+            <Button
+                android:id="@+id/dateOfBirthBtn"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:text="@string/action_date_of_birth"
+                android:background="@drawable/secondary_patient_button"
+                android:onClick="showDatePickerDialog"/>
+
+            <!--selected date of birth-->
+            <TextView
+                android:id="@+id/showDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hint_DOB"
+                android:layout_marginStart="50dp"
+                android:textColor="#FFFFFF"/>
+            <!--<TextView-->
+            <!--android:id="@+id/showAge"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="age"-->
+            <!--android:layout_marginStart="30dp"/>-->
+        </TableRow>
+
+        <RadioGroup
+            android:id="@+id/genderRG"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:id="@+id/genderTV"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/prompt_gender" />
+
+            <!--male-->
+            <RadioButton
+                android:id="@+id/maleRB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="5dp"
+                android:text="@string/action_male_radioBtn" />
+
+            <!--female-->
+            <RadioButton
+                android:id="@+id/femaleRB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/action_female_radioBtn" />
+        </RadioGroup>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!--height-->
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/TIL_height"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:errorEnabled="true"
+                app:errorTextAppearance="@style/ErrorAppearance">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/heightET"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_height"
+                    android:inputType="number" />
+            </android.support.design.widget.TextInputLayout>
+
+            <!--weight-->
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/TIL_weight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:errorEnabled="true"
+                app:errorTextAppearance="@style/ErrorAppearance">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/weightET"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:hint="@string/hint_weight"
+                    android:inputType="number" />
+            </android.support.design.widget.TextInputLayout>
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/confirmBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:background="@drawable/primary_patient_button"
+            android:text="@string/action_confirm"
+            android:textColor="#17A589" />
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

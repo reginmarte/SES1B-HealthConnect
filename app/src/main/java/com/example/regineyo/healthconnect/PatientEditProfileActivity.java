@@ -35,9 +35,9 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EditProfileActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
+public class PatientEditProfileActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
-    private static final String TAG = "EditProfileActivity";
+    private static final String TAG = "PatientEditProfileActivity";
     private TextInputEditText nameET, emailET, numberET, heightET, weightET;
     private RadioGroup genderRadioGroup;
     private RadioButton genderRadioButton;
@@ -53,13 +53,12 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_profile);
+        setContentView(R.layout.activity_patient_edit_profile);
         mAuth = FirebaseAuth.getInstance();
 
         FirebaseUser user = mAuth.getCurrentUser();
         final String userID = user.getUid();
         DatabaseReference mRef = FirebaseDatabase.getInstance().getReference();
-
         //gets user data from database
         ValueEventListener patientDetailsListener = new ValueEventListener() {
             @Override
@@ -86,7 +85,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                 }
                 heightET.setText(height);
                 weightET.setText(weight);
-
             }
 
             @Override
@@ -110,7 +108,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         findViewById(R.id.passwordBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent RegisterIntent = new Intent(EditProfileActivity.this, ChangePasswordActivity.class);
+                Intent RegisterIntent = new Intent(PatientEditProfileActivity.this, ChangePasswordActivity.class);
                 startActivity(RegisterIntent);
             }
         });
@@ -202,6 +200,17 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         String height = heightET.getText().toString().trim();
         String weight = weightET.getText().toString().trim();
 
+        //adds user to database
+        Map childUpdates = new HashMap();
+        childUpdates.put("name", name);
+        childUpdates.put("email", email);
+        childUpdates.put("number", number);
+        childUpdates.put("birthday", birthday);
+        childUpdates.put("gender", genderSelect);
+        childUpdates.put("height", height);
+        childUpdates.put("weight", weight);
+        currentUser_db.updateChildren(childUpdates);
+
         user.updateEmail(email)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -212,17 +221,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                     }
                 });
 
-        //adds user to database
-        Map childUpdates = new HashMap();
-        childUpdates.put("name", name);
-        childUpdates.put("email", email);
-        childUpdates.put("number", number);
-        childUpdates.put("birthday", birthday);
-        childUpdates.put("gender", genderSelect);
-        childUpdates.put("height", height);
-        childUpdates.put("weight", weight);
-
-        currentUser_db.updateChildren(childUpdates);
         updateUI(user);
     }
 
@@ -235,7 +233,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     }
 
     public void showDatePickerDialog(View v) {
-        DialogFragment newFragment = new EditProfileActivity.DatePickerFragment();
+        DialogFragment newFragment = new PatientEditProfileActivity.DatePickerFragment();
         newFragment.show(getSupportFragmentManager(),"datePicker" );
     }
 
