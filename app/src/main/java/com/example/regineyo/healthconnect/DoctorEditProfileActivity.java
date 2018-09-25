@@ -189,6 +189,38 @@ public class DoctorEditProfileActivity extends AppCompatActivity implements View
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("doctors").child(userID);
         DatabaseReference centreRef = FirebaseDatabase.getInstance().getReference().child("health_care_centre");
 
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                String clinicCode = snapshot.child("clinic").getValue(String.class);
+                DatabaseReference doctorClinicRef = FirebaseDatabase.getInstance().getReference()
+                        .child("health_care_centre")
+                        .child(clinicCode)
+                        .child("doctor")
+                        .child(userID);
+                if (clinicCode.equalsIgnoreCase(sCodeET.getText().toString().trim())) {
+                    //same clinic
+                    Map dbUpdates = new HashMap();
+                    dbUpdates.put("name", name);
+                    doctorClinicRef.updateChildren(dbUpdates);
+                } else {
+                    //different clinic
+                    Map dbUpdates = new HashMap();
+                    dbUpdates.put("name", name);
+                    FirebaseDatabase.getInstance().getReference()
+                            .child("health_care_centre")
+                            .child(sCodeET.getText().toString().trim())
+                            .child("doctor")
+                            .child(userID)
+                            .updateChildren(dbUpdates);
+                    doctorClinicRef.removeValue();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) { }
+        });
+
         //adds user to database
         Map childUpdates = new HashMap();
         childUpdates.put("name", name);
@@ -208,41 +240,11 @@ public class DoctorEditProfileActivity extends AppCompatActivity implements View
                     }
                 });
 
-        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                String clinicCode = snapshot.child("clinic").getValue(String.class);
-                DatabaseReference clinicRef = FirebaseDatabase.getInstance().getReference()
-                        .child("health_care_centre")
-                        .child(clinicCode)
-                        .child("doctor")
-                        .child(userID);
-                if (clinicCode.equalsIgnoreCase(sCodeET.getText().toString().trim())) {
-                    //same clinic
-                    Map dbUpdates = new HashMap();
-                    dbUpdates.put("name", name);
-                    clinicRef.updateChildren(dbUpdates);
-                } else {
-                    //different clinic
-                    //clinicRef.removeValue();
-                    FirebaseDatabase.getInstance().getReference()
-                            .child("health_care_centre")
-                            .child(clinicCode)
-                            .child("doctor")
-                            .child(userID).removeValue();
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {}
-        });
-
         updateUI(user);
     }
 
     private void updateUI(FirebaseUser user) {
         if (user != null) {
-            Intent intent = new Intent(this, DoctorHomePage.class);
-            startActivity(intent);
             finish();
         }
     }

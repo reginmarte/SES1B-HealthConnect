@@ -29,7 +29,6 @@ public class HomePage extends AppCompatActivity {
                 {
                     Intent RegisterIntent = new Intent(HomePage.this, MessagingActivity.class);
                     startActivity(RegisterIntent);
-                    finish();
                 }
                     return true;
                 case R.id.navigation_map:
@@ -37,7 +36,6 @@ public class HomePage extends AppCompatActivity {
                 {
                     Intent RegisterIntent = new Intent(HomePage.this, MapActivity.class);
                     startActivity(RegisterIntent);
-                    finish();
                 }
                     return true;
                 case R.id.navigation_profile:
@@ -45,7 +43,6 @@ public class HomePage extends AppCompatActivity {
                 {
                     Intent RegisterIntent = new Intent(HomePage.this, PatientEditProfileActivity.class);
                     startActivity(RegisterIntent);
-                    finish();
                 }
 
                     return true;

@@ -44,7 +44,6 @@ public class DoctorHomePage extends AppCompatActivity {
                 {
                     Intent RegisterIntent = new Intent(DoctorHomePage.this, DoctorEditProfileActivity.class);
                     startActivity(RegisterIntent);
-                    finish();
                 }
                 return true;
             }
