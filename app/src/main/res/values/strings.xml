@@ -7,6 +7,7 @@
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Login</string>
+    <string name="sign_out">Sign Out</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
@@ -38,6 +39,9 @@
     <string name="hint_DOB">day/month/year</string>
     <string name="hint_height">Height (cm)</string>
     <string name="hint_weight">Weight (kg)</string>
+    <string name="fresh_config">Fresh Config</string>
+    <string name="cause_crash">Cause Crash</string>
+    <string name="invite_menu_label">Invite</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

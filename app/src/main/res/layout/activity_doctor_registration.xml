@@ -80,7 +80,7 @@
                 android:inputType="phone" />
         </android.support.design.widget.TextInputLayout>
 
-        <!--number-->
+        <!--sCode-->
         <android.support.design.widget.TextInputLayout
             android:id="@+id/TIL_sCode"
             android:layout_width="match_parent"
@@ -91,6 +91,7 @@
                 android:id="@+id/sCodeET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="number"
                 android:hint="@string/hint_sCode" />
         </android.support.design.widget.TextInputLayout>
 

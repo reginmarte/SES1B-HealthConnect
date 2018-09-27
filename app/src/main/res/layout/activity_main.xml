@@ -39,7 +39,7 @@
                 android:id="@+id/patientBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#17A589"
+                android:textColor="#76D7C4"
                 android:text="@string/action_select_patient"
                 android:background="@drawable/secondary_patient_button"
                 android:layout_margin="10dp"/>
@@ -48,7 +48,7 @@
                 android:id="@+id/doctorBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#2E86C1"
+                android:textColor="#85C1E9"
                 android:text="@string/action_select_doctor"
                 android:background="@drawable/secondary_doctor_button"
                 android:layout_margin="10dp"/>

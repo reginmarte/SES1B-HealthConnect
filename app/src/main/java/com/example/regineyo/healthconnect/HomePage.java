@@ -27,7 +27,7 @@ public class HomePage extends AppCompatActivity {
                 case R.id.navigation_messages:
                     mTextMessage.setText(R.string.title_messages);
                 {
-                    Intent RegisterIntent = new Intent(HomePage.this, MessagingActivity.class);
+                    Intent RegisterIntent = new Intent(HomePage.this, DoctorListActivity.class);
                     startActivity(RegisterIntent);
                 }
                     return true;

@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -173,6 +174,10 @@ public class PatientRegistrationActivity extends AppCompatActivity implements Vi
                             String weight = weightET.getText().toString().trim();
 
                             //adds user to database
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(name).build();
+                            user.updateProfile(profileUpdates);
+
                             Map newUser = new HashMap();
                             newUser.put("name", name);
                             newUser.put("email", email);

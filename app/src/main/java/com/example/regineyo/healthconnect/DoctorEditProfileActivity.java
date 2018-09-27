@@ -187,7 +187,6 @@ public class DoctorEditProfileActivity extends AppCompatActivity implements View
         FirebaseUser user = mAuth.getCurrentUser();
         final String userID = mAuth.getCurrentUser().getUid();
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("doctors").child(userID);
-        DatabaseReference centreRef = FirebaseDatabase.getInstance().getReference().child("health_care_centre");
 
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

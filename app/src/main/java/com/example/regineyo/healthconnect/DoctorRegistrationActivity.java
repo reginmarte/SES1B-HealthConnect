@@ -24,6 +24,7 @@ import com.google.firebase.FirebaseError;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -43,9 +44,6 @@ public class DoctorRegistrationActivity extends AppCompatActivity implements Vie
     private TextInputEditText nameET, emailET, numberET, passwordET, sCodeET;
     private RadioGroup genderRadioGroup;
     private RadioButton genderRadioButton;
-    //    private TextView dateOfBirthTV;
-//    private int age;
-//    private String birthday;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseUser user;
@@ -62,9 +60,7 @@ public class DoctorRegistrationActivity extends AppCompatActivity implements Vie
         emailET = findViewById(R.id.emailET);
         numberET = findViewById(R.id.numberET);
         passwordET = findViewById(R.id.passwordET);
-//        dateOfBirthTV = findViewById(R.id.showDate);
         genderRadioGroup = findViewById(R.id.genderRG);
-//        ageTV = findViewById(R.id.showAge);
         sCodeET = findViewById(R.id.sCodeET);
 
         RadioButton maleBtn = findViewById(R.id.maleRB);
@@ -84,10 +80,10 @@ public class DoctorRegistrationActivity extends AppCompatActivity implements Vie
 
     private void checkInputs() {
         TextInputLayout nameTIL = findViewById(R.id.TIL_name);
-        final TextInputLayout emailTIL = findViewById(R.id.TIL_email);
+        TextInputLayout emailTIL = findViewById(R.id.TIL_email);
         TextInputLayout numberTIL = findViewById(R.id.TIL_number);
-        final TextInputLayout passwordTIL = findViewById(R.id.TIL_password);
-        final TextInputLayout sCodeTIL = findViewById(R.id.TIL_sCode);
+        TextInputLayout passwordTIL = findViewById(R.id.TIL_password);
+        TextInputLayout sCodeTIL = findViewById(R.id.TIL_sCode);
 
         nameTIL.setError(null);
         emailTIL.setError(null);
@@ -96,8 +92,8 @@ public class DoctorRegistrationActivity extends AppCompatActivity implements Vie
 //        dateOfBirthTV.setError(null);
         sCodeTIL.setError(null);
 
-        final String email = emailET.getText().toString().trim();
-        final String password = passwordET.getText().toString().trim();
+        String email = emailET.getText().toString().trim();
+        String password = passwordET.getText().toString().trim();
 
         if (nameET.getText().toString().trim().isEmpty()) {
             nameTIL.setError("Please enter your name");
@@ -137,16 +133,18 @@ public class DoctorRegistrationActivity extends AppCompatActivity implements Vie
             return;
         }
 
-
         DatabaseReference clinicsRef = FirebaseDatabase.getInstance().getReference().child("health_care_centre");
         clinicsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 if (!snapshot.child(sCodeET.getText().toString().trim()).exists()) {
                     //clinic doesn't exist
+                    TextInputLayout sCodeTIL = findViewById(R.id.TIL_sCode);
                     sCodeTIL.setError("Clinic code does not exist");
                     sCodeET.requestFocus();
                 } else {
+                    String email = emailET.getText().toString().trim();
+                    String password = passwordET.getText().toString().trim();
                     createAccount(email, password);
                 }
             }
@@ -163,7 +161,6 @@ public class DoctorRegistrationActivity extends AppCompatActivity implements Vie
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
-
                             String name = nameET.getText().toString().trim();
                             String email = emailET.getText().toString().trim();
                             String number = numberET.getText().toString().trim();
@@ -171,9 +168,10 @@ public class DoctorRegistrationActivity extends AppCompatActivity implements Vie
                             genderRadioButton = findViewById(genderID);
                             String genderSelect = genderRadioButton.getText().toString();
                             String sCode = sCodeET.getText().toString().trim();
-
+                            FirebaseUser user = mAuth.getCurrentUser();
                             String userID = mAuth.getCurrentUser().getUid();
-                            DatabaseReference currentUser_db = FirebaseDatabase.getInstance().getReference().child("doctors").child(userID);
+                            DatabaseReference currentUser_db = FirebaseDatabase.getInstance().getReference()
+                                    .child("doctors").child(userID);
                             DatabaseReference clinicRef = FirebaseDatabase.getInstance().getReference()
                                     .child("health_care_centre")
                                     .child(sCode)
@@ -181,20 +179,24 @@ public class DoctorRegistrationActivity extends AppCompatActivity implements Vie
                                     .child(userID);
 
                             //adds user to database
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(name).build();
+                            user.updateProfile(profileUpdates);
+
                             Map newUser = new HashMap();
                             newUser.put("name", name);
                             newUser.put("email", email);
                             newUser.put("number", number);
                             newUser.put("gender", genderSelect);
                             newUser.put("clinic", sCode);
+
                             currentUser_db.setValue(newUser);
+                            updateUI(user);
 
                             //adds doctor to clinic
                             Map newDoctor = new HashMap();
                             newDoctor.put("name", name);
                             clinicRef.setValue(newDoctor);
-
-                            updateUI(user);
 
                         } else {
                             // If sign in fails, display a message to the user.
