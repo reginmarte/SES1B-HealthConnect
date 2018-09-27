@@ -1,14 +1,12 @@
 package com.example.regineyo.healthconnect;
 
-import android.app.usage.NetworkStats;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -16,15 +14,12 @@ import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,13 +42,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.util.HashMap;
-import java.util.Map;
-
-//import de.hdodenhof.circleimageview.CircleImageView;
-
-public class ChatActivity extends AppCompatActivity
-        implements GoogleApiClient.OnConnectionFailedListener {
+public class DoctorChatActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     public static class MessageViewHolder extends RecyclerView.ViewHolder {
         TextView messageTextView;
@@ -70,7 +59,7 @@ public class ChatActivity extends AppCompatActivity
         }
     }
 
-    private static final String TAG = "ChatActivity";
+    private static final String TAG = "DoctorChatActivity";
     public static final String CHAT_MSG_LENGTH = "chat_msg_length";
     public static final String MESSAGES_CHILD = "messages";
     private static final int REQUEST_INVITE = 1;
@@ -80,7 +69,7 @@ public class ChatActivity extends AppCompatActivity
     public static final String ANONYMOUS = "anonymous";
     private static final String MESSAGE_SENT_EVENT = "message_sent";
     private String mUsername;
-    private String doctorID;
+    private String patientID;
     private String mPhotoUrl;
     private SharedPreferences mSharedPreferences;
     private GoogleApiClient mGoogleApiClient;
@@ -89,21 +78,20 @@ public class ChatActivity extends AppCompatActivity
     private Button mSendButton;
     private RecyclerView mMessageRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
-    private ProgressBar mProgressBar;
+    //    private ProgressBar mProgressBar;
     private EditText mMessageEditText;
     private ImageView mAddMessageImageView;
 
     // Firebase instance variables
     private FirebaseUser mFirebaseUser;
     private DatabaseReference mFirebaseDatabaseReference;
-    private FirebaseRecyclerAdapter<ChatMessage, MessageViewHolder> mFirebaseAdapter;
+    private FirebaseRecyclerAdapter<ChatMessage, DoctorChatActivity.MessageViewHolder> mFirebaseAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat);
-
-        doctorID = getIntent().getStringExtra("selected_doctor");
+        setContentView(R.layout.activity_doctor_chat);
+        patientID = getIntent().getStringExtra("selected_patient");
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         // Set default username is anonymous.
@@ -125,7 +113,7 @@ public class ChatActivity extends AppCompatActivity
         // New child entries
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
 //                .child(MESSAGES_CHILD);
-//                .child(mUsername + "_" + doctorID);
+//                .child(patientID + "_" + mUsername);
         SnapshotParser<ChatMessage> parser = new SnapshotParser<ChatMessage>() {
             @Override
             public ChatMessage parseSnapshot(DataSnapshot dataSnapshot) {
@@ -139,23 +127,23 @@ public class ChatActivity extends AppCompatActivity
 
         DatabaseReference messagesRef = mFirebaseDatabaseReference
                 .child(MESSAGES_CHILD)
-                .child(mUsername + "_" + doctorID);
+                .child(patientID + "_" + mUsername);
         FirebaseRecyclerOptions<ChatMessage> options =
                 new FirebaseRecyclerOptions.Builder<ChatMessage>()
                         .setQuery(messagesRef, parser)
                         .build();
-        mFirebaseAdapter = new FirebaseRecyclerAdapter<ChatMessage, MessageViewHolder>(options) {
+        mFirebaseAdapter = new FirebaseRecyclerAdapter<ChatMessage, DoctorChatActivity.MessageViewHolder>(options) {
             @Override
-            public MessageViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+            public DoctorChatActivity.MessageViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
                 LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-                return new MessageViewHolder(inflater.inflate(R.layout.message, viewGroup, false));
+                return new DoctorChatActivity.MessageViewHolder(inflater.inflate(R.layout.message, viewGroup, false));
             }
 
             @Override
-            protected void onBindViewHolder(final MessageViewHolder viewHolder,
+            protected void onBindViewHolder(final DoctorChatActivity.MessageViewHolder viewHolder,
                                             int position,
                                             ChatMessage chatMessage) {
-                mProgressBar.setVisibility(ProgressBar.INVISIBLE);
+//                mProgressBar.setVisibility(ProgressBar.INVISIBLE);
                 if (chatMessage.getText() != null) {
                     viewHolder.messageTextView.setText(chatMessage.getText());
                     viewHolder.messageTextView.setVisibility(TextView.VISIBLE);
@@ -254,7 +242,7 @@ public class ChatActivity extends AppCompatActivity
                         mPhotoUrl,
                         null /* no image */);
                 mFirebaseDatabaseReference.child(MESSAGES_CHILD)
-                        .child(mUsername + "_" + doctorID).push().setValue(chatMessage);
+                        .child(patientID + "_" + mUsername).push().setValue(chatMessage);
                 mMessageEditText.setText("");
             }
         });
@@ -354,7 +342,7 @@ public class ChatActivity extends AppCompatActivity
     }
 
     private void putImageInStorage(StorageReference storageReference, Uri uri, final String key) {
-        storageReference.putFile(uri).addOnCompleteListener(ChatActivity.this,
+        storageReference.putFile(uri).addOnCompleteListener(DoctorChatActivity.this,
                 new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {

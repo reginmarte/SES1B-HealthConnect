@@ -14,25 +14,26 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public class DoctorListActivity extends AppCompatActivity {
+public class PatientListActivity extends AppCompatActivity {
 
-    ListView doctorsLV;
-    ArrayList<String> listOfDoctors = new ArrayList<String>();
+    ListView patientsLV;
+    ArrayList<String> listofPatients = new ArrayList<String>();
     ArrayAdapter arrayAdpt;
-    private DatabaseReference dbr = FirebaseDatabase.getInstance().getReference().child("doctors");
+    private DatabaseReference dbr = FirebaseDatabase.getInstance().getReference().child("patients");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_doctor_list);
+        setContentView(R.layout.activity_patient_list);
 
-        doctorsLV = findViewById(R.id.doctorList);
-        arrayAdpt = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listOfDoctors);
-        doctorsLV.setAdapter(arrayAdpt);
+        patientsLV = (ListView) findViewById(R.id.patientList);
+        arrayAdpt = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listofPatients);
+        patientsLV.setAdapter(arrayAdpt);
 
         dbr.addValueEventListener(new ValueEventListener() {
             @Override
@@ -52,13 +53,14 @@ public class DoctorListActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {}
         });
 
-        doctorsLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        patientsLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(DoctorListActivity.this, PatientChatActivity.class);
-                i.putExtra("selected_doctor", ((TextView)view).getText().toString());
+                Intent i = new Intent(PatientListActivity.this, DoctorChatActivity.class);
+                i.putExtra("selected_patient", ((TextView)view).getText().toString());
                 startActivity(i);
             }
         });
     }
 }
+

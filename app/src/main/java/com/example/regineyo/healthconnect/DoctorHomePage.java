@@ -27,7 +27,7 @@ public class DoctorHomePage extends AppCompatActivity {
                 case R.id.navigation_messages:
                     mTextMessage.setText(R.string.title_messages);
                 {
-                    Intent RegisterIntent = new Intent(DoctorHomePage.this, ChatActivity.class);
+                    Intent RegisterIntent = new Intent(DoctorHomePage.this, PatientListActivity.class);
                     startActivity(RegisterIntent);
                 }
                 return true;
