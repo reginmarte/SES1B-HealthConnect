@@ -22,6 +22,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class DoctorLoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "DoctorLoginActivity" ;
@@ -45,6 +48,15 @@ public class DoctorLoginActivity extends AppCompatActivity implements View.OnCli
             }
         });
 
+        //user selects forgot password button
+        findViewById(R.id.forgotPasswordBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent RegisterIntent = new Intent(DoctorLoginActivity.this, ForgotPasswordActivity.class);
+                startActivity(RegisterIntent);
+            }
+        });
+
         //user selects register button
         findViewById(R.id.registerBtn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,14 +66,16 @@ public class DoctorLoginActivity extends AppCompatActivity implements View.OnCli
             }
         });
 
-        //user selects forgot password button
-        findViewById(R.id.forgotPasswordBtn).setOnClickListener(new View.OnClickListener() {
+        //user selects patient button
+        findViewById(R.id.patientBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent RegisterIntent = new Intent(DoctorLoginActivity.this, ForgotPasswordActivity.class);
+                Intent RegisterIntent = new Intent(DoctorLoginActivity.this, MainActivity.class);
                 startActivity(RegisterIntent);
+                finish();
             }
         });
+
     }
 
     @Override
@@ -75,8 +89,30 @@ public class DoctorLoginActivity extends AppCompatActivity implements View.OnCli
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
+                            DatabaseReference dbr = FirebaseDatabase.getInstance().getReference().child("doctors");
+                            dbr.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    Boolean isSignedIn = false;
+                                    for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                                        if (ds.getKey().equalsIgnoreCase(mAuth.getCurrentUser().getUid())) {
+                                            //user is a doctor
+                                            updateUI(mAuth.getCurrentUser());
+                                            isSignedIn = true;
+                                        }
+                                    }
+                                    if(!isSignedIn) {
+                                        FirebaseAuth.getInstance().signOut();
+                                        updateUI(null);
+                                        Toast.makeText(DoctorLoginActivity.this, "Invalid account.",
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {}
+                            });
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());

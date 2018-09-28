@@ -73,7 +73,7 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:gravity="center"
             android:layout_marginTop="60dp">
 
@@ -92,8 +92,28 @@
                 android:textAllCaps="false"
                 android:text="@string/action_register_short"
                 android:textSize="12sp" />
+        </TableRow>
 
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:gravity="center">
 
+            <TextView
+                android:id="@+id/prompt_doctor"
+                android:text="@string/prompt_patient"
+                android:layout_height="wrap_content"
+                android:layout_width="170dp"
+                android:gravity="right" />
+
+            <Button
+                android:id="@+id/patientBtn"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:textAllCaps="false"
+                android:text="@string/action_select_patient"
+                android:textSize="13sp" />
         </TableRow>
 
     </LinearLayout>

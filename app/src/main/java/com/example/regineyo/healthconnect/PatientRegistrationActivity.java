@@ -203,7 +203,7 @@ public class PatientRegistrationActivity extends AppCompatActivity implements Vi
 
     private void updateUI(FirebaseUser user) {
         if(user != null) {
-            Intent intent = new Intent(this, HomePage.class);
+            Intent intent = new Intent(this, PatientHomePage.class);
             startActivity(intent);
             finish();
         }

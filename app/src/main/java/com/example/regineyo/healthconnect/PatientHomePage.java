@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class HomePage extends AppCompatActivity {
+public class PatientHomePage extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private TextView mTextMessage;
@@ -27,25 +27,25 @@ public class HomePage extends AppCompatActivity {
                 case R.id.navigation_messages:
                     mTextMessage.setText(R.string.title_messages);
                 {
-                    Intent RegisterIntent = new Intent(HomePage.this, DoctorListActivity.class);
+                    Intent RegisterIntent = new Intent(PatientHomePage.this, DoctorListActivity.class);
                     startActivity(RegisterIntent);
                 }
-                    return true;
+                return true;
                 case R.id.navigation_map:
                     mTextMessage.setText(R.string.title_map);
                 {
-                    Intent RegisterIntent = new Intent(HomePage.this, MapActivity.class);
+                    Intent RegisterIntent = new Intent(PatientHomePage.this, MapActivity.class);
                     startActivity(RegisterIntent);
                 }
-                    return true;
+                return true;
                 case R.id.navigation_profile:
                     mTextMessage.setText(R.string.title_profile);
                 {
-                    Intent RegisterIntent = new Intent(HomePage.this, PatientEditProfileActivity.class);
+                    Intent RegisterIntent = new Intent(PatientHomePage.this, PatientEditProfileActivity.class);
                     startActivity(RegisterIntent);
                 }
 
-                    return true;
+                return true;
             }
             return false;
         }
@@ -54,7 +54,7 @@ public class HomePage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_page);
+        setContentView(R.layout.activity_patient_home_page);
         mAuth = FirebaseAuth.getInstance();
 
         mTextMessage = (TextView) findViewById(R.id.message);
@@ -65,7 +65,7 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
-                Intent RegisterIntent = new Intent(HomePage.this, MainActivity.class);
+                Intent RegisterIntent = new Intent(PatientHomePage.this, MainActivity.class);
                 startActivity(RegisterIntent);
                 finish();
             }

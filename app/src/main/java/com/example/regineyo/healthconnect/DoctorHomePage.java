@@ -65,7 +65,7 @@ public class DoctorHomePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
-                Intent RegisterIntent = new Intent(DoctorHomePage.this, MainActivity.class);
+                Intent RegisterIntent = new Intent(DoctorHomePage.this, DoctorLoginActivity.class);
                 startActivity(RegisterIntent);
                 finish();
             }
