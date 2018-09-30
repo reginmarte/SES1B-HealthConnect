@@ -12,29 +12,30 @@
     android:background="@drawable/gradient_background_doctor"
     tools:context=".DoctorChatActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbar"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="match_parent"
+        android:background="@drawable/white_border"
+        android:orientation="vertical"
+        android:gravity="center">
 
         <TextView
             android:id="@+id/chatName"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="60dp"
             android:paddingStart="20dp"
             android:gravity="center_vertical"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
             android:textColor="#2E86C1" />
-    </android.support.design.widget.AppBarLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/messageRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/appbar"
-        android:layout_above="@+id/linearLayout"
-        android:padding="20dp"
-        android:layout_marginBottom="10dp"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/messageRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:background="@drawable/primary_doctor_button"
+            android:padding="20dp"
+            android:layout_marginBottom="5dp"/>
+    </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -47,9 +48,10 @@
 
         <ImageView
             android:id="@+id/addMessageImageView"
-            android:layout_width="30dp"
+            android:layout_width="50dp"
             android:layout_height="match_parent"
-            ads:srcCompat="@drawable/ic_clip_24dp" />
+            android:layout_margin="10dp"
+            ads:srcCompat="@drawable/ic_clip" />
 
         <EditText
             android:id="@+id/messageEditText"
@@ -64,7 +66,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="@drawable/primary_doctor_button"
             android:textColor="#2E86C1"
             android:enabled="false"
             android:text="@string/action_send"/>

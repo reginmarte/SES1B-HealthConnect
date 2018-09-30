@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background"
+    android:background="@drawable/gradient_background_patient"
     tools:context=".PatientRegistrationActivity">
 
     <LinearLayout
@@ -12,24 +12,19 @@
         android:layout_height="match_parent"
         android:layout_margin="30dp"
         android:orientation="vertical"
+        android:background="@drawable/white_border"
         android:gravity="center">
-
-        <!--<TextView-->
-        <!--android:id="@+id/registration_title"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="@string/patient_register_title" />-->
 
         <!--name-->
         <android.support.design.widget.TextInputLayout
             android:id="@+id/TIL_name"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             app:errorEnabled="true"
             app:errorTextAppearance="@style/ErrorAppearance">
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/nameET"
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_name" />
         </android.support.design.widget.TextInputLayout>
@@ -37,13 +32,13 @@
         <!--email-->
         <android.support.design.widget.TextInputLayout
             android:id="@+id/TIL_email"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             app:errorEnabled="true"
             app:errorTextAppearance="@style/ErrorAppearance">
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/emailET"
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/prompt_email"
                 android:inputType="textEmailAddress" />
@@ -52,14 +47,14 @@
         <!--password-->
         <android.support.design.widget.TextInputLayout
             android:id="@+id/TIL_password"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             app:passwordToggleEnabled="true"
             app:errorEnabled="true"
             app:errorTextAppearance="@style/ErrorAppearance">
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/passwordET"
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/prompt_password"
                 android:inputType="textPassword" />
@@ -68,20 +63,20 @@
         <!--number-->
         <android.support.design.widget.TextInputLayout
             android:id="@+id/TIL_number"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             app:errorEnabled="true"
             app:errorTextAppearance="@style/ErrorAppearance">
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/numberET"
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_number"
                 android:inputType="phone" />
         </android.support.design.widget.TextInputLayout>
 
         <TableRow
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
@@ -101,13 +96,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/hint_DOB"
-                android:layout_marginStart="60dp"/>
-            <!--<TextView-->
-            <!--android:id="@+id/showAge"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="age"-->
-            <!--android:layout_marginStart="30dp"/>-->
+                android:layout_marginStart="30dp"/>
+
         </TableRow>
 
         <RadioGroup
@@ -144,7 +134,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_margin="10dp">
 
             <!--height-->
             <android.support.design.widget.TextInputLayout
@@ -186,7 +177,7 @@
             android:layout_gravity="right"
             android:background="@drawable/primary_patient_button"
             android:text="@string/action_confirm"
-            android:textColor="#17A589" />
+            android:textColor="#ffffff" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

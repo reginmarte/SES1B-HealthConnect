@@ -35,7 +35,6 @@
         <activity android:name=".ChangePasswordActivity" />
         <activity android:name=".MapActivity" />
         <activity android:name=".ForgotPasswordActivity" />
-        <activity android:name=".DoctorLoginActivity" />
         <activity android:name=".DoctorRegistrationActivity" />
         <activity android:name=".PatientRegistrationActivity" />
         <activity android:name=".PatientEditProfileActivity" />
@@ -45,7 +44,8 @@
         <activity android:name=".PatientChatActivity" />
         <activity android:name=".PatientListActivity" />
         <activity android:name=".DoctorChatActivity" />
-        <activity android:name=".PatientHomePage"></activity>
+        <activity android:name=".PatientHomePage" />
+        <activity android:name=".SignUpActivity"></activity>
     </application>
 
 </manifest>

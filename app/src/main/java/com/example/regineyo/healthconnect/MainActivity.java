@@ -59,18 +59,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.registerBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent RegisterIntent = new Intent(MainActivity.this, PatientRegistrationActivity.class);
+                Intent RegisterIntent = new Intent(MainActivity.this, SignUpActivity.class);
                 startActivity(RegisterIntent);
-            }
-        });
-
-        //user selects doctor button
-        findViewById(R.id.doctorBtn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent RegisterIntent = new Intent(MainActivity.this, DoctorLoginActivity.class);
-                startActivity(RegisterIntent);
-                finish();
             }
         });
     }
@@ -87,21 +77,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
                             DatabaseReference dbr = FirebaseDatabase.getInstance().getReference().child("patients");
+                            isPatient = false;
                             dbr.addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
-                                    isPatient = false;
                                     for(DataSnapshot ds : dataSnapshot.getChildren()) {
                                         if (ds.getKey().equalsIgnoreCase(mAuth.getCurrentUser().getUid())) {
                                             //user is a patient
                                             updateUI(mAuth.getCurrentUser());
+                                            Toast.makeText(MainActivity.this, "Welcome " + mAuth.getCurrentUser().getDisplayName(),
+                                                    Toast.LENGTH_SHORT).show();
                                             isPatient = true;
                                         }
                                     }
+
                                     if(!isPatient) {
-                                        FirebaseAuth.getInstance().signOut();
-                                        updateUI(null);
-                                        Toast.makeText(MainActivity.this, "Invalid account.",
+                                        //user is a doctor
+//                                        FirebaseAuth.getInstance().signOut();
+                                        updateUI(mAuth.getCurrentUser());
+                                        Toast.makeText(MainActivity.this, "Welcome Dr " + mAuth.getCurrentUser().getDisplayName(),
                                                 Toast.LENGTH_SHORT).show();
                                     }
                                 }
@@ -123,11 +117,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void updateUI(FirebaseUser user) {
         if(user != null) {
-            Intent intent = new Intent(this, PatientHomePage.class);
-            startActivity(intent);
-            finish();
+            DatabaseReference dbr = FirebaseDatabase.getInstance().getReference().child("patients");
+            dbr.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    isPatient = false;
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        if (ds.getKey().equalsIgnoreCase(mAuth.getCurrentUser().getUid())) {
+                            //user is a doctor
+                            isPatient = true;
+                            Intent intent = new Intent(MainActivity.this, PatientHomePage.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }
+                    if (!isPatient) {
+                        Intent intent = new Intent(MainActivity.this, DoctorHomePage.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            });
+//            }
         }
     }
+
+//    private void updateDoctorUI(FirebaseUser user) {
+//        if(user != null) {
+//
+//        }
+//    }
 
     public void checkInputs() {
         TextInputLayout til = findViewById(R.id.TIL_email);
@@ -159,8 +182,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser user = mAuth.getCurrentUser();
-        if(user!=null) {
-            if (isPatient) {
+        if(user != null) {
+//            if (isPatient) {
                 DatabaseReference dbr = FirebaseDatabase.getInstance().getReference().child("patients");
                 dbr.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -174,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             }
                         }
                         if (!isPatient) {
-                            Intent intent = new Intent(MainActivity.this, DoctorLoginActivity.class);
+                            Intent intent = new Intent(MainActivity.this, DoctorHomePage.class);
                             startActivity(intent);
                             finish();
                         }
@@ -184,9 +207,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onCancelled(DatabaseError databaseError) {
                     }
                 });
-            } else {
-                updateUI(null);
-            }
+//            }
         }
     }
 }

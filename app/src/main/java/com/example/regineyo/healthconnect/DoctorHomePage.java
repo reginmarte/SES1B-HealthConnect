@@ -45,6 +45,20 @@ public class DoctorHomePage extends AppCompatActivity {
                     Intent RegisterIntent = new Intent(DoctorHomePage.this, DoctorEditProfileActivity.class);
                     startActivity(RegisterIntent);
                 }
+
+                case R.id.navigation_settings:
+                    mTextMessage.setText(R.string.title_setting);
+                {
+                    findViewById(R.id.logoutBtn).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            FirebaseAuth.getInstance().signOut();
+                            Intent RegisterIntent = new Intent(DoctorHomePage.this, MainActivity.class);
+                            startActivity(RegisterIntent);
+                            finish();
+                        }
+                    });
+                }
                 return true;
             }
             return false;
@@ -60,16 +74,6 @@ public class DoctorHomePage extends AppCompatActivity {
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-        findViewById(R.id.logoutBtn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                Intent RegisterIntent = new Intent(DoctorHomePage.this, DoctorLoginActivity.class);
-                startActivity(RegisterIntent);
-                finish();
-            }
-        });
 
     }
 

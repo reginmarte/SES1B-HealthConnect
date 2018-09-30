@@ -45,6 +45,20 @@ public class PatientHomePage extends AppCompatActivity {
                     startActivity(RegisterIntent);
                 }
 
+                case R.id.navigation_settings:
+                    mTextMessage.setText(R.string.title_setting);
+                {
+                    findViewById(R.id.logoutBtn).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            FirebaseAuth.getInstance().signOut();
+                            Intent RegisterIntent = new Intent(PatientHomePage.this, MainActivity.class);
+                            startActivity(RegisterIntent);
+                            finish();
+                        }
+                    });
+                }
+
                 return true;
             }
             return false;
