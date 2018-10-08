@@ -41,7 +41,7 @@ public class PatientHomePage extends AppCompatActivity {
                 case R.id.navigation_profile:
                     mTextMessage.setText(R.string.title_profile);
                 {
-                    Intent RegisterIntent = new Intent(PatientHomePage.this, PatientEditProfileActivity.class);
+                    Intent RegisterIntent = new Intent(PatientHomePage.this, PatientProfileActivity.class);
                     startActivity(RegisterIntent);
                 }
 

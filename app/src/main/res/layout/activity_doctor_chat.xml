@@ -12,6 +12,8 @@
     android:background="@drawable/gradient_background_doctor"
     tools:context=".DoctorChatActivity">
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,8 +25,9 @@
             android:id="@+id/chatName"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:paddingStart="20dp"
             android:gravity="center_vertical"
+            android:paddingStart="20dp"
+            android:textSize="25sp"
             android:textColor="#2E86C1" />
 
         <android.support.v7.widget.RecyclerView
@@ -42,8 +45,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:background="@drawable/white_border"
         android:orientation="horizontal">
 
         <ImageView

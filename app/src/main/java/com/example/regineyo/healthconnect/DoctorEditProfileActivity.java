@@ -25,6 +25,7 @@ import com.google.firebase.FirebaseError;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,6 +42,7 @@ public class DoctorEditProfileActivity extends AppCompatActivity implements View
 
     private static final String TAG = "DoctorEditProfileActivity";
     private TextInputEditText nameET, emailET, numberET, sCodeET;
+//    private String clinic;
     private RadioGroup genderRadioGroup;
     private RadioButton genderRadioButton;
     private FirebaseAuth mAuth;
@@ -55,7 +57,7 @@ public class DoctorEditProfileActivity extends AppCompatActivity implements View
         setContentView(R.layout.activity_doctor_edit_profile);
         mAuth = FirebaseAuth.getInstance();
 
-        FirebaseUser user = mAuth.getCurrentUser();
+        user = mAuth.getCurrentUser();
         final String userID = user.getUid();
         DatabaseReference mRef = FirebaseDatabase.getInstance().getReference();
         //gets user data from database
@@ -66,7 +68,7 @@ public class DoctorEditProfileActivity extends AppCompatActivity implements View
                 String email = dataSnapshot.child("doctors").child(userID).child("email").getValue(String.class);
                 String number = dataSnapshot.child("doctors").child(userID).child("number").getValue(String.class);
                 String gender = dataSnapshot.child("doctors").child(userID).child("gender").getValue(String.class);
-                String sCode = dataSnapshot.child("doctors").child(userID).child("clinic").getValue(String.class);
+                String sCode = dataSnapshot.child("doctors").child(userID).child("sCode").getValue(String.class);
                 RadioButton maleBtn = findViewById(R.id.maleRB);
                 RadioButton femaleBtn = findViewById(R.id.femaleRB);
 
@@ -155,8 +157,8 @@ public class DoctorEditProfileActivity extends AppCompatActivity implements View
             return;
         }
 
-        DatabaseReference clinicsRef = FirebaseDatabase.getInstance().getReference().child("health_care_centre");
-        clinicsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseReference centreRef = FirebaseDatabase.getInstance().getReference().child("health_care_centre");
+        centreRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 if (!snapshot.child(sCodeET.getText().toString().trim()).exists()) {
@@ -176,32 +178,35 @@ public class DoctorEditProfileActivity extends AppCompatActivity implements View
 
     private void saveDetails() {
 
+        final String sCode = sCodeET.getText().toString().trim();
         final String name = nameET.getText().toString().trim();
-        String email = emailET.getText().toString().trim();
-        String number = numberET.getText().toString().trim();
+        final String email = emailET.getText().toString().trim();
+        final String number = numberET.getText().toString().trim();
         int genderID = genderRadioGroup.getCheckedRadioButtonId();
         genderRadioButton = findViewById(genderID);
-        String genderSelect = genderRadioButton.getText().toString();
-        final String sCode = sCodeET.getText().toString().trim();
+        final String genderSelect = genderRadioButton.getText().toString();
 
-        FirebaseUser user = mAuth.getCurrentUser();
+        user = mAuth.getCurrentUser();
         final String userID = mAuth.getCurrentUser().getUid();
-        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("doctors").child(userID);
+        final DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("doctors").child(userID);
 
+        //update clinic's doctors list
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                String clinicCode = snapshot.child("clinic").getValue(String.class);
+            public void onDataChange(final DataSnapshot snapshot) {
+                String currentCode = snapshot.child("sCode").getValue(String.class);
                 DatabaseReference doctorClinicRef = FirebaseDatabase.getInstance().getReference()
                         .child("health_care_centre")
-                        .child(clinicCode)
+                        .child(currentCode)
                         .child("doctor")
                         .child(userID);
-                if (clinicCode.equalsIgnoreCase(sCodeET.getText().toString().trim())) {
+
+                if (currentCode.equalsIgnoreCase(sCodeET.getText().toString().trim())) {
                     //same clinic
                     Map dbUpdates = new HashMap();
                     dbUpdates.put("name", name);
                     doctorClinicRef.updateChildren(dbUpdates);
+
                 } else {
                     //different clinic
                     Map dbUpdates = new HashMap();
@@ -221,13 +226,9 @@ public class DoctorEditProfileActivity extends AppCompatActivity implements View
         });
 
         //adds user to database
-        Map childUpdates = new HashMap();
-        childUpdates.put("name", name);
-        childUpdates.put("email", email);
-        childUpdates.put("number", number);
-        childUpdates.put("gender", genderSelect);
-        childUpdates.put("clinic", sCode);
-        userRef.updateChildren(childUpdates);
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName(name).build();
+        user.updateProfile(profileUpdates);
 
         user.updateEmail(email)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -238,6 +239,22 @@ public class DoctorEditProfileActivity extends AppCompatActivity implements View
                         }
                     }
                 });
+
+        FirebaseDatabase.getInstance().getReference().child("health_care_centre").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    if (ds.getKey().equalsIgnoreCase(sCode)) {
+                        String clinic = ds.child("name").getValue(String.class);
+                        DoctorInfo doctorInfo = new DoctorInfo(name, email, number, genderSelect, sCode, clinic);
+                        Map<String, Object> doctorValues = doctorInfo.toMap();
+                        userRef.updateChildren(doctorValues);
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
 
         updateUI(user);
     }

@@ -42,7 +42,7 @@ public class DoctorHomePage extends AppCompatActivity {
                 case R.id.navigation_profile:
                     mTextMessage.setText(R.string.title_profile);
                 {
-                    Intent RegisterIntent = new Intent(DoctorHomePage.this, DoctorEditProfileActivity.class);
+                    Intent RegisterIntent = new Intent(DoctorHomePage.this, DoctorProfileActivity.class);
                     startActivity(RegisterIntent);
                 }
 

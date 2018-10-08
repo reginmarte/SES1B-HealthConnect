@@ -5,14 +5,16 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -49,20 +51,21 @@ import com.google.firebase.storage.UploadTask;
 import java.util.HashMap;
 import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class DoctorChatActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     public static class MessageViewHolder extends RecyclerView.ViewHolder {
-        TextView messageTextView;
+        TextView messageTextView, messengerTextView, body;
         ImageView messageImageView;
-        TextView messengerTextView;
-//        CircleImageView messengerImageView;
+        CircleImageView messengerImageView;
 
         public MessageViewHolder(View v) {
             super(v);
             messageTextView = itemView.findViewById(R.id.messageTextView);
-            messageImageView = itemView.findViewById(R.id.messageImageView);
+            messageImageView = (ImageView) itemView.findViewById(R.id.messageImageView);
             messengerTextView = itemView.findViewById(R.id.messengerTextView);
-//            messengerImageView = (CircleImageView) itemView.findViewById(R.id.messengerImageView);
+            messengerImageView = (CircleImageView) itemView.findViewById(R.id.messengerImageView);
         }
     }
 
@@ -175,9 +178,11 @@ public class DoctorChatActivity extends AppCompatActivity implements GoogleApiCl
                                             ChatMessage chatMessage) {
 //                mProgressBar.setVisibility(ProgressBar.INVISIBLE);
                 if (chatMessage.getText() != null) {
+                    ////===============================================================================
                     viewHolder.messageTextView.setText(chatMessage.getText());
                     viewHolder.messageTextView.setVisibility(TextView.VISIBLE);
                     viewHolder.messageImageView.setVisibility(ImageView.GONE);
+                    ////===============================================================================
                 } else if (chatMessage.getImageUrl() != null) {
                     String imageUrl = chatMessage.getImageUrl();
                     if (imageUrl.startsWith("gs://")) {
@@ -209,14 +214,14 @@ public class DoctorChatActivity extends AppCompatActivity implements GoogleApiCl
 
 
                 viewHolder.messengerTextView.setText(chatMessage.getName());
-//                if (chatMessage.getPhotoUrl() == null) {
-//                    viewHolder.messengerImageView.setImageDrawable(ContextCompat.getDrawable(MainActivity.this,
-//                            R.drawable.ic_account_circle_black_36dp));
-//                } else {
-//                    Glide.with(MainActivity.this)
-//                            .load(friendlyMessage.getPhotoUrl())
-//                            .into(viewHolder.messengerImageView);
-//                }
+                if (chatMessage.getPhotoUrl() == null) {
+                    viewHolder.messengerImageView.setImageDrawable(ContextCompat.getDrawable(DoctorChatActivity.this,
+                            R.drawable.user));
+                } else {
+                    Glide.with(DoctorChatActivity.this)
+                            .load(chatMessage.getPhotoUrl())
+                            .into(viewHolder.messengerImageView);
+                }
 
             }
         };
@@ -240,7 +245,7 @@ public class DoctorChatActivity extends AppCompatActivity implements GoogleApiCl
         });
 
         mMessageRecyclerView.setAdapter(mFirebaseAdapter);
-        mMessageEditText = (EditText) findViewById(R.id.messageEditText);
+        mMessageEditText = findViewById(R.id.messageEditText);
         mMessageEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(mSharedPreferences
                 .getInt(CHAT_MSG_LENGTH, DEFAULT_MSG_LENGTH_LIMIT))});
         mMessageEditText.addTextChangedListener(new TextWatcher() {
@@ -400,7 +405,8 @@ public class DoctorChatActivity extends AppCompatActivity implements GoogleApiCl
 
                     ChatMessage tempMessage = new ChatMessage(null, mUsername, mPhotoUrl,
                             LOADING_IMAGE_URL);
-                    mFirebaseDatabaseReference.child(MESSAGES_CHILD).push()
+                    mFirebaseDatabaseReference.child(MESSAGES_CHILD)
+                            .child(patientID + "_" + mUsername).push()
                             .setValue(tempMessage, new DatabaseReference.CompletionListener() {
                                 @Override
                                 public void onComplete(DatabaseError databaseError,
@@ -430,12 +436,13 @@ public class DoctorChatActivity extends AppCompatActivity implements GoogleApiCl
                 new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                        Task<Uri> u = task.getResult().getMetadata().getReference().getDownloadUrl();
                         if (task.isSuccessful()) {
                             ChatMessage chatMessage =
-                                    new ChatMessage(null, mUsername, mPhotoUrl,
-                                            task.getResult().getMetadata().getReference().getDownloadUrl()
-                                                    .toString());
-                            mFirebaseDatabaseReference.child(MESSAGES_CHILD).child(key)
+                                    new ChatMessage(null, mUsername, mPhotoUrl, u.toString());
+                            mFirebaseDatabaseReference.child(MESSAGES_CHILD)
+                                    .child(patientID + "_" + mUsername)
+                                    .child(key)
                                     .setValue(chatMessage);
                         } else {
                             Log.w(TAG, "Image upload task was not successful.",

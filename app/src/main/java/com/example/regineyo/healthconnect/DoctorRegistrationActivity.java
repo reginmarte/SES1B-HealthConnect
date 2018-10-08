@@ -18,6 +18,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseError;
@@ -42,6 +44,7 @@ public class DoctorRegistrationActivity extends AppCompatActivity implements Vie
 
     private static final String TAG = "DoctorRegistrationActivity";
     private TextInputEditText nameET, emailET, numberET, passwordET, sCodeET;
+//    private String clinic;
     private RadioGroup genderRadioGroup;
     private RadioButton genderRadioButton;
     private FirebaseAuth mAuth;
@@ -89,7 +92,6 @@ public class DoctorRegistrationActivity extends AppCompatActivity implements Vie
         emailTIL.setError(null);
         numberTIL.setError(null);
         passwordTIL.setError(null);
-//        dateOfBirthTV.setError(null);
         sCodeTIL.setError(null);
 
         String email = emailET.getText().toString().trim();
@@ -133,8 +135,8 @@ public class DoctorRegistrationActivity extends AppCompatActivity implements Vie
             return;
         }
 
-        DatabaseReference clinicsRef = FirebaseDatabase.getInstance().getReference().child("health_care_centre");
-        clinicsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseReference centreRef = FirebaseDatabase.getInstance().getReference().child("health_care_centre");
+        centreRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 if (!snapshot.child(sCodeET.getText().toString().trim()).exists()) {
@@ -153,7 +155,7 @@ public class DoctorRegistrationActivity extends AppCompatActivity implements Vie
         });
     }
 
-    private void createAccount(String email, String password) {
+    private void createAccount(final String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(DoctorRegistrationActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -161,42 +163,55 @@ public class DoctorRegistrationActivity extends AppCompatActivity implements Vie
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
-                            String name = nameET.getText().toString().trim();
-                            String email = emailET.getText().toString().trim();
-                            String number = numberET.getText().toString().trim();
+
+                            final String sCode = sCodeET.getText().toString().trim();
+                            final String name = nameET.getText().toString().trim();
+                            final String email = emailET.getText().toString().trim();
+                            final String number = numberET.getText().toString().trim();
                             int genderID = genderRadioGroup.getCheckedRadioButtonId();
                             genderRadioButton = findViewById(genderID);
-                            String genderSelect = genderRadioButton.getText().toString();
-                            String sCode = sCodeET.getText().toString().trim();
-                            FirebaseUser user = mAuth.getCurrentUser();
+                            final String genderSelect = genderRadioButton.getText().toString();
+
+                            user = mAuth.getCurrentUser();
                             String userID = mAuth.getCurrentUser().getUid();
-                            DatabaseReference currentUser_db = FirebaseDatabase.getInstance().getReference()
+                            DatabaseReference mRef = FirebaseDatabase.getInstance().getReference();
+
+                            final DatabaseReference doctorRef = mRef
                                     .child("doctors").child(userID);
-                            DatabaseReference clinicRef = FirebaseDatabase.getInstance().getReference()
+
+                            final DatabaseReference clinicRef = mRef
                                     .child("health_care_centre")
                                     .child(sCode)
                                     .child("doctor")
                                     .child(userID);
+
+                            //sets up name of doctor's clinic
+                            mRef.child("health_care_centre").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                                        if (ds.getKey().equalsIgnoreCase(sCode)) {
+                                            String clinic = ds.child("name").getValue(String.class);
+                                            DoctorInfo doctorInfo = new DoctorInfo(name, email, number, genderSelect, sCode, clinic);
+                                            doctorRef.setValue(doctorInfo);
+                                        }
+                                    }
+                                }
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {}
+                            });
 
                             //adds user to database
                             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                     .setDisplayName(name).build();
                             user.updateProfile(profileUpdates);
 
-                            Map newUser = new HashMap();
-                            newUser.put("name", name);
-                            newUser.put("email", email);
-                            newUser.put("number", number);
-                            newUser.put("gender", genderSelect);
-                            newUser.put("clinic", sCode);
-
-                            currentUser_db.setValue(newUser);
-                            updateUI(user);
-
                             //adds doctor to clinic
                             Map newDoctor = new HashMap();
                             newDoctor.put("name", name);
                             clinicRef.setValue(newDoctor);
+
+                            updateUI(user);
 
                         } else {
                             // If sign in fails, display a message to the user.

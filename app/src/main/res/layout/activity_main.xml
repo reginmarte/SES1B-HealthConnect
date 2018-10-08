@@ -16,13 +16,19 @@
         android:orientation="vertical"
         android:gravity="center">
 
-        <TextView
-            android:id="@+id/logo"
-            android:text="@string/patient_register_title"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_margin="40dp"
-            android:layout_gravity="center" />
+        <!--<TextView-->
+            <!--android:id="@+id/logo"-->
+            <!--android:text="@string/patient_register_title"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_gravity="center" />-->
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:layout_margin="30dp"
+            android:src="@drawable/cardiogram"/>
 
         <!--email-->
         <android.support.design.widget.TextInputLayout
@@ -60,9 +66,9 @@
             android:id="@+id/loginBtn"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
             android:background="@drawable/primary_patient_button"
-            android:text="@string/action_sign_in_short"/>
+            android:text="@string/action_sign_in_short"
+            android:textColor="#FFFFFF" />
 
         <Button
             android:id="@+id/forgotPasswordBtn"

@@ -178,16 +178,9 @@ public class PatientRegistrationActivity extends AppCompatActivity implements Vi
                                     .setDisplayName(name).build();
                             user.updateProfile(profileUpdates);
 
-                            Map newUser = new HashMap();
-                            newUser.put("name", name);
-                            newUser.put("email", email);
-                            newUser.put("number", number);
-                            newUser.put("birthday", birthday);
-                            newUser.put("gender", genderSelect);
-                            newUser.put("height", height);
-                            newUser.put("weight", weight);
+                            PatientInfo patientInfo = new PatientInfo(name, email, number, birthday, genderSelect, height, weight);
 
-                            currentUser_db.setValue(newUser);
+                            currentUser_db.setValue(patientInfo);
                             updateUI(user);
 
                         } else {

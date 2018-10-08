@@ -4,10 +4,14 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.google.android.gms.common.oob.SignUp;
 
 public class SignUpActivity extends AppCompatActivity {
+
+    private ImageButton patientBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

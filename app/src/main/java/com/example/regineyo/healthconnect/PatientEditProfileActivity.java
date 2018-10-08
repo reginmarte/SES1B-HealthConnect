@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,17 +46,12 @@ public class PatientEditProfileActivity extends AppCompatActivity implements Vie
     private int age;
     private String birthday;
     private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
-    private FirebaseUser user;
-    private FirebaseDatabase mDatabase;
-    private DatabaseReference mRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_edit_profile);
         mAuth = FirebaseAuth.getInstance();
-
         FirebaseUser user = mAuth.getCurrentUser();
         final String userID = user.getUid();
         DatabaseReference mRef = FirebaseDatabase.getInstance().getReference();
@@ -201,15 +197,24 @@ public class PatientEditProfileActivity extends AppCompatActivity implements Vie
         String weight = weightET.getText().toString().trim();
 
         //adds user to database
-        Map childUpdates = new HashMap();
-        childUpdates.put("name", name);
-        childUpdates.put("email", email);
-        childUpdates.put("number", number);
-        childUpdates.put("birthday", birthday);
-        childUpdates.put("gender", genderSelect);
-        childUpdates.put("height", height);
-        childUpdates.put("weight", weight);
-        currentUser_db.updateChildren(childUpdates);
+        //adds user to database
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName(name).build();
+        user.updateProfile(profileUpdates);
+
+        user.updateEmail(email)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "User email address updated.");
+                        }
+                    }
+                });
+
+        PatientInfo patientInfo = new PatientInfo(name, email, number, birthday, genderSelect, height, weight);
+        Map<String, Object> patientValues = patientInfo.toMap();
+        currentUser_db.updateChildren(patientValues);
 
         user.updateEmail(email)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {

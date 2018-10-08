@@ -16,7 +16,7 @@
     <string name="google_maps_API_key">AIzaSyD1AZs0PxyEIw4ezqoGlDaf8ADfnJ65Zu4</string>
 
     <string name="prompt_enter_email">"Enter your email to reset password.</string>
-    <string name="patient_register_title">COMPANY LOGO</string>
+    <string name="patient_register_title">Health Connect</string>
     <string name="prompt_patient_doctor">"Are you a patient or doctor?"</string>
     <string name="action_select_patient">Patient</string>
     <string name="action_select_doctor">Doctor</string>
@@ -32,13 +32,15 @@
     <string name="action_save">Save</string>
     <string name="action_send">Send</string>
     <string name="hint_sCode">Clinic code</string>
-    <string name="prompt_gender">Gender: </string>
+    <string name="prompt_gender">Gender </string>
     <string name="action_male_radioBtn">Male</string>
     <string name="action_female_radioBtn">Female</string>
-    <string name="action_date_of_birth">Date of Birth</string>
+    <string name="action_date_of_birth">Date of birth</string>
     <string name="hint_DOB">day/month/year</string>
     <string name="hint_height">Height (cm)</string>
     <string name="hint_weight">Weight (kg)</string>
+    <string name="title_clinic">Clinic</string>
+    <string name="title_specialty">Specialty</string>
     <string name="fresh_config">Fresh Config</string>
     <string name="cause_crash">Cause Crash</string>
     <string name="invite_menu_label">Invite</string>
