@@ -68,6 +68,7 @@ public class PatientChatListFragment extends Fragment implements View.OnClickLis
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_patient_chat_list, container, false);
+
         doctorsLV = view.findViewById(R.id.doctorList);
         arrayAdapt = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, listofDoctors);
         doctorsLV.setAdapter(arrayAdapt);
@@ -94,7 +95,7 @@ public class PatientChatListFragment extends Fragment implements View.OnClickLis
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(getActivity(),PatientChatActivity.class);
-                i.putExtra("selected_patient", ((TextView)view).getText().toString());
+                i.putExtra("selected_doctor", ((TextView)view).getText().toString());
                 startActivity(i);
             }
         });

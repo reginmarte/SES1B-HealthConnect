@@ -3,31 +3,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_background_patient"
     tools:context=".PatientChatListFragment">
 
-    <LinearLayout
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/coordinator"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_margin="30dp"
+        android:background="@drawable/white_border">
 
-        <TextView
-            android:text="@string/title_list_doctors"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:gravity="center_vertical"
-            android:paddingStart="20dp"
-            android:paddingTop="0dp"
-            android:textColor="#17A589" />
-
-        <ListView
-            android:id="@+id/doctorList"
             android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:divider="#c6c8cf"
-            android:dividerHeight="1dp"
-            android:listSelector="#76D7C4"
-            android:layout_marginBottom="5dp"/>
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <TextView
+                android:text="@string/title_list_doctors"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:paddingStart="20dp"
+                android:paddingTop="0dp"
+                android:textColor="#17A589" />
+
+            <ListView
+                android:id="@+id/doctorList"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:divider="#c6c8cf"
+                android:dividerHeight="1dp"
+                android:listSelector="#76D7C4"
+                android:layout_marginBottom="5dp"/>
+
+        </LinearLayout>
+    </android.support.design.widget.CoordinatorLayout>
 
 </FrameLayout>

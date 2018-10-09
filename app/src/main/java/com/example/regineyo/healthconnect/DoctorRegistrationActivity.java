@@ -226,8 +226,8 @@ public class DoctorRegistrationActivity extends AppCompatActivity implements Vie
 
     private void updateUI(FirebaseUser user) {
         if (user != null) {
-            Intent intent = new Intent(this, DoctorHomePage.class);
-            startActivity(intent);
+//            Intent intent = new Intent(this, DoctorHomePage.class);
+//            startActivity(intent);
             finish();
         }
     }

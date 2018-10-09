@@ -33,6 +33,7 @@ public class DoctorChatListFragment extends Fragment implements View.OnClickList
     ArrayList<String> listOfPatients = new ArrayList<String>();
     ArrayAdapter arrayAdapt;
     private DatabaseReference dbr = FirebaseDatabase.getInstance().getReference().child("patients");
+    //child("doctors").child(getCurrentId).child(existingchats)
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -72,7 +73,7 @@ public class DoctorChatListFragment extends Fragment implements View.OnClickList
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(getActivity(), DoctorChatActivity.class);
-                i.putExtra("selected_doctor", ((TextView)view).getText().toString());
+                i.putExtra("selected_patient", ((TextView)view).getText().toString());
                 startActivity(i);
             }
         });
@@ -82,6 +83,5 @@ public class DoctorChatListFragment extends Fragment implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-
     }
 }

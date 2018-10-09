@@ -101,6 +101,7 @@ public class DoctorChatActivity extends AppCompatActivity implements GoogleApiCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_chat);
+
         patientID = getIntent().getStringExtra("selected_patient");
         chatName = findViewById(R.id.chatName);
         chatName.setText(patientID);
