@@ -33,7 +33,7 @@
             android:id="@+id/messageRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="500dp"
-            android:background="@drawable/primary_doctor_button"
+            android:background="@drawable/white_border"
             android:padding="20dp"
             android:layout_marginBottom="5dp"/>
     </LinearLayout>

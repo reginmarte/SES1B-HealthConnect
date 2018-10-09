@@ -40,14 +40,10 @@
         <activity android:name=".PatientEditProfileActivity" />
         <activity android:name=".DoctorEditProfileActivity" />
         <activity android:name=".DoctorHomePage" />
-        <activity android:name=".DoctorListActivity" />
         <activity android:name=".PatientChatActivity" />
-        <activity android:name=".PatientListActivity" />
         <activity android:name=".DoctorChatActivity" />
         <activity android:name=".PatientHomePage" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".PatientProfileActivity" />
-        <activity android:name=".DoctorProfileActivity"></activity>
     </application>
 
 </manifest>

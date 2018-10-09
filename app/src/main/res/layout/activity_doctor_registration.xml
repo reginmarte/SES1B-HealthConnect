@@ -132,7 +132,7 @@
             android:id="@+id/confirmBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
+            android:layout_marginStart="100dp"
             android:background="@drawable/primary_doctor_button"
             android:text="@string/action_confirm"
             android:textColor="#2E86C1" />

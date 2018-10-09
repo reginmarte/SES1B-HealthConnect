@@ -1,11 +1,14 @@
 package com.example.regineyo.healthconnect;
 
+import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -17,17 +20,40 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class DoctorProfileActivity extends AppCompatActivity {
+/**
+ * A simple {@link Fragment} subclass.
+ * create an instance of this fragment.
+ */
+public class DoctorProfileFragment extends Fragment {
 
     private TextView nameTV, emailTV, numberTV, genderTV, clinicTV, specialtyTV;
-    public static final String TAG = "DoctorProfileActivity";
+    public static final String TAG = "DoctorProfileFragment";
     private FirebaseAuth mAuth;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_doctor_profile);
+    public DoctorProfileFragment() {
+        // Required empty public constructor
+    }
 
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     * @return A new instance of fragment DoctorProfileFragment.
+     */
+    // TODO: Rename and change types and number of parameters
+//    public static DoctorProfileFragment newInstance(String param1, String param2) {
+//        DoctorProfileFragment fragment = new DoctorProfileFragment();
+//        Bundle args = new Bundle();
+//        args.putString(ARG_PARAM1, param1);
+//        args.putString(ARG_PARAM2, param2);
+//        fragment.setArguments(args);
+//        return fragment;
+//    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_doctor_profile, container, false);
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         final String userID = user.getUid();
@@ -58,21 +84,23 @@ public class DoctorProfileActivity extends AppCompatActivity {
         };
         mRef.addValueEventListener(doctorDetailsListener);
 
-        nameTV = findViewById(R.id.nameTV);
-        emailTV = findViewById(R.id.emailTV);
-        numberTV = findViewById(R.id.numberTV);
-        genderTV = findViewById(R.id.genderTV);
-        clinicTV = findViewById(R.id.clinicTV);
+        nameTV = view.findViewById(R.id.nameTV);
+        emailTV = view.findViewById(R.id.emailTV);
+        numberTV = view.findViewById(R.id.numberTV);
+        genderTV = view.findViewById(R.id.genderTV);
+        clinicTV = view.findViewById(R.id.clinicTV);
 //        specialtyTV = findViewById(R.id.specialtyTV);
 
-        ImageButton editImageBtn = findViewById(R.id.editImageBtn);
+        ImageButton editImageBtn = view.findViewById(R.id.editImageBtn);
         editImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent RegisterIntent = new Intent(DoctorProfileActivity.this, DoctorEditProfileActivity.class);
+                Intent RegisterIntent = new Intent(getActivity(), DoctorEditProfileActivity.class);
                 startActivity(RegisterIntent);
             }
         });
 
+        return view;
     }
+
 }

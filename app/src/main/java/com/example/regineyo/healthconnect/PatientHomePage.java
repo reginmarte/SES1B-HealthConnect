@@ -1,69 +1,33 @@
 package com.example.regineyo.healthconnect;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.MapFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class PatientHomePage extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private TextView mTextMessage;
-    private Button logoutBtn;
+    private BottomNavigationView mMainNav;
+    private FrameLayout mMainFrame;
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_messages:
-                    mTextMessage.setText(R.string.title_messages);
-                {
-                    Intent RegisterIntent = new Intent(PatientHomePage.this, DoctorListActivity.class);
-                    startActivity(RegisterIntent);
-                }
-                return true;
-                case R.id.navigation_map:
-                    mTextMessage.setText(R.string.title_map);
-                {
-                    Intent RegisterIntent = new Intent(PatientHomePage.this, MapActivity.class);
-                    startActivity(RegisterIntent);
-                }
-                return true;
-                case R.id.navigation_profile:
-                    mTextMessage.setText(R.string.title_profile);
-                {
-                    Intent RegisterIntent = new Intent(PatientHomePage.this, PatientProfileActivity.class);
-                    startActivity(RegisterIntent);
-                }
-
-                case R.id.navigation_settings:
-                    mTextMessage.setText(R.string.title_setting);
-                {
-                    findViewById(R.id.logoutBtn).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            FirebaseAuth.getInstance().signOut();
-                            Intent RegisterIntent = new Intent(PatientHomePage.this, MainActivity.class);
-                            startActivity(RegisterIntent);
-                            finish();
-                        }
-                    });
-                }
-
-                return true;
-            }
-            return false;
-        }
-    };
+    private PatientChatListFragment chatFragment;
+    private MapFragment mapFragment;
+    private PatientProfileFragment profileFragment;
+    private SettingsFragment settingsFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,20 +35,49 @@ public class PatientHomePage extends AppCompatActivity {
         setContentView(R.layout.activity_patient_home_page);
         mAuth = FirebaseAuth.getInstance();
 
-        mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        mMainFrame = (FrameLayout) findViewById(R.id.frame_container);
+        mMainNav = (BottomNavigationView) findViewById(R.id.navigation);
 
-        findViewById(R.id.logoutBtn).setOnClickListener(new View.OnClickListener() {
+        chatFragment = new PatientChatListFragment();
+        mapFragment = new MapFragment();
+        profileFragment = new PatientProfileFragment();
+        settingsFragment = new SettingsFragment();
+
+        loadFragment(chatFragment);
+
+        mMainNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+
             @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                Intent RegisterIntent = new Intent(PatientHomePage.this, MainActivity.class);
-                startActivity(RegisterIntent);
-                finish();
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment fragment;
+                switch (item.getItemId()) {
+                    case R.id.navigation_messages:
+                        loadFragment(chatFragment);
+                        return true;
+                    case R.id.navigation_map:
+                        Intent intent = new Intent(PatientHomePage.this, MapActivity.class);
+                        startActivity(intent);
+                        //                    fragment = new MapFragment();
+                        //                    loadFragment(fragment);
+                        return true;
+                    case R.id.navigation_profile:
+                        loadFragment(profileFragment);
+                        return true;
+                    case R.id.navigation_settings:
+                        loadFragment(settingsFragment);
+                        return true;
+                }
+                return false;
             }
         });
-
     }
 
+    private void loadFragment(Fragment fragment) {
+        // load fragment
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
 }
+

@@ -44,6 +44,7 @@
     <string name="fresh_config">Fresh Config</string>
     <string name="cause_crash">Cause Crash</string>
     <string name="invite_menu_label">Invite</string>
+    <string name="action_delete_account">Delete Account</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -54,4 +55,6 @@
     <string name="title_profile">Profile</string>
     <string name="title_setting">Setting</string>
     <string name="title_activity_messaging">MessagingActivity</string>
+    <string name="title_list_patients">List of Patients</string>
+    <string name="title_list_doctors">List of Doctors</string>
 </resources>
