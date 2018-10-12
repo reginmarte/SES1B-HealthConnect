@@ -1,6 +1,7 @@
 package com.example.regineyo.healthconnect;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -69,6 +70,30 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
+            }
+        });
+
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                final String clinicName = marker.getTitle();
+                databaseReference.child("health_care_centre").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (final DataSnapshot ds : dataSnapshot.getChildren()){
+                            if (clinicName.equals(ds.child("name").getValue(String.class))){
+                                Intent i = new Intent(MapActivity.this, SignUpActivity.class);
+//                                i.putExtra("centreID", ds.getValue(String.class));
+                                startActivity(i);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
             }
         });
 

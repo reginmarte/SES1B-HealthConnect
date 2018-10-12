@@ -2,6 +2,7 @@ package com.example.regineyo.healthconnect;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Location;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -31,6 +32,9 @@ import com.firebase.ui.database.SnapshotParser;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -82,6 +86,9 @@ public class PatientChatActivity extends AppCompatActivity implements GoogleApiC
     private SharedPreferences mSharedPreferences;
     private GoogleApiClient mGoogleApiClient;
     private static final String MESSAGE_URL = "http://friendlychat.firebase.google.com/message/";
+
+    private FusedLocationProviderClient mFusedLocationProviderClient;
+    private Boolean mLocationPermissionsGranted = true;
 
     private Button mSendButton;
     private RecyclerView mMessageRecyclerView;
@@ -264,10 +271,11 @@ public class PatientChatActivity extends AppCompatActivity implements GoogleApiC
         mAddMessageImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-                intent.addCategory(Intent.CATEGORY_OPENABLE);
-                intent.setType("image/*");
-                startActivityForResult(intent, REQUEST_IMAGE);
+//                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+//                intent.addCategory(Intent.CATEGORY_OPENABLE);
+//                intent.setType("image/*");
+//                startActivityForResult(intent, REQUEST_IMAGE);
+                getDeviceCurrentLocation();
             }
         });
 
@@ -322,6 +330,40 @@ public class PatientChatActivity extends AppCompatActivity implements GoogleApiC
                         applyRetrievedLengthLimit();
                     }
                 });
+    }
+
+    public void getDeviceCurrentLocation(){
+
+        Log.d(TAG, "getDeviceLocation: getting the devices current location");
+
+        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+
+        try{
+            if(mLocationPermissionsGranted){
+
+                final Task location = mFusedLocationProviderClient.getLastLocation();
+                location.addOnCompleteListener(new OnCompleteListener() {
+                    @Override
+                    public void onComplete(@NonNull Task task) {
+                        if(task.isSuccessful()){
+                            Log.d(TAG, "onComplete: found location!");
+                            Location currentLocation = (Location) task.getResult();
+
+                            if(currentLocation != null) {
+                                String curLocation = currentLocation.getLatitude() +" ,"+ currentLocation.getLongitude();
+                                mMessageEditText.setText("I am currently at "+ curLocation+ ".");
+                            }
+
+                        }else{
+                            Log.d(TAG, "onComplete: current location is null");
+                        }
+                    }
+                });
+            }
+        }catch (SecurityException e){
+            Log.e(TAG, "getDeviceLocation: SecurityException: " + e.getMessage() );
+        }
+
     }
     /**
      * Apply retrieved length limit to edit text field.
