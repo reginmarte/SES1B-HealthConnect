@@ -25,6 +25,7 @@ public class DoctorHomePage extends AppCompatActivity {
     private DoctorChatListFragment chatFragment;
     private DoctorProfileFragment profileFragment;
     private SettingsFragment settingsFragment;
+    private WelcomeFragment welcomeFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +39,9 @@ public class DoctorHomePage extends AppCompatActivity {
         chatFragment = new DoctorChatListFragment();
         profileFragment = new DoctorProfileFragment();
         settingsFragment = new SettingsFragment();
+        welcomeFragment = new WelcomeFragment();
 
-        loadFragment(chatFragment);
+        loadFragment(welcomeFragment);
 
         mMainNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 
