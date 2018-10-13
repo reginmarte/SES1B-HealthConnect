@@ -55,6 +55,8 @@
     <string name="title_profile">Profile</string>
     <string name="title_setting">Setting</string>
     <string name="title_activity_messaging">MessagingActivity</string>
-    <string name="title_list_patients">List of Patients</string>
-    <string name="title_list_doctors">List of Doctors</string>
+    <string name="title_clinic_list">Doctors available at: </string>
+    <string name="title_list_patients">Patients</string>
+    <string name="title_list_doctors">Doctors</string>
+    <string name="title_no_doctors">No doctors registered under this clinic</string>
 </resources>

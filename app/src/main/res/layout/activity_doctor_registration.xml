@@ -135,7 +135,7 @@
             android:layout_marginStart="100dp"
             android:background="@drawable/primary_doctor_button"
             android:text="@string/action_confirm"
-            android:textColor="#2E86C1" />
+            android:textColor="#FFFFFF" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

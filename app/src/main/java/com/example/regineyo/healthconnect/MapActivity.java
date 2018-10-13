@@ -82,8 +82,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (final DataSnapshot ds : dataSnapshot.getChildren()){
                             if (clinicName.equals(ds.child("name").getValue(String.class))){
-                                Intent i = new Intent(MapActivity.this, SignUpActivity.class);
-//                                i.putExtra("centreID", ds.getValue(String.class));
+                                Intent i = new Intent(MapActivity.this, ClinicListActivity.class);
+                                i.putExtra("clinicName", ds.child("name").getValue(String.class));
                                 startActivity(i);
                             }
                         }

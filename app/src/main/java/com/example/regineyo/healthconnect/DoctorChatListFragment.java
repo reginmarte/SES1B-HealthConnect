@@ -58,7 +58,11 @@ public class DoctorChatListFragment extends Fragment implements View.OnClickList
                 Set<String> set = new HashSet<>();
 
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
-                    set.add(ds.child("name").getValue(String.class));
+                    if(ds.child("name").exists()) {
+                        set.add(ds.child("name").getValue(String.class));
+                    } else {
+                        set.add("No doctors available");
+                    }
                 }
                 arrayAdapt.clear();
                 arrayAdapt.addAll(set);
