@@ -6,6 +6,7 @@ import android.location.Location;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -45,6 +46,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 import com.google.firebase.storage.FirebaseStorage;
@@ -54,20 +56,22 @@ import com.google.firebase.storage.UploadTask;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PatientChatActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+import de.hdodenhof.circleimageview.CircleImageView;
+
+public class PatientChatActivity extends AppCompatActivity implements
+        GoogleApiClient.OnConnectionFailedListener {
 
     public static class MessageViewHolder extends RecyclerView.ViewHolder {
-        TextView messageTextView;
+        TextView messageTextView, messengerTextView;
         ImageView messageImageView;
-        TextView messengerTextView;
-//        CircleImageView messengerImageView;
+        CircleImageView messengerImageView;
 
         public MessageViewHolder(View v) {
             super(v);
             messageTextView = itemView.findViewById(R.id.messageTextView);
             messageImageView = itemView.findViewById(R.id.messageImageView);
             messengerTextView = itemView.findViewById(R.id.messengerTextView);
-//            messengerImageView = (CircleImageView) itemView.findViewById(R.id.messengerImageView);
+            messengerImageView = (CircleImageView) itemView.findViewById(R.id.messengerImageView);
         }
     }
 
@@ -80,13 +84,13 @@ public class PatientChatActivity extends AppCompatActivity implements GoogleApiC
     public static final int DEFAULT_MSG_LENGTH_LIMIT = 10;
     public static final String ANONYMOUS = "anonymous";
     private static final String MESSAGE_SENT_EVENT = "message_sent";
-    private String mUsername;
-    private String doctorID;
-    private String mPhotoUrl;
-    private SharedPreferences mSharedPreferences;
-    private GoogleApiClient mGoogleApiClient;
     private static final String MESSAGE_URL = "http://friendlychat.firebase.google.com/message/";
 
+    private String mUsername, mPhotoUrl, mUserID, doctorName, doctorID;
+    private SharedPreferences mSharedPreferences;
+    private GoogleApiClient mGoogleApiClient;
+
+    private Button mSendButton, profileBtn;
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private Boolean mLocationPermissionsGranted = true;
 
@@ -109,14 +113,41 @@ public class PatientChatActivity extends AppCompatActivity implements GoogleApiC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_chat);
 
-        doctorID = getIntent().getStringExtra("selected_doctor");
+        //gets selected doctor====================================================================================
+        doctorName = getIntent().getStringExtra("selected_doctor");
+        DatabaseReference mRef = FirebaseDatabase.getInstance().getReference().child("doctors");
+        mRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot ds: snapshot.getChildren()){
+                    if(ds.child("name").getValue(String.class).equalsIgnoreCase(doctorName)){
+                        doctorID = ds.getKey();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {}
+        });
         chatName = findViewById(R.id.chatName);
-        chatName.setText(doctorID);
+        chatName.setText(doctorName);
+        //========================================================================================================
+
+        profileBtn = findViewById(R.id.profileBtn);
+        profileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(PatientChatActivity.this, DoctorProfileActivity.class);
+                i.putExtra("doctor", doctorID);
+                startActivity(i);
+            }
+        });
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         // Set default username is anonymous.
         mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         mUsername = mFirebaseUser.getDisplayName();
+        mUserID = mFirebaseUser.getUid();
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
@@ -125,15 +156,13 @@ public class PatientChatActivity extends AppCompatActivity implements GoogleApiC
 
         // Initialize ProgressBar and RecyclerView.
 //        mProgressBar = findViewById(R.id.progressBar);
-        mMessageRecyclerView = findViewById(R.id.messageRecyclerView);
+        mMessageRecyclerView = (RecyclerView) findViewById(R.id.messageRecyclerView);
         mLinearLayoutManager = new LinearLayoutManager(this);
         mLinearLayoutManager.setStackFromEnd(true);
         mMessageRecyclerView.setLayoutManager(mLinearLayoutManager);
 
         // New child entries
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
-//                .child(MESSAGES_CHILD);
-//                .child(mUsername + "_" + doctorID);
         SnapshotParser<ChatMessage> parser = new SnapshotParser<ChatMessage>() {
             @Override
             public ChatMessage parseSnapshot(DataSnapshot dataSnapshot) {
@@ -147,20 +176,20 @@ public class PatientChatActivity extends AppCompatActivity implements GoogleApiC
 
         DatabaseReference messagesRef = mFirebaseDatabaseReference
                 .child(MESSAGES_CHILD)
-                .child(mUsername + "_" + doctorID);
+                .child(mUsername + "_" + doctorName);
         FirebaseRecyclerOptions<ChatMessage> options =
                 new FirebaseRecyclerOptions.Builder<ChatMessage>()
                         .setQuery(messagesRef, parser)
                         .build();
-        mFirebaseAdapter = new FirebaseRecyclerAdapter<ChatMessage, PatientChatActivity.MessageViewHolder>(options) {
+        mFirebaseAdapter = new FirebaseRecyclerAdapter<ChatMessage, MessageViewHolder>(options) {
             @Override
-            public PatientChatActivity.MessageViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+            public MessageViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
                 LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-                return new PatientChatActivity.MessageViewHolder(inflater.inflate(R.layout.message, viewGroup, false));
+                return new MessageViewHolder(inflater.inflate(R.layout.message, viewGroup, false));
             }
 
             @Override
-            protected void onBindViewHolder(final PatientChatActivity.MessageViewHolder viewHolder,
+            protected void onBindViewHolder(final MessageViewHolder viewHolder,
                                             int position,
                                             ChatMessage chatMessage) {
 //                mProgressBar.setVisibility(ProgressBar.INVISIBLE);
@@ -197,17 +226,15 @@ public class PatientChatActivity extends AppCompatActivity implements GoogleApiC
                     viewHolder.messageTextView.setVisibility(TextView.GONE);
                 }
 
-
                 viewHolder.messengerTextView.setText(chatMessage.getName());
-//                if (chatMessage.getPhotoUrl() == null) {
-//                    viewHolder.messengerImageView.setImageDrawable(ContextCompat.getDrawable(MainActivity.this,
-//                            R.drawable.ic_account_circle_black_36dp));
-//                } else {
-//                    Glide.with(MainActivity.this)
-//                            .load(friendlyMessage.getPhotoUrl())
-//                            .into(viewHolder.messengerImageView);
-//                }
-
+                if (chatMessage.getPhotoUrl() == null) {
+                    viewHolder.messengerImageView.setImageDrawable(ContextCompat.getDrawable(PatientChatActivity.this,
+                            R.drawable.patient));
+                } else {
+                    Glide.with(PatientChatActivity.this)
+                            .load(chatMessage.getPhotoUrl())
+                            .into(viewHolder.messengerImageView);
+                }
             }
         };
 
@@ -230,6 +257,28 @@ public class PatientChatActivity extends AppCompatActivity implements GoogleApiC
         });
 
         mMessageRecyclerView.setAdapter(mFirebaseAdapter);
+
+        // Initialize Firebase Remote Config.
+        mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
+
+        // Define Firebase Remote Config Settings.
+        FirebaseRemoteConfigSettings firebaseRemoteConfigSettings =
+                new FirebaseRemoteConfigSettings.Builder()
+                        .setDeveloperModeEnabled(true)
+                        .build();
+
+        // Define default config values. Defaults are used when fetched config values are not
+        // available. Eg: if an error occurred fetching values from the server.
+        Map<String, Object> defaultConfigMap = new HashMap<>();
+        defaultConfigMap.put("chat_msg_length", 10L);
+
+        // Apply config settings and default values.
+        mFirebaseRemoteConfig.setConfigSettings(firebaseRemoteConfigSettings);
+        mFirebaseRemoteConfig.setDefaults(defaultConfigMap);
+
+        // Fetch remote config.
+        fetchConfig();
+
         mMessageEditText = (EditText) findViewById(R.id.messageEditText);
         mMessageEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(mSharedPreferences
                 .getInt(CHAT_MSG_LENGTH, DEFAULT_MSG_LENGTH_LIMIT))});
@@ -261,13 +310,24 @@ public class PatientChatActivity extends AppCompatActivity implements GoogleApiC
                         mUsername,
                         mPhotoUrl,
                         null /* no image */);
-                mFirebaseDatabaseReference.child(MESSAGES_CHILD)
-                        .child(mUsername + "_" + doctorID).push().setValue(chatMessage);
+                mFirebaseDatabaseReference
+                        .child(MESSAGES_CHILD)
+                        .child(mUsername + "_" + doctorName).push().setValue(chatMessage);
                 mMessageEditText.setText("");
+
+                //adds chat to patient's/doctor's list of existing chats
+                mFirebaseDatabaseReference.child("patients").child(mUserID)
+                        .child("doctor_chats")
+                        .child(doctorID)
+                        .child("name").setValue(doctorName);
+                mFirebaseDatabaseReference.child("doctors").child(doctorID)
+                        .child("patient_chats")
+                        .child(mUserID)
+                        .child("name").setValue(mUsername);
             }
         });
 
-        mAddMessageImageView = findViewById(R.id.addMessageImageView);
+        mAddMessageImageView = (ImageView) findViewById(R.id.addMessageImageView);
         mAddMessageImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -278,27 +338,6 @@ public class PatientChatActivity extends AppCompatActivity implements GoogleApiC
                 getDeviceCurrentLocation();
             }
         });
-
-        // Initialize Firebase Remote Config.
-        mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
-
-        // Define Firebase Remote Config Settings.
-        FirebaseRemoteConfigSettings firebaseRemoteConfigSettings =
-                new FirebaseRemoteConfigSettings.Builder()
-                        .setDeveloperModeEnabled(true)
-                        .build();
-
-        // Define default config values. Defaults are used when fetched config values are not
-        // available. Eg: if an error occurred fetching values from the server.
-        Map<String, Object> defaultConfigMap = new HashMap<>();
-        defaultConfigMap.put("chat_msg_length", 10L);
-
-        // Apply config settings and default values.
-        mFirebaseRemoteConfig.setConfigSettings(firebaseRemoteConfigSettings);
-        mFirebaseRemoteConfig.setDefaults(defaultConfigMap);
-
-        // Fetch remote config.
-        fetchConfig();
     }
 
     // Fetch the config to determine the allowed length of messages.
@@ -446,7 +485,9 @@ public class PatientChatActivity extends AppCompatActivity implements GoogleApiC
 
                     ChatMessage tempMessage = new ChatMessage(null, mUsername, mPhotoUrl,
                             LOADING_IMAGE_URL);
-                    mFirebaseDatabaseReference.child(MESSAGES_CHILD).push()
+                    mFirebaseDatabaseReference
+                            .child(MESSAGES_CHILD)
+                            .child(mUsername + "_" + doctorName).push()
                             .setValue(tempMessage, new DatabaseReference.CompletionListener() {
                                 @Override
                                 public void onComplete(DatabaseError databaseError,
@@ -481,7 +522,9 @@ public class PatientChatActivity extends AppCompatActivity implements GoogleApiC
                                     new ChatMessage(null, mUsername, mPhotoUrl,
                                             task.getResult().getMetadata().getReference().getDownloadUrl()
                                                     .toString());
-                            mFirebaseDatabaseReference.child(MESSAGES_CHILD).child(key)
+                            mFirebaseDatabaseReference.child(MESSAGES_CHILD)
+                                    .child(mUsername + "_" + doctorName)
+                                    .child(key)
                                     .setValue(chatMessage);
                         } else {
                             Log.w(TAG, "Image upload task was not successful.",

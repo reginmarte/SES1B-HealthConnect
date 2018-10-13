@@ -57,8 +57,6 @@ public class PatientHomePage extends AppCompatActivity {
                     case R.id.navigation_map:
                         Intent intent = new Intent(PatientHomePage.this, MapActivity.class);
                         startActivity(intent);
-                        //                    fragment = new MapFragment();
-                        //                    loadFragment(fragment);
                         return true;
                     case R.id.navigation_profile:
                         loadFragment(profileFragment);

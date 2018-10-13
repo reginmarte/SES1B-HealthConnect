@@ -42,6 +42,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 import com.google.firebase.storage.FirebaseStorage;
@@ -78,12 +79,13 @@ public class DoctorChatActivity extends AppCompatActivity implements GoogleApiCl
     public static final int DEFAULT_MSG_LENGTH_LIMIT = 10;
     public static final String ANONYMOUS = "anonymous";
     private static final String MESSAGE_SENT_EVENT = "message_sent";
-    private String mUsername, patientID, mPhotoUrl;
-    private SharedPreferences mSharedPreferences;
-    private GoogleApiClient mGoogleApiClient;
     private static final String MESSAGE_URL = "http://friendlychat.firebase.google.com/message/";
 
-    private Button mSendButton;
+    private String mUsername, mPhotoUrl, mUserID, patientID, patientName;
+    private SharedPreferences mSharedPreferences;
+    private GoogleApiClient mGoogleApiClient;
+
+    private Button mSendButton, profileBtn;
     private RecyclerView mMessageRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     //    private ProgressBar mProgressBar;
@@ -102,14 +104,41 @@ public class DoctorChatActivity extends AppCompatActivity implements GoogleApiCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_chat);
 
-        patientID = getIntent().getStringExtra("selected_patient");
+        //========================================================================================================
+        patientName = getIntent().getStringExtra("selected_patient");
+        DatabaseReference mRef = FirebaseDatabase.getInstance().getReference().child("patients");
+        mRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot ds: snapshot.getChildren()){
+                    if(ds.child("name").getValue(String.class).equalsIgnoreCase(patientName)){
+                        patientID = ds.getKey();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {}
+        });
         chatName = findViewById(R.id.chatName);
-        chatName.setText(patientID);
+        chatName.setText(patientName);
+        //========================================================================================================
+
+        profileBtn = findViewById(R.id.profileBtn);
+        profileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(DoctorChatActivity.this, PatientProfileActivity.class);
+                i.putExtra("patient", patientID);
+                startActivity(i);
+            }
+        });
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         // Set default username is anonymous.
         mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         mUsername = mFirebaseUser.getDisplayName();
+        mUserID = mFirebaseUser.getUid();
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
@@ -123,31 +152,8 @@ public class DoctorChatActivity extends AppCompatActivity implements GoogleApiCl
         mLinearLayoutManager.setStackFromEnd(true);
         mMessageRecyclerView.setLayoutManager(mLinearLayoutManager);
 
-        // Initialize Firebase Remote Config.
-        mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
-
-        // Define Firebase Remote Config Settings.
-        FirebaseRemoteConfigSettings firebaseRemoteConfigSettings =
-                new FirebaseRemoteConfigSettings.Builder()
-                        .setDeveloperModeEnabled(true)
-                        .build();
-
-        // Define default config values. Defaults are used when fetched config values are not
-        // available. Eg: if an error occurred fetching values from the server.
-        Map<String, Object> defaultConfigMap = new HashMap<>();
-        defaultConfigMap.put("chat_msg_length", 10L);
-
-        // Apply config settings and default values.
-        mFirebaseRemoteConfig.setConfigSettings(firebaseRemoteConfigSettings);
-        mFirebaseRemoteConfig.setDefaults(defaultConfigMap);
-
-        // Fetch remote config.
-        fetchConfig();
-
         // New child entries
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
-//                .child(MESSAGES_CHILD);
-//                .child(patientID + "_" + mUsername);
         SnapshotParser<ChatMessage> parser = new SnapshotParser<ChatMessage>() {
             @Override
             public ChatMessage parseSnapshot(DataSnapshot dataSnapshot) {
@@ -161,7 +167,7 @@ public class DoctorChatActivity extends AppCompatActivity implements GoogleApiCl
 
         DatabaseReference messagesRef = mFirebaseDatabaseReference
                 .child(MESSAGES_CHILD)
-                .child(patientID + "_" + mUsername);
+                .child(patientName + "_" + mUsername);
         FirebaseRecyclerOptions<ChatMessage> options =
                 new FirebaseRecyclerOptions.Builder<ChatMessage>()
                         .setQuery(messagesRef, parser)
@@ -179,11 +185,9 @@ public class DoctorChatActivity extends AppCompatActivity implements GoogleApiCl
                                             ChatMessage chatMessage) {
 //                mProgressBar.setVisibility(ProgressBar.INVISIBLE);
                 if (chatMessage.getText() != null) {
-                    ////===============================================================================
                     viewHolder.messageTextView.setText(chatMessage.getText());
                     viewHolder.messageTextView.setVisibility(TextView.VISIBLE);
                     viewHolder.messageImageView.setVisibility(ImageView.GONE);
-                    ////===============================================================================
                 } else if (chatMessage.getImageUrl() != null) {
                     String imageUrl = chatMessage.getImageUrl();
                     if (imageUrl.startsWith("gs://")) {
@@ -213,17 +217,15 @@ public class DoctorChatActivity extends AppCompatActivity implements GoogleApiCl
                     viewHolder.messageTextView.setVisibility(TextView.GONE);
                 }
 
-
                 viewHolder.messengerTextView.setText(chatMessage.getName());
                 if (chatMessage.getPhotoUrl() == null) {
                     viewHolder.messengerImageView.setImageDrawable(ContextCompat.getDrawable(DoctorChatActivity.this,
-                            R.drawable.user));
+                            R.drawable.doctor));
                 } else {
                     Glide.with(DoctorChatActivity.this)
                             .load(chatMessage.getPhotoUrl())
                             .into(viewHolder.messengerImageView);
                 }
-
             }
         };
 
@@ -246,6 +248,28 @@ public class DoctorChatActivity extends AppCompatActivity implements GoogleApiCl
         });
 
         mMessageRecyclerView.setAdapter(mFirebaseAdapter);
+
+        // Initialize Firebase Remote Config.
+        mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
+
+        // Define Firebase Remote Config Settings.
+        FirebaseRemoteConfigSettings firebaseRemoteConfigSettings =
+                new FirebaseRemoteConfigSettings.Builder()
+                        .setDeveloperModeEnabled(true)
+                        .build();
+
+        // Define default config values. Defaults are used when fetched config values are not
+        // available. Eg: if an error occurred fetching values from the server.
+        Map<String, Object> defaultConfigMap = new HashMap<>();
+        defaultConfigMap.put("chat_msg_length", 10L);
+
+        // Apply config settings and default values.
+        mFirebaseRemoteConfig.setConfigSettings(firebaseRemoteConfigSettings);
+        mFirebaseRemoteConfig.setDefaults(defaultConfigMap);
+
+        // Fetch remote config.
+        fetchConfig();
+
         mMessageEditText = findViewById(R.id.messageEditText);
         mMessageEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(mSharedPreferences
                 .getInt(CHAT_MSG_LENGTH, DEFAULT_MSG_LENGTH_LIMIT))});
@@ -277,8 +301,9 @@ public class DoctorChatActivity extends AppCompatActivity implements GoogleApiCl
                         mUsername,
                         mPhotoUrl,
                         null /* no image */);
-                mFirebaseDatabaseReference.child(MESSAGES_CHILD)
-                        .child(patientID + "_" + mUsername).push().setValue(chatMessage);
+                mFirebaseDatabaseReference
+                        .child(MESSAGES_CHILD)
+                        .child(patientName + "_" + mUsername).push().setValue(chatMessage);
                 mMessageEditText.setText("");
             }
         });
@@ -406,8 +431,9 @@ public class DoctorChatActivity extends AppCompatActivity implements GoogleApiCl
 
                     ChatMessage tempMessage = new ChatMessage(null, mUsername, mPhotoUrl,
                             LOADING_IMAGE_URL);
-                    mFirebaseDatabaseReference.child(MESSAGES_CHILD)
-                            .child(patientID + "_" + mUsername).push()
+                    mFirebaseDatabaseReference
+                            .child(MESSAGES_CHILD)
+                            .child(patientName + "_" + mUsername).push()
                             .setValue(tempMessage, new DatabaseReference.CompletionListener() {
                                 @Override
                                 public void onComplete(DatabaseError databaseError,
@@ -437,12 +463,13 @@ public class DoctorChatActivity extends AppCompatActivity implements GoogleApiCl
                 new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                        Task<Uri> u = task.getResult().getMetadata().getReference().getDownloadUrl();
                         if (task.isSuccessful()) {
                             ChatMessage chatMessage =
-                                    new ChatMessage(null, mUsername, mPhotoUrl, u.toString());
+                                    new ChatMessage(null, mUsername, mPhotoUrl,
+                                            task.getResult().getMetadata().getReference().getDownloadUrl()
+                                                    .toString());
                             mFirebaseDatabaseReference.child(MESSAGES_CHILD)
-                                    .child(patientID + "_" + mUsername)
+                                    .child(patientName + "_" + mUsername)
                                     .child(key)
                                     .setValue(chatMessage);
                         } else {

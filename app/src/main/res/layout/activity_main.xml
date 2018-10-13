@@ -33,13 +33,14 @@
         <!--email-->
         <android.support.design.widget.TextInputLayout
             android:id="@+id/TIL_email"
-            android:layout_width="300dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             app:errorEnabled="true"
             app:errorTextAppearance="@style/ErrorAppearance">
+
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/emailET"
-                android:layout_width="300dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/prompt_email"
                 android:inputType="textEmailAddress" />
@@ -49,14 +50,14 @@
         <!--password-->
         <android.support.design.widget.TextInputLayout
             android:id="@+id/TIL_password"
-            android:layout_width="300dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             app:errorEnabled="true"
             app:passwordToggleEnabled="true"
             app:errorTextAppearance="@style/ErrorAppearance">
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/passwordET"
-                android:layout_width="300dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/prompt_password"
                 android:inputType="textPassword" />
@@ -64,7 +65,7 @@
 
         <Button
             android:id="@+id/loginBtn"
-            android:layout_width="300dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:background="@drawable/primary_patient_button"
             android:text="@string/action_sign_in_short"

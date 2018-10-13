@@ -13,6 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,7 +36,10 @@ public class PatientChatListFragment extends Fragment implements View.OnClickLis
     ListView doctorsLV;
     ArrayList<String> listofDoctors = new ArrayList<String>();
     ArrayAdapter arrayAdapt;
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    String mUserID = mAuth.getCurrentUser().getUid();
     private DatabaseReference dbr = FirebaseDatabase.getInstance().getReference().child("doctors");
+//            .child("patients").child(mUserID).child("doctor_chats");
 
     public PatientChatListFragment() {
         // Required empty public constructor
@@ -81,7 +86,6 @@ public class PatientChatListFragment extends Fragment implements View.OnClickLis
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
                     set.add(ds.child("name").getValue(String.class));
                 }
-
                 arrayAdapt.clear();
                 arrayAdapt.addAll(set);
                 arrayAdapt.notifyDataSetChanged();
@@ -99,6 +103,7 @@ public class PatientChatListFragment extends Fragment implements View.OnClickLis
                 startActivity(i);
             }
         });
+
         return view;
     }
 

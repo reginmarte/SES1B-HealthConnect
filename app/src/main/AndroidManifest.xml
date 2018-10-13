@@ -45,6 +45,8 @@
         <activity android:name=".PatientHomePage" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".ClinicListActivity"></activity>
+        <activity android:name=".PatientProfileActivity" />
+        <activity android:name=".DoctorProfileActivity"></activity>
     </application>
 
 </manifest>

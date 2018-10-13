@@ -1,38 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
-    tools:context=".PatientProfileFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <android.support.design.widget.CoordinatorLayout
-        android:id="@+id/coordinator"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="30dp"
-        android:background="@drawable/white_border">
+    tools:context=".PatientProfileActivity">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="30dp"
+            android:background="@drawable/white_border"
             android:orientation="vertical">
-
-            <ImageButton
-                android:id="@+id/editImageBtn"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_margin="5dp"
-                android:layout_gravity="end"
-                android:background="@drawable/edit" />
 
             <ImageView
                 android:layout_width="110dp"
                 android:layout_height="110dp"
                 android:src="@drawable/patient"
                 android:layout_gravity="center"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="80dp"
                 android:layout_marginBottom="50dp"/>
 
             <TableLayout
@@ -158,10 +145,7 @@
                         android:text="null"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
                 </TableRow>
-
             </TableLayout>
         </LinearLayout>
 
-    </android.support.design.widget.CoordinatorLayout>
-
-</FrameLayout>
+</android.support.constraint.ConstraintLayout>

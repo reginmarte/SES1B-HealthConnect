@@ -26,6 +26,8 @@ import com.google.firebase.database.ValueEventListener;
  */
 public class DoctorProfileFragment extends Fragment {
 
+    //This is for doctor's own use. They view this and edit this information.
+
     private TextView nameTV, emailTV, numberTV, genderTV, clinicTV, specialtyTV;
     public static final String TAG = "DoctorProfileFragment";
     private FirebaseAuth mAuth;
