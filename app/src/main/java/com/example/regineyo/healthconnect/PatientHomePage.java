@@ -28,6 +28,7 @@ public class PatientHomePage extends AppCompatActivity {
     private MapFragment mapFragment;
     private PatientProfileFragment profileFragment;
     private SettingsFragment settingsFragment;
+    private WelcomeFragment welcomeFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +43,9 @@ public class PatientHomePage extends AppCompatActivity {
         mapFragment = new MapFragment();
         profileFragment = new PatientProfileFragment();
         settingsFragment = new SettingsFragment();
+        welcomeFragment = new WelcomeFragment();
 
-        loadFragment(chatFragment);
+        loadFragment(welcomeFragment);
 
         mMainNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 
