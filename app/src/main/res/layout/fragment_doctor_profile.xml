@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background_doctor"
+    android:background="@drawable/gradient_background"
     tools:context=".DoctorProfileFragment">
 
     <android.support.design.widget.CoordinatorLayout
@@ -29,7 +29,7 @@
             <ImageView
                 android:layout_width="110dp"
                 android:layout_height="110dp"
-                android:src="@drawable/user"
+                android:src="@drawable/doctor"
                 android:layout_gravity="center"
                 android:layout_marginTop="50dp"
                 android:layout_marginBottom="50dp"/>
@@ -47,11 +47,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="30dp"/>
+
                     <TextView
                         android:id="@+id/nameTV"
-                        android:text="null"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"/>
+                        android:text="null"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
                 </TableRow>
 
                 <TableRow
@@ -62,11 +64,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="30dp"/>
+
                     <TextView
                         android:id="@+id/emailTV"
-                        android:text="null"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"/>
+                        android:text="null"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
                 </TableRow>
 
                 <TableRow
@@ -77,11 +81,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="30dp"/>
+
                     <TextView
                         android:id="@+id/numberTV"
-                        android:text="null"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"/>
+                        android:text="null"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
                 </TableRow>
 
                 <TableRow
@@ -92,11 +98,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="30dp"/>
+
                     <TextView
                         android:id="@+id/genderTV"
-                        android:text="null"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"/>
+                        android:text="null"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
                 </TableRow>
 
                 <TableRow
@@ -107,11 +115,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="30dp"/>
+
                     <TextView
                         android:id="@+id/clinicTV"
-                        android:text="null"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"/>
+                        android:text="null"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
                 </TableRow>
 
                 <TableRow
@@ -122,11 +132,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="30dp"/>
+
                     <TextView
                         android:id="@+id/specialtyTV"
-                        android:text="Add specialty..."
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"/>
+                        android:text="Add specialty..."
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
                 </TableRow>
             </TableLayout>
         </LinearLayout>

@@ -36,7 +36,7 @@
     <string name="action_male_radioBtn">Male</string>
     <string name="action_female_radioBtn">Female</string>
     <string name="action_date_of_birth">Date of birth</string>
-    <string name="hint_DOB">day/month/year</string>
+    <string name="hint_DOB">dd/mon/year</string>
     <string name="hint_height">Height (cm)</string>
     <string name="hint_weight">Weight (kg)</string>
     <string name="title_clinic">Clinic</string>

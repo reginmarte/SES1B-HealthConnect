@@ -3,6 +3,7 @@ package com.example.regineyo.healthconnect;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
@@ -27,6 +28,7 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.InputStream;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -175,7 +177,8 @@ public class PatientRegistrationActivity extends AppCompatActivity implements Vi
 
                             //adds user to database
                             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                    .setDisplayName(name).build();
+                                    .setDisplayName(name)
+                                    .build();
                             user.updateProfile(profileUpdates);
 
                             PatientInfo patientInfo = new PatientInfo(name, email, number, birthday, genderSelect, height, weight);

@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,8 +33,13 @@ public class DoctorChatListFragment extends Fragment implements View.OnClickList
     ListView patientsLV;
     ArrayList<String> listOfPatients = new ArrayList<String>();
     ArrayAdapter arrayAdapt;
-    private DatabaseReference dbr = FirebaseDatabase.getInstance().getReference().child("patients");
-    //child("doctors").child(getCurrentId).child(existingchats)
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    String mUserID = mAuth.getCurrentUser().getUid();
+    private DatabaseReference dbr = FirebaseDatabase.getInstance().getReference()
+            .child("doctors")
+            .child(mUserID)
+            .child("patient_chats");
+//            .child("patients");
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
