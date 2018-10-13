@@ -94,7 +94,6 @@ public class PatientChatActivity extends AppCompatActivity implements
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private Boolean mLocationPermissionsGranted = true;
 
-    private Button mSendButton;
     private RecyclerView mMessageRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
 //    private ProgressBar mProgressBar;

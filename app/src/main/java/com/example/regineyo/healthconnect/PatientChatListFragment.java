@@ -38,7 +38,11 @@ public class PatientChatListFragment extends Fragment implements View.OnClickLis
     ArrayAdapter arrayAdapt;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     String mUserID = mAuth.getCurrentUser().getUid();
-    private DatabaseReference dbr = FirebaseDatabase.getInstance().getReference().child("doctors");
+    private DatabaseReference dbr = FirebaseDatabase.getInstance().getReference()
+            .child("patients")
+            .child(mUserID)
+            .child("doctor_chats");
+//            .child("doctors");
 //            .child("patients").child(mUserID).child("doctor_chats");
 
     public PatientChatListFragment() {
@@ -84,7 +88,11 @@ public class PatientChatListFragment extends Fragment implements View.OnClickLis
                 Set<String> set = new HashSet<>();
 
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
-                    set.add(ds.child("name").getValue(String.class));
+                    if(ds.child("name").exists()) {
+                        set.add(ds.child("name").getValue(String.class));
+                    } else {
+                        set.add("No current chats available");
+                    }
                 }
                 arrayAdapt.clear();
                 arrayAdapt.addAll(set);

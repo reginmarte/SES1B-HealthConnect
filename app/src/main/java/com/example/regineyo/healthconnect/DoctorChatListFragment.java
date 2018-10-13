@@ -67,7 +67,7 @@ public class DoctorChatListFragment extends Fragment implements View.OnClickList
                     if(ds.child("name").exists()) {
                         set.add(ds.child("name").getValue(String.class));
                     } else {
-                        set.add("No doctors available");
+                        set.add("No current chats available");
                     }
                 }
                 arrayAdapt.clear();

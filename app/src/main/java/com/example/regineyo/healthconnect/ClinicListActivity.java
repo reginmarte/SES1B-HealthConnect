@@ -60,7 +60,11 @@ public class ClinicListActivity extends AppCompatActivity {
                                 Set<String> set = new HashSet<>();
 
                                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
-                                    set.add(ds.child("name").getValue(String.class));
+                                    if(ds.child("name").exists()) {
+                                        set.add(ds.child("name").getValue(String.class));
+                                    } else {
+                                        set.add("No doctors currently available");
+                                    }
                                 }
                                 arrayAdapt.clear();
                                 arrayAdapt.addAll(set);
