@@ -89,7 +89,7 @@ public class PatientChatActivity extends AppCompatActivity implements GoogleApiC
 //    private ProgressBar mProgressBar;
     private EditText mMessageEditText;
     private TextView chatName;
-    private ImageView mAddMessageImageView;
+    private ImageView mAddMessageImageView, addHeartRateImageView;
 
     // Firebase instance variables
     private FirebaseRemoteConfig mFirebaseRemoteConfig;
@@ -257,6 +257,16 @@ public class PatientChatActivity extends AppCompatActivity implements GoogleApiC
                 mFirebaseDatabaseReference.child(MESSAGES_CHILD)
                         .child(mUsername + "_" + doctorID).push().setValue(chatMessage);
                 mMessageEditText.setText("");
+            }
+        });
+
+        //initialises icons available to patient (send location, send heart rate, send photos)
+        addHeartRateImageView = findViewById(R.id.heartRateImageView);
+        addHeartRateImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PatientChatActivity.this, HeartRateActivity.class);
+                startActivity(intent);
             }
         });
 

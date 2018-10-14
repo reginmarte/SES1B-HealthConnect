@@ -32,6 +32,7 @@
     <string name="action_confirm">Confirm</string>
     <string name="action_save">Save</string>
     <string name="action_send">Send</string>
+    <string name="action_send_HR">Send your heart rate</string>
     <string name="hint_sCode">Clinic code</string>
     <string name="prompt_gender">Gender </string>
     <string name="action_male_radioBtn">Male</string>
@@ -46,6 +47,10 @@
     <string name="cause_crash">Cause Crash</string>
     <string name="invite_menu_label">Invite</string>
     <string name="action_delete_account">Delete Account</string>
+    <string name="instruct_heart_rate_sensor">To begin, turn the flash on.</string>
+    <string name="instruct_heart_rate_sensor1">Press your finger against the camera.</string>
+    <string name="instruct_heart_rate_sensor2">Then send.</string>
+    <string name="title_HR">What\'s your heart rate?</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -58,4 +63,6 @@
     <string name="title_activity_messaging">MessagingActivity</string>
     <string name="title_list_patients">List of Patients</string>
     <string name="title_list_doctors">List of Doctors</string>
+    <string name="title_flash">Flash</string>
+    <string name="title_bpm">0 bpm</string>
 </resources>
