@@ -10,6 +10,18 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+
+    <uses-feature
+        android:name="android.hardware.camera.flash"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera2"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera2.front"
+        android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -44,6 +56,7 @@
         <activity android:name=".DoctorChatActivity" />
         <activity android:name=".PatientHomePage" />
         <activity android:name=".SignUpActivity" />
+        <activity android:name=".HeartRateActivity" />
     </application>
 
 </manifest>

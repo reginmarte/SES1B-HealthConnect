@@ -23,7 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-
+    static{ System.loadLibrary("opencv_java3"); }
     private static final String TAG = "MainActivity" ;
     private TextInputEditText emailET, passwordET;
     private FirebaseAuth mAuth;
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.forgotPasswordBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent RegisterIntent = new Intent(MainActivity.this, ForgotPasswordActivity.class);
+                Intent RegisterIntent = new Intent(MainActivity.this, HeartRateActivity.class);
                 startActivity(RegisterIntent);
             }
         });
