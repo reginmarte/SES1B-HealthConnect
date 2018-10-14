@@ -91,7 +91,7 @@ public class DoctorChatActivity extends AppCompatActivity implements GoogleApiCl
     //    private ProgressBar mProgressBar;
     private EditText mMessageEditText;
     private TextView chatName;
-    private ImageView mAddMessageImageView;
+    private ImageView mAddMessageImageView, portfolioImageView;
 
     // Firebase instance variables
     private FirebaseRemoteConfig mFirebaseRemoteConfig;
@@ -124,15 +124,15 @@ public class DoctorChatActivity extends AppCompatActivity implements GoogleApiCl
         chatName.setText(patientName);
         //========================================================================================================
 
-        profileBtn = findViewById(R.id.profileBtn);
-        profileBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(DoctorChatActivity.this, PatientProfileActivity.class);
-                i.putExtra("patient", patientID);
-                startActivity(i);
-            }
-        });
+//        profileBtn = findViewById(R.id.profileBtn);
+//        profileBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(DoctorChatActivity.this, PatientProfileActivity.class);
+//                i.putExtra("patient", patientID);
+//                startActivity(i);
+//            }
+//        });
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         // Set default username is anonymous.
@@ -308,16 +308,26 @@ public class DoctorChatActivity extends AppCompatActivity implements GoogleApiCl
             }
         });
 
-        mAddMessageImageView = findViewById(R.id.addMessageImageView);
-        mAddMessageImageView.setOnClickListener(new View.OnClickListener() {
+        portfolioImageView = findViewById(R.id.portfolioImageView);
+        portfolioImageView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-                intent.addCategory(Intent.CATEGORY_OPENABLE);
-                intent.setType("image/*");
-                startActivityForResult(intent, REQUEST_IMAGE);
+            public void onClick(View v) {
+                Intent intent = new Intent(DoctorChatActivity.this, PatientProfileActivity.class);
+                intent.putExtra("patient", patientID);
+                startActivity(intent);
             }
         });
+
+//        mAddMessageImageView = findViewById(R.id.addMessageImageView);
+//        mAddMessageImageView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+//                intent.addCategory(Intent.CATEGORY_OPENABLE);
+//                intent.setType("image/*");
+//                startActivityForResult(intent, REQUEST_IMAGE);
+//            }
+//        });
     }
 
     // Fetch the config to determine the allowed length of messages.

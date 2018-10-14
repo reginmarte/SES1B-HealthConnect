@@ -64,6 +64,7 @@
     <string name="title_clinic_list">Doctors available at: </string>
     <string name="title_list_patients">Patients</string>
     <string name="title_list_doctors">Doctors</string>
+    <string name="title_existing_chats">Existing Chats</string>
     <string name="title_no_doctors">No doctors registered under this clinic</string>
     <string name="title_flash">Flash</string>
     <string name="title_bpm">0 bpm</string>

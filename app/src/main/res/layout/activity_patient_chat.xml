@@ -20,25 +20,35 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="60dp">
+            android:layout_height="50dp">
 
             <TextView
                 android:id="@+id/chatName"
                 android:layout_width="205dp"
-                android:layout_height="80dp"
-                android:gravity="center_vertical"
-                android:paddingStart="20dp"
-                android:text="null"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="@string/action_select_patient"
                 android:textColor="#17A589"
                 android:textSize="25sp" />
 
-            <Button
-                android:id="@+id/profileBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/white_border"
-                android:textColor="#17A589"
-                android:text="@string/title_profile"/>
+            <ImageView
+                android:id="@+id/portfolioImageView"
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:padding="5dp"
+                ads:srcCompat="@drawable/portfolio"/>
+            <ImageView
+                android:id="@+id/heartRateImageView"
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:padding="5dp"
+                ads:srcCompat="@drawable/love" />
+            <ImageView
+                android:id="@+id/addMessageImageView"
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:padding="5dp"
+                ads:srcCompat="@drawable/map" />
 
         </TableRow>
 
@@ -46,8 +56,8 @@
             android:id="@+id/messageRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="500dp"
-            android:padding="20dp"
-            android:layout_marginBottom="5dp"/>
+            android:layout_marginBottom="5dp"
+            android:padding="20dp" />
     </TableLayout>
 
     <LinearLayout
@@ -58,21 +68,6 @@
         android:layout_alignParentStart="true"
         android:background="@drawable/white_border"
         android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/heartRateImageView"
-            android:layout_width="40dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
-            android:padding="5dp"
-            ads:srcCompat="@drawable/love" />
-
-        <ImageView
-            android:id="@+id/addMessageImageView"
-            android:layout_width="40dp"
-            android:layout_height="match_parent"
-            android:padding="5dp"
-            ads:srcCompat="@drawable/map" />
 
         <EditText
             android:id="@+id/messageEditText"

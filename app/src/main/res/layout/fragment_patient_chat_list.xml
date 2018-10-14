@@ -19,7 +19,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:text="@string/title_list_doctors"
+                android:text="@string/title_existing_chats"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:gravity="center_vertical"

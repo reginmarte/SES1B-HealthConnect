@@ -90,7 +90,7 @@ public class PatientChatActivity extends AppCompatActivity implements
     private SharedPreferences mSharedPreferences;
     private GoogleApiClient mGoogleApiClient;
 
-    private Button mSendButton, profileBtn;
+    private Button mSendButton;
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private Boolean mLocationPermissionsGranted = true;
 
@@ -99,7 +99,7 @@ public class PatientChatActivity extends AppCompatActivity implements
 //    private ProgressBar mProgressBar;
     private EditText mMessageEditText;
     private TextView chatName;
-    private ImageView mAddMessageImageView, addHeartRateImageView;
+    private ImageView mAddMessageImageView, addHeartRateImageView, portfolioImageView;
 
     // Firebase instance variables
     private FirebaseRemoteConfig mFirebaseRemoteConfig;
@@ -131,16 +131,6 @@ public class PatientChatActivity extends AppCompatActivity implements
         chatName = findViewById(R.id.chatName);
         chatName.setText(doctorName);
         //========================================================================================================
-
-        profileBtn = findViewById(R.id.profileBtn);
-        profileBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(PatientChatActivity.this, DoctorProfileActivity.class);
-                i.putExtra("doctor", doctorID);
-                startActivity(i);
-            }
-        });
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         // Set default username is anonymous.
@@ -326,7 +316,17 @@ public class PatientChatActivity extends AppCompatActivity implements
             }
         });
 
-        //initialises icons available to patient (send location, send heart rate, send photos)
+        //initialises icons available to patient (go to profile, send location, send heart rate, send photos)
+        portfolioImageView = findViewById(R.id.portfolioImageView);
+        portfolioImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PatientChatActivity.this, DoctorProfileActivity.class);
+                intent.putExtra("doctor", doctorID);
+                startActivity(intent);
+            }
+        });
+
         addHeartRateImageView = findViewById(R.id.heartRateImageView);
         addHeartRateImageView.setOnClickListener(new View.OnClickListener() {
             @Override
