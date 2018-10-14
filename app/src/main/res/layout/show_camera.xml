@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:opencv="http://schemas.android.com/apk/res-auto"
+    xmlns:ap="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="30dp"
+    android:orientation="vertical"
+    tools:context=".HeartRateActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/white_border">
+
+        <TextView
+            android:text="@string/title_HR"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="70dp"
+            android:textSize="20sp"
+            android:textColor="#17A589"/>
+
+        <TextView
+            android:text="@string/instruct_heart_rate_sensor"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp" />
+        <TextView
+            android:text="@string/instruct_heart_rate_sensor1"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"/>
+        <!--android:layout_gravity="end"/>-->
+
+        <TextView
+            android:text="@string/instruct_heart_rate_sensor2"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"/>
+            <!--android:layout_marginStart="20dp"-->
+            <!--android:gravity="end"/>-->
+
+        <Switch
+            android:text="@string/title_flash"
+            android:id="@+id/switch1"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginStart="200dp"
+            android:switchPadding="@dimen/activity_horizontal_margin" />
+
+        <TextView
+            android:id="@+id/histvalue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="@string/title_bpm"
+            android:textAlignment="center"
+            android:textSize="40sp" />
+
+        <com.example.regineyo.healthconnect.ViewActivity
+            android:id="@+id/show_camera_activity_java_surface_view"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:visibility="visible"
+            opencv:camera_id="back"/>
+            <!--opencv:show_fps="true" />-->
+
+        <Button
+            android:id="@+id/loginBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="60dp"
+            android:background="@color/ap_transparent"
+            android:text="@string/action_send_HR"
+            android:textAllCaps="false"
+            android:textColor="#17A589" />
+
+    </LinearLayout>
+
+</RelativeLayout>

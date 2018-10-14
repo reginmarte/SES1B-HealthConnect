@@ -99,7 +99,7 @@ public class PatientChatActivity extends AppCompatActivity implements
 //    private ProgressBar mProgressBar;
     private EditText mMessageEditText;
     private TextView chatName;
-    private ImageView mAddMessageImageView;
+    private ImageView mAddMessageImageView, addHeartRateImageView;
 
     // Firebase instance variables
     private FirebaseRemoteConfig mFirebaseRemoteConfig;
@@ -326,7 +326,17 @@ public class PatientChatActivity extends AppCompatActivity implements
             }
         });
 
-        mAddMessageImageView = (ImageView) findViewById(R.id.addMessageImageView);
+        //initialises icons available to patient (send location, send heart rate, send photos)
+        addHeartRateImageView = findViewById(R.id.heartRateImageView);
+        addHeartRateImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PatientChatActivity.this, HeartRateActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        mAddMessageImageView = findViewById(R.id.addMessageImageView);
         mAddMessageImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
