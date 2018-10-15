@@ -12,16 +12,33 @@
         android:layout_height="match_parent"
         android:layout_margin="30dp"
         android:background="@drawable/white_border"
-        android:gravity="center"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="10dp"
+            android:layout_gravity="top|start"
+            android:background="@drawable/backarrow" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/prompt_patient_doctor"
+            android:layout_marginTop="150dp"
+            android:fontFamily="@font/roboto_slab_light"
+            android:text="@string/prompt_account_type"
+            android:textColor="#17A589"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
-            android:textSize="18sp"
-            android:layout_gravity="center"/>
+            android:fontFamily="@font/roboto_slab"
+            android:text="@string/prompt_patient_doctor"
+            android:textSize="14sp" />
 
             <TableRow
                 android:layout_width="wrap_content"

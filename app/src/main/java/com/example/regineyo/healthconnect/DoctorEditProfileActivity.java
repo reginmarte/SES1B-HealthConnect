@@ -106,6 +106,13 @@ public class DoctorEditProfileActivity extends AppCompatActivity implements View
             }
         });
 
+        findViewById(R.id.backBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
         findViewById(R.id.confirmBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

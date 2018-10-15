@@ -16,43 +16,51 @@
         android:layout_alignParentStart="true"
         android:background="@drawable/white_border"
         android:orientation="vertical"
-        android:gravity="center">
+        android:layout_gravity="center">
 
         <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_width="60dp"
+            android:layout_height="60dp">
+
+            <!--<ImageButton-->
+                <!--android:id="@+id/backBtn"-->
+                <!--android:layout_width="20dp"-->
+                <!--android:layout_height="20dp"-->
+                <!--android:layout_margin="10dp"-->
+                <!--android:background="@drawable/backarrow" />-->
 
             <TextView
                 android:id="@+id/chatName"
-                android:layout_width="205dp"
-                android:layout_height="50dp"
-                android:gravity="center"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="20dp"
+                android:fontFamily="@font/roboto_slab_light"
+                android:gravity="center_vertical"
                 android:text="@string/action_select_doctor"
                 android:textColor="#2E86C1"
                 android:textSize="25sp" />
 
             <ImageView
                 android:id="@+id/portfolioImageView"
-                android:layout_width="40dp"
-                android:layout_height="50dp"
+                android:layout_width="30dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="80dp"
-                android:padding="5dp"
-                ads:srcCompat="@drawable/portfolio"/>
+                ads:srcCompat="@drawable/portfolio" />
 
             <!--<Button-->
-                <!--android:id="@+id/profileBtn"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:background="@drawable/white_border"-->
-                <!--android:textColor="#2E86C1"-->
-                <!--android:text="@string/title_profile"/>-->
+            <!--android:id="@+id/profileBtn"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/white_border"-->
+            <!--android:textColor="#2E86C1"-->
+            <!--android:text="@string/title_profile"/>-->
 
         </TableRow>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/messageRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_height="600dp"
             android:background="@drawable/white_border"
             android:padding="20dp"
             android:layout_marginBottom="5dp"/>
@@ -77,20 +85,23 @@
 
         <EditText
             android:id="@+id/messageEditText"
-            android:layout_marginHorizontal="5dp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:layout_weight="1"/>
+            android:layout_marginHorizontal="5dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/roboto_slab_light" />
 
         <Button
             android:id="@+id/sendButton"
+            style="@style/ButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:textColor="#2E86C1"
+            android:background="@drawable/white_border"
             android:enabled="false"
-            android:text="@string/action_send"/>
+            android:text="@string/action_send"
+            android:textColor="#2E86C1" />
     </LinearLayout>
 
     <android.support.v7.widget.CardView

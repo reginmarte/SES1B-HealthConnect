@@ -16,47 +16,61 @@
         android:orientation="vertical"
         android:background="@drawable/white_border">
 
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="10dp"
+            android:layout_gravity="top|start"
+            android:background="@drawable/backarrow" />
+
         <TextView
-            android:text="@string/title_HR"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="70dp"
-            android:textSize="20sp"
-            android:textColor="#17A589"/>
+            android:fontFamily="@font/roboto_slab_light"
+            android:text="@string/title_HR"
+            android:textColor="#17A589"
+            android:textSize="22sp" />
 
         <TextView
-            android:text="@string/instruct_heart_rate_sensor"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/roboto_slab"
+            android:text="@string/instruct_heart_rate_sensor" />
+
         <TextView
-            android:text="@string/instruct_heart_rate_sensor1"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/roboto_slab"
+            android:text="@string/instruct_heart_rate_sensor1" />
         <!--android:layout_gravity="end"/>-->
 
         <TextView
-            android:text="@string/instruct_heart_rate_sensor2"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/roboto_slab"
+            android:text="@string/instruct_heart_rate_sensor2" />
             <!--android:layout_marginStart="20dp"-->
             <!--android:gravity="end"/>-->
 
         <Switch
-            android:text="@string/title_flash"
             android:id="@+id/switch1"
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:layout_marginStart="200dp"
-            android:switchPadding="@dimen/activity_horizontal_margin" />
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/roboto_slab_light"
+            android:switchPadding="@dimen/activity_horizontal_margin"
+            android:text="@string/title_flash" />
 
         <TextView
             android:id="@+id/histvalue"
@@ -64,6 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
+            android:fontFamily="@font/roboto_slab"
             android:text="@string/title_bpm"
             android:textAlignment="center"
             android:textSize="40sp" />
@@ -85,6 +100,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="60dp"
             android:background="@color/ap_transparent"
+            android:fontFamily="@font/roboto_slab"
             android:text="@string/action_send_HR"
             android:textAllCaps="false"
             android:textColor="#17A589" />

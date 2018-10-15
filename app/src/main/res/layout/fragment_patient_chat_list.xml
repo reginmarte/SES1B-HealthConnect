@@ -19,13 +19,15 @@
             android:orientation="vertical">
 
             <TextView
-                android:text="@string/title_existing_chats"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
+                android:fontFamily="@font/roboto_slab_light"
                 android:gravity="center_vertical"
                 android:paddingStart="20dp"
                 android:paddingTop="0dp"
-                android:textColor="#17A589" />
+                android:text="@string/title_existing_chats"
+                android:textColor="#17A589"
+                android:textSize="16sp" />
 
             <ListView
                 android:id="@+id/doctorList"

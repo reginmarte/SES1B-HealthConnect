@@ -16,38 +16,44 @@
         android:layout_alignParentStart="true"
         android:background="@drawable/white_border"
         android:orientation="vertical"
-        android:gravity="center">
+        android:layout_gravity="center">
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="60dp">
 
             <TextView
                 android:id="@+id/chatName"
-                android:layout_width="205dp"
-                android:layout_height="50dp"
-                android:gravity="center"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="20dp"
+                android:fontFamily="@font/roboto_slab_light"
+                android:gravity="center_vertical"
                 android:text="@string/action_select_patient"
                 android:textColor="#17A589"
                 android:textSize="25sp" />
 
             <ImageView
                 android:id="@+id/portfolioImageView"
-                android:layout_width="40dp"
-                android:layout_height="50dp"
-                android:padding="5dp"
-                ads:srcCompat="@drawable/portfolio"/>
+                android:layout_width="30dp"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                ads:srcCompat="@drawable/portfolio" />
+
             <ImageView
                 android:id="@+id/heartRateImageView"
-                android:layout_width="40dp"
-                android:layout_height="50dp"
-                android:padding="5dp"
+                android:layout_width="30dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="10dp"
+                android:gravity="center_vertical"
                 ads:srcCompat="@drawable/love" />
+
             <ImageView
                 android:id="@+id/addMessageImageView"
-                android:layout_width="40dp"
-                android:layout_height="50dp"
-                android:padding="5dp"
+                android:layout_width="30dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="10dp"
+                android:gravity="center_vertical"
                 ads:srcCompat="@drawable/map" />
 
         </TableRow>
@@ -71,6 +77,7 @@
 
         <EditText
             android:id="@+id/messageEditText"
+            android:layout_marginHorizontal="5dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -78,13 +85,14 @@
 
         <Button
             android:id="@+id/sendButton"
+            style="@style/ButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:background="@drawable/white_border"
             android:enabled="false"
-            android:textColor="#17A589"
-            android:text="@string/action_send"/>
+            android:text="@string/action_send"
+            android:textColor="#17A589" />
     </LinearLayout>
 
 </RelativeLayout>

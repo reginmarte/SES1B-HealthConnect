@@ -69,6 +69,13 @@ public class DoctorRegistrationActivity extends AppCompatActivity implements Vie
         RadioButton maleBtn = findViewById(R.id.maleRB);
         maleBtn.setChecked(true);
 
+        findViewById(R.id.backBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
         findViewById(R.id.confirmBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

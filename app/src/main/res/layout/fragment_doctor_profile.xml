@@ -43,15 +43,17 @@
                     android:layout_marginBottom="10dp">
                     <!--name-->
                     <TextView
-                        android:text="@string/hint_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="30dp"/>
+                        android:layout_marginEnd="30dp"
+                        android:fontFamily="@font/roboto_slab_light"
+                        android:text="@string/hint_name" />
 
                     <TextView
                         android:id="@+id/nameTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_slab"
                         android:text="null"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
                 </TableRow>
@@ -60,15 +62,17 @@
                     android:layout_marginBottom="10dp">
                     <!--email-->
                     <TextView
-                        android:text="@string/prompt_email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="30dp"/>
+                        android:layout_marginEnd="30dp"
+                        android:fontFamily="@font/roboto_slab_light"
+                        android:text="@string/prompt_email" />
 
                     <TextView
                         android:id="@+id/emailTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_slab"
                         android:text="null"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
                 </TableRow>
@@ -77,15 +81,17 @@
                     android:layout_marginBottom="10dp">
                     <!--number-->
                     <TextView
-                        android:text="@string/hint_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="30dp"/>
+                        android:layout_marginEnd="30dp"
+                        android:fontFamily="@font/roboto_slab_light"
+                        android:text="@string/hint_number" />
 
                     <TextView
                         android:id="@+id/numberTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_slab"
                         android:text="null"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
                 </TableRow>
@@ -97,12 +103,14 @@
                         android:text="@string/prompt_gender"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_slab_light"
                         android:layout_marginEnd="30dp"/>
 
                     <TextView
                         android:id="@+id/genderTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_slab"
                         android:text="null"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
                 </TableRow>
@@ -114,12 +122,14 @@
                         android:text="@string/title_clinic"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_slab_light"
                         android:layout_marginEnd="30dp"/>
 
                     <TextView
                         android:id="@+id/clinicTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_slab"
                         android:text="null"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
                 </TableRow>
@@ -131,12 +141,14 @@
                         android:text="@string/title_specialty"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_slab_light"
                         android:layout_marginEnd="30dp"/>
 
                     <TextView
                         android:id="@+id/specialtyTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_slab"
                         android:text="Add specialty..."
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
                 </TableRow>

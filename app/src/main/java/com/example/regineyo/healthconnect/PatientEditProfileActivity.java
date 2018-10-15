@@ -51,6 +51,7 @@ public class PatientEditProfileActivity extends AppCompatActivity implements Vie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_edit_profile);
+
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         final String userID = user.getUid();
@@ -100,6 +101,13 @@ public class PatientEditProfileActivity extends AppCompatActivity implements Vie
 //        ageTV = findViewById(R.id.showAge);
         heightET = findViewById(R.id.heightET);
         weightET = findViewById(R.id.weightET);
+
+        findViewById(R.id.backBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         findViewById(R.id.passwordBtn).setOnClickListener(new View.OnClickListener() {
             @Override

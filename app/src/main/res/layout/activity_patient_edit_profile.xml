@@ -8,18 +8,31 @@
     tools:context=".PatientEditProfileActivity">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="354dp"
         android:layout_height="match_parent"
         android:layout_margin="30dp"
-        android:orientation="vertical"
         android:background="@drawable/white_border"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="27dp"
+        tools:layout_editor_absoluteY="30dp">
 
-        <!--<TextView-->
-        <!--android:id="@+id/registration_title"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="@string/patient_register_title" />-->
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/backarrow" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_slab_light"
+            android:text="@string/title_edit_profile"
+            android:textColor="#17A589"
+            android:textSize="20sp" />
 
         <!--name-->
         <android.support.design.widget.TextInputLayout
@@ -28,10 +41,12 @@
             android:layout_height="80dp"
             app:errorEnabled="true"
             app:errorTextAppearance="@style/ErrorAppearance">
+
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/nameET"
                 android:layout_width="250dp"
                 android:layout_height="40dp"
+                android:fontFamily="@font/roboto_slab_light"
                 android:hint="@string/hint_name" />
         </android.support.design.widget.TextInputLayout>
 
@@ -42,10 +57,12 @@
             android:layout_height="80dp"
             app:errorEnabled="true"
             app:errorTextAppearance="@style/ErrorAppearance">
+
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/emailET"
                 android:layout_width="250dp"
                 android:layout_height="40dp"
+                android:fontFamily="@font/roboto_slab_light"
                 android:hint="@string/prompt_email"
                 android:inputType="textEmailAddress" />
         </android.support.design.widget.TextInputLayout>
@@ -53,11 +70,13 @@
         <!--password-->
         <Button
             android:id="@+id/passwordBtn"
+            style="@style/ButtonStyle"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
+            android:background="@drawable/secondary_patient_button"
             android:text="@string/action_change_password"
-            android:background="@drawable/secondary_patient_button" />
+            android:textColor="#17A589" />
 
         <!--number-->
         <android.support.design.widget.TextInputLayout
@@ -66,10 +85,12 @@
             android:layout_height="80dp"
             app:errorEnabled="true"
             app:errorTextAppearance="@style/ErrorAppearance">
+
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/numberET"
                 android:layout_width="250dp"
                 android:layout_height="40dp"
+                android:fontFamily="@font/roboto_slab_light"
                 android:hint="@string/hint_number"
                 android:inputType="number" />
         </android.support.design.widget.TextInputLayout>
@@ -86,8 +107,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/secondary_patient_button"
+                android:fontFamily="@font/roboto_slab_light"
                 android:onClick="showDatePickerDialog"
-                android:text="@string/action_date_of_birth" />
+                android:text="@string/action_date_of_birth"
+                android:textAllCaps="false"
+                android:textColor="#17A589" />
 
             <!--selected date of birth-->
             <TextView
@@ -95,6 +119,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
+                android:fontFamily="@font/roboto_slab_light"
                 android:text="@string/hint_DOB" />
 
             <!--<TextView-->
@@ -109,14 +134,15 @@
             android:id="@+id/genderRG"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_marginBottom="10dp"
             android:gravity="center"
-            android:layout_marginBottom="10dp">
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/genderTV"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:fontFamily="@font/roboto_slab_light"
                 android:gravity="center"
                 android:text="@string/prompt_gender" />
 
@@ -125,8 +151,9 @@
                 android:id="@+id/maleRB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:layout_marginEnd="5dp"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/roboto_slab_light"
                 android:text="@string/action_male_radioBtn" />
 
             <!--female-->
@@ -134,6 +161,7 @@
                 android:id="@+id/femaleRB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_slab_light"
                 android:text="@string/action_female_radioBtn" />
         </RadioGroup>
 
@@ -149,10 +177,12 @@
                 android:layout_height="80dp"
                 app:errorEnabled="true"
                 app:errorTextAppearance="@style/ErrorAppearance">
+
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/heightET"
                     android:layout_width="110dp"
                     android:layout_height="40dp"
+                    android:fontFamily="@font/roboto_slab_light"
                     android:hint="@string/hint_height"
                     android:inputType="number" />
             </android.support.design.widget.TextInputLayout>
@@ -164,24 +194,25 @@
                 android:layout_height="80dp"
                 app:errorEnabled="true"
                 app:errorTextAppearance="@style/ErrorAppearance">
+
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/weightET"
                     android:layout_width="110dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="140dp"
+                    android:fontFamily="@font/roboto_slab_light"
                     android:hint="@string/hint_weight"
                     android:inputType="number" />
             </android.support.design.widget.TextInputLayout>
         </RelativeLayout>
 
-        <Button
+        <ImageButton
             android:id="@+id/confirmBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:background="@drawable/primary_patient_button"
-            android:text="@string/action_confirm"
-            android:textColor="#FFFFFF" />
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/checked" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

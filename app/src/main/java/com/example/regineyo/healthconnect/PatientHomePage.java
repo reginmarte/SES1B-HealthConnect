@@ -38,6 +38,7 @@ public class PatientHomePage extends AppCompatActivity {
 
         mMainFrame = (FrameLayout) findViewById(R.id.frame_container);
         mMainNav = (BottomNavigationView) findViewById(R.id.navigation);
+        mMainNav.getMenu().getItem(0).setCheckable(false);
 
         chatFragment = new PatientChatListFragment();
         mapFragment = new MapFragment();
@@ -54,16 +55,20 @@ public class PatientHomePage extends AppCompatActivity {
                 Fragment fragment;
                 switch (item.getItemId()) {
                     case R.id.navigation_messages:
+                        item.setCheckable(true);
                         loadFragment(chatFragment);
                         return true;
                     case R.id.navigation_map:
+                        item.setCheckable(true);
                         Intent intent = new Intent(PatientHomePage.this, MapActivity.class);
                         startActivity(intent);
                         return true;
                     case R.id.navigation_profile:
+                        item.setCheckable(true);
                         loadFragment(profileFragment);
                         return true;
                     case R.id.navigation_settings:
+                        item.setCheckable(true);
                         loadFragment(settingsFragment);
                         return true;
                 }

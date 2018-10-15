@@ -3,6 +3,7 @@ package com.example.regineyo.healthconnect;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,8 +27,14 @@ public class DoctorProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_profile);
 
-        userID = getIntent().getStringExtra("doctor");
+        findViewById(R.id.backBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
+        userID = getIntent().getStringExtra("doctor");
         DatabaseReference mRef = FirebaseDatabase.getInstance().getReference();
         //gets user data from database
         ValueEventListener doctorDetailsListener = new ValueEventListener() {

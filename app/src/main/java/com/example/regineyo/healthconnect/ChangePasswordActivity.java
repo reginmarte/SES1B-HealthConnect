@@ -38,6 +38,13 @@ public class ChangePasswordActivity extends AppCompatActivity {
         passwordET = findViewById(R.id.passwordET);
         confirmPasswordET = findViewById(R.id.confirmPasswordET);
 
+        findViewById(R.id.backBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
         findViewById(R.id.saveBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

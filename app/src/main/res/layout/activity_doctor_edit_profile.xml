@@ -15,11 +15,30 @@
         android:orientation="vertical"
         android:gravity="center">
 
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="-20dp"
+            android:layout_gravity="start"
+            android:background="@drawable/backarrow" />
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/roboto_slab_light"
+            android:text="@string/title_edit_profile"
+            android:textColor="#2E86C1"
+            android:textSize="25sp" />
+
         <!--name-->
         <android.support.design.widget.TextInputLayout
             android:id="@+id/TIL_name"
             android:layout_width="250dp"
             android:layout_height="80dp"
+            android:layout_gravity="center"
             app:errorEnabled="true"
             app:errorTextAppearance="@style/ErrorAppearance">
 
@@ -27,6 +46,7 @@
                 android:id="@+id/nameET"
                 android:layout_width="250dp"
                 android:layout_height="40dp"
+                android:fontFamily="@font/roboto_slab_light"
                 android:hint="@string/hint_name" />
         </android.support.design.widget.TextInputLayout>
 
@@ -35,6 +55,7 @@
             android:id="@+id/TIL_email"
             android:layout_width="250dp"
             android:layout_height="80dp"
+            android:layout_gravity="center"
             app:errorEnabled="true"
             app:errorTextAppearance="@style/ErrorAppearance">
 
@@ -42,6 +63,7 @@
                 android:id="@+id/emailET"
                 android:layout_width="250dp"
                 android:layout_height="40dp"
+                android:fontFamily="@font/roboto_slab_light"
                 android:hint="@string/prompt_email"
                 android:inputType="textEmailAddress" />
         </android.support.design.widget.TextInputLayout>
@@ -51,9 +73,12 @@
             android:id="@+id/passwordBtn"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginBottom="10dp"
             android:background="@drawable/secondary_doctor_button"
+            android:fontFamily="@font/roboto_slab_light"
             android:text="@string/action_change_password"
+            android:textAllCaps="false"
             android:textColor="#2E86C1" />
 
         <!--number-->
@@ -61,6 +86,7 @@
             android:id="@+id/TIL_number"
             android:layout_width="250dp"
             android:layout_height="80dp"
+            android:layout_gravity="center"
             app:errorEnabled="true"
             app:errorTextAppearance="@style/ErrorAppearance">
 
@@ -68,6 +94,7 @@
                 android:id="@+id/numberET"
                 android:layout_width="250dp"
                 android:layout_height="40dp"
+                android:fontFamily="@font/roboto_slab_light"
                 android:hint="@string/hint_number"
                 android:inputType="phone" />
         </android.support.design.widget.TextInputLayout>
@@ -77,6 +104,7 @@
             android:id="@+id/TIL_sCode"
             android:layout_width="250dp"
             android:layout_height="80dp"
+            android:layout_gravity="center"
             app:errorEnabled="true"
             app:errorTextAppearance="@style/ErrorAppearance">
 
@@ -84,6 +112,7 @@
                 android:id="@+id/sCodeET"
                 android:layout_width="250dp"
                 android:layout_height="40dp"
+                android:fontFamily="@font/roboto_slab_light"
                 android:hint="@string/hint_sCode"
                 android:inputType="phone" />
         </android.support.design.widget.TextInputLayout>
@@ -93,13 +122,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center"
+            android:layout_gravity="center"
             android:layout_margin="10dp">
 
             <TextView
                 android:id="@+id/genderTV"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:fontFamily="@font/roboto_slab_light"
                 android:gravity="center"
                 android:text="@string/prompt_gender" />
 
@@ -108,8 +138,9 @@
                 android:id="@+id/maleRB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:layout_marginEnd="5dp"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/roboto_slab_light"
                 android:text="@string/action_male_radioBtn" />
 
             <!--female-->
@@ -117,17 +148,18 @@
                 android:id="@+id/femaleRB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_slab_light"
                 android:text="@string/action_female_radioBtn" />
         </RadioGroup>
 
-        <Button
+        <ImageButton
             android:id="@+id/confirmBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:background="@drawable/primary_doctor_button"
-            android:text="@string/action_confirm"
-            android:textColor="#FFFFFF"/>
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:background="@drawable/checked" />
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
