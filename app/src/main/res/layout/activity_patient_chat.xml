@@ -22,9 +22,16 @@
             android:layout_width="match_parent"
             android:layout_height="60dp">
 
+            <ImageView
+                android:id="@+id/backBtn"
+                android:layout_width="20dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="10dp"
+                ads:srcCompat="@drawable/backarrow" />
+
             <TextView
                 android:id="@+id/chatName"
-                android:layout_width="200dp"
+                android:layout_width="145dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="20dp"
                 android:fontFamily="@font/roboto_slab_light"
@@ -39,15 +46,6 @@
                 android:layout_height="60dp"
                 android:gravity="center_vertical"
                 ads:srcCompat="@drawable/portfolio" />
-
-            <ImageView
-                android:id="@+id/heartRateImageView"
-                android:layout_width="30dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="10dp"
-                android:gravity="center_vertical"
-                ads:srcCompat="@drawable/love" />
-
             <ImageView
                 android:id="@+id/addMessageImageView"
                 android:layout_width="30dp"
@@ -55,7 +53,19 @@
                 android:layout_marginStart="10dp"
                 android:gravity="center_vertical"
                 ads:srcCompat="@drawable/map" />
-
+            <ImageView
+                android:id="@+id/heartRateImageView"
+                android:layout_width="30dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="10dp"
+                android:gravity="center_vertical"
+                ads:srcCompat="@drawable/love" />
+            <ImageView
+                android:id="@+id/cameraImageView"
+                android:layout_width="30dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="10dp"
+                ads:srcCompat="@drawable/camera" />
         </TableRow>
 
         <android.support.v7.widget.RecyclerView
@@ -91,6 +101,7 @@
             android:layout_gravity="bottom"
             android:background="@drawable/white_border"
             android:enabled="false"
+            android:fontFamily="@font/roboto_slab"
             android:text="@string/action_send"
             android:textColor="#17A589" />
     </LinearLayout>

@@ -91,7 +91,7 @@ public class DoctorChatActivity extends AppCompatActivity implements GoogleApiCl
     //    private ProgressBar mProgressBar;
     private EditText mMessageEditText;
     private TextView chatName;
-    private ImageView mAddMessageImageView, portfolioImageView;
+    private ImageView mAddMessageImageView, portfolioImageView, backImageView;
 
     // Firebase instance variables
     private FirebaseRemoteConfig mFirebaseRemoteConfig;
@@ -305,6 +305,14 @@ public class DoctorChatActivity extends AppCompatActivity implements GoogleApiCl
                         .child(MESSAGES_CHILD)
                         .child(patientName + "_" + mUsername).push().setValue(chatMessage);
                 mMessageEditText.setText("");
+            }
+        });
+
+        backImageView = findViewById(R.id.backBtn);
+        backImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
 

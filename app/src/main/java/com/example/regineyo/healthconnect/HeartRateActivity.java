@@ -1,6 +1,9 @@
 package com.example.regineyo.healthconnect;
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -28,6 +31,7 @@ import java.util.List;
         private static final String TAG = "OCVSample::Activity";
         private ViewActivity mOpenCvCameraView;
 
+        private static final int requestCode = 1234;
         private static final int HISTORY_SIZE = 100;
         private double temp = 0;
         static final float ALPHA = 0.75f;
@@ -79,6 +83,10 @@ import java.util.List;
                     onBackPressed();
                 }
             });
+
+//            checkCameraPermissions();
+
+
             // setup the APR History plot:
 
 
@@ -111,6 +119,12 @@ import java.util.List;
 
         }
 
+//        private void checkCameraPermissions() {
+//            if (ContextCompat.checkSelfPermission(HeartRateActivity.this, android.Manifest.permission.CAMERA)
+//                    == PackageManager.PERMISSION_DENIED) {
+//                ActivityCompat.requestPermissions(HeartRateActivity.this, new String[] {android.Manifest.permission.CAMERA}, requestCode);
+//            }
+//        }
 
         @Override
         public void onCameraViewStarted(int width, int height) {

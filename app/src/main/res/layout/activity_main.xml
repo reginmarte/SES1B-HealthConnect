@@ -61,7 +61,7 @@
                 android:id="@+id/passwordET"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="serif-monospace"
+                android:fontFamily="@font/roboto_slab_light"
                 android:hint="@string/prompt_password"
                 android:inputType="textPassword" />
         </android.support.design.widget.TextInputLayout>

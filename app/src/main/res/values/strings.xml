@@ -48,7 +48,7 @@
     <string name="invite_menu_label">Invite</string>
     <string name="action_delete_account">Delete Account</string>
     <string name="instruct_heart_rate_sensor">To begin, turn the flash on.</string>
-    <string name="instruct_heart_rate_sensor1">Press your finger against the camera.</string>
+    <string name="instruct_heart_rate_sensor1">Lightly press your finger on the camera.</string>
     <string name="instruct_heart_rate_sensor2">Then send.</string>
     <string name="title_HR">Send your heart rate.</string>
     <string name="prompt_account_type">Choose account type.</string>

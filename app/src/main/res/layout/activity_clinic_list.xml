@@ -31,7 +31,7 @@
                 android:id="@+id/clinicNameTV"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:fontFamily="@font/roboto_slab_bold"
+                android:fontFamily="@font/roboto_slab"
                 android:paddingStart="20dp"
                 android:text="null"
                 android:textColor="#000000"

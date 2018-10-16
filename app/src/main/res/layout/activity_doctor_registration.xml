@@ -13,13 +13,13 @@
         android:layout_margin="30dp"
         android:background="@drawable/white_border"
         android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center_horizontal">
 
         <ImageButton
             android:id="@+id/backBtn"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginStart="10dp"
+            android:layout_margin="10dp"
             android:layout_gravity="start"
             android:background="@drawable/backarrow" />
 
@@ -156,7 +156,7 @@
             android:id="@+id/confirmBtn"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_gravity="center"
             android:background="@drawable/checked" />
     </LinearLayout>

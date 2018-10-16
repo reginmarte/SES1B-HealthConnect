@@ -99,7 +99,8 @@ public class PatientChatActivity extends AppCompatActivity implements
 //    private ProgressBar mProgressBar;
     private EditText mMessageEditText;
     private TextView chatName;
-    private ImageView mAddMessageImageView, addHeartRateImageView, portfolioImageView;
+    private ImageView mAddMessageImageView;
+//            addHeartRateImageView, portfolioImageView, backImageView;
 
     // Firebase instance variables
     private FirebaseRemoteConfig mFirebaseRemoteConfig;
@@ -111,6 +112,8 @@ public class PatientChatActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_chat);
+
+        ImageView addHeartRateImageView, portfolioImageView, backImageView;
 
         //gets selected doctor====================================================================================
         doctorName = getIntent().getStringExtra("selected_doctor");
@@ -317,6 +320,14 @@ public class PatientChatActivity extends AppCompatActivity implements
         });
 
         //initialises icons available to patient (go to profile, send location, send heart rate, send photos)
+        backImageView = findViewById(R.id.backBtn);
+        backImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
         portfolioImageView = findViewById(R.id.portfolioImageView);
         portfolioImageView.setOnClickListener(new View.OnClickListener() {
             @Override

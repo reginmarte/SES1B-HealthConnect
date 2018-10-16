@@ -8,14 +8,12 @@
     tools:context=".PatientEditProfileActivity">
 
     <LinearLayout
-        android:layout_width="354dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="30dp"
         android:background="@drawable/white_border"
-        android:gravity="center"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="27dp"
-        tools:layout_editor_absoluteY="30dp">
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <ImageButton
             android:id="@+id/backBtn"
