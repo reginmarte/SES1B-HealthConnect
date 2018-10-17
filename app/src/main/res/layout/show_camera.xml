@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:opencv="http://schemas.android.com/apk/res-auto"
+    xmlns:ap="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="30dp"
+    android:orientation="vertical"
+    tools:context=".HeartRateActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/white_border">
+
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="10dp"
+            android:layout_gravity="top|start"
+            android:background="@drawable/backarrow" />
+
+        <TextView
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="70dp"
+            android:fontFamily="@font/roboto_slab_light"
+            android:text="@string/title_HR"
+            android:textColor="#17A589"
+            android:textSize="22sp" />
+
+        <TextView
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/roboto_slab"
+            android:text="@string/instruct_heart_rate_sensor" />
+
+        <TextView
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/roboto_slab"
+            android:text="@string/instruct_heart_rate_sensor1" />
+        <!--android:layout_gravity="end"/>-->
+
+        <TextView
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/roboto_slab"
+            android:text="@string/instruct_heart_rate_sensor2" />
+            <!--android:layout_marginStart="20dp"-->
+            <!--android:gravity="end"/>-->
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginStart="200dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/roboto_slab_light"
+            android:switchPadding="@dimen/activity_horizontal_margin"
+            android:text="@string/title_flash" />
+
+        <TextView
+            android:id="@+id/histvalue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/roboto_slab"
+            android:text="@string/title_bpm"
+            android:textAlignment="center"
+            android:textSize="40sp" />
+
+        <com.example.regineyo.healthconnect.ViewActivity
+            android:id="@+id/show_camera_activity_java_surface_view"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:visibility="visible"
+            opencv:camera_id="back"/>
+            <!--opencv:show_fps="true" />-->
+
+        <Button
+            android:id="@+id/loginBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="60dp"
+            android:background="@color/ap_transparent"
+            android:fontFamily="@font/roboto_slab"
+            android:text="@string/action_send_HR"
+            android:textAllCaps="false"
+            android:textColor="#17A589" />
+
+    </LinearLayout>
+
+</RelativeLayout>

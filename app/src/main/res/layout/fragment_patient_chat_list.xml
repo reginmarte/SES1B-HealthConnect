@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    tools:context=".PatientChatListFragment">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/coordinator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="30dp"
+        android:background="@drawable/white_border">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:fontFamily="@font/roboto_slab_light"
+                android:gravity="center_vertical"
+                android:paddingStart="20dp"
+                android:paddingTop="0dp"
+                android:text="@string/title_existing_chats"
+                android:textColor="#17A589"
+                android:textSize="16sp" />
+
+            <ListView
+                android:id="@+id/doctorList"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:divider="#c6c8cf"
+                android:dividerHeight="1dp"
+                android:listSelector="#76D7C4"
+                android:layout_marginBottom="5dp"/>
+
+        </LinearLayout>
+    </android.support.design.widget.CoordinatorLayout>
+
+</FrameLayout>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    tools:context=".ClinicListActivity">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="30dp"
+        android:orientation="vertical"
+        android:background="@drawable/white_border">
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:fontFamily="@font/roboto_slab_light"
+                android:gravity="center_vertical"
+                android:paddingStart="20dp"
+                android:paddingTop="0dp"
+                android:text="@string/title_clinic_list"
+                android:textColor="#17A589"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/clinicNameTV"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:fontFamily="@font/roboto_slab_bold"
+                android:paddingStart="20dp"
+                android:text="null"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+        </TableRow>
+
+        <ListView
+            android:id="@+id/doctorList"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="5dp"
+            android:divider="#c6c8cf"
+            android:dividerHeight="1dp"
+            android:listSelector="#76D7C4" />
+        <TextView
+            android:id="@+id/empty"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/roboto_slab_light"
+            android:text="@string/title_no_doctors"/>
+
+    </TableLayout>
+
+</android.support.constraint.ConstraintLayout>

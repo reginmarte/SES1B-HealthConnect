@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    tools:context=".PatientProfileActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="30dp"
+            android:background="@drawable/white_border"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/backBtn"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_margin="10dp"
+                android:layout_gravity="top|start"
+                android:background="@drawable/backarrow" />
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/patient"
+                android:layout_gravity="center"
+                android:layout_marginTop="80dp"
+                android:layout_marginBottom="50dp"/>
+
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <TableRow
+                    android:layout_marginBottom="10dp">
+                    <!--name-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="30dp"
+                        android:fontFamily="@font/roboto_slab_light"
+                        android:text="@string/hint_name" />
+
+                    <TextView
+                        android:id="@+id/nameTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_slab"
+                        android:text="null"
+                        android:textAppearance="@style/Title" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginBottom="10dp">
+                    <!--email-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="30dp"
+                        android:fontFamily="@font/roboto_slab_light"
+                        android:text="@string/prompt_email" />
+
+                    <TextView
+                        android:id="@+id/emailTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_slab"
+                        android:text="null"
+                        android:textAppearance="@style/Title" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginBottom="10dp">
+                    <!--number-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="30dp"
+                        android:fontFamily="@font/roboto_slab_light"
+                        android:text="@string/hint_number" />
+
+                    <TextView
+                        android:id="@+id/numberTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_slab"
+                        android:text="null"
+                        android:textAppearance="@style/Title" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginBottom="10dp">
+                    <!--D.O.B-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="30dp"
+                        android:fontFamily="@font/roboto_slab_light"
+                        android:text="@string/action_date_of_birth" />
+
+                    <TextView
+                        android:id="@+id/dateOfBirthTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_slab"
+                        android:text="null"
+                        android:textAppearance="@style/Title" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginBottom="10dp">
+                    <!--gender-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="30dp"
+                        android:fontFamily="@font/roboto_slab_light"
+                        android:text="@string/prompt_gender" />
+
+                    <TextView
+                        android:id="@+id/genderTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_slab"
+                        android:text="null"
+                        android:textAppearance="@style/Title" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginBottom="10dp">
+                    <!--height-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="30dp"
+                        android:fontFamily="@font/roboto_slab_light"
+                        android:text="@string/hint_height" />
+
+                    <TextView
+                        android:id="@+id/heightTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_slab"
+                        android:text="null"
+                        android:textAppearance="@style/Title" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginBottom="10dp">
+                    <!--weight-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="30dp"
+                        android:fontFamily="@font/roboto_slab_light"
+                        android:text="@string/hint_weight" />
+
+                    <TextView
+                        android:id="@+id/weightTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_slab"
+                        android:text="null"
+                        android:textAppearance="@style/Title" />
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

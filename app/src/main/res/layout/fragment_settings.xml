@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    tools:context=".SettingsFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="30dp"
+        android:background="@drawable/white_border"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/deleteBtn"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/primary_patient_button"
+            android:fontFamily="@font/roboto_slab"
+            android:text="@string/action_delete_account"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/logoutBtn"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/primary_patient_button"
+            android:fontFamily="@font/roboto_slab"
+            android:text="@string/sign_out"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+</FrameLayout>

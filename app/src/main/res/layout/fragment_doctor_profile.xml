@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    tools:context=".DoctorProfileFragment">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/coordinator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="30dp"
+        android:background="@drawable/white_border">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/editImageBtn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="5dp"
+                android:layout_gravity="end"
+                android:background="@drawable/edit" />
+
+            <ImageView
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:src="@drawable/doctor"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"/>
+
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <TableRow
+                    android:layout_marginBottom="10dp">
+                    <!--name-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="30dp"
+                        android:fontFamily="@font/roboto_slab_light"
+                        android:text="@string/hint_name" />
+
+                    <TextView
+                        android:id="@+id/nameTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_slab"
+                        android:text="null"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginBottom="10dp">
+                    <!--email-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="30dp"
+                        android:fontFamily="@font/roboto_slab_light"
+                        android:text="@string/prompt_email" />
+
+                    <TextView
+                        android:id="@+id/emailTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_slab"
+                        android:text="null"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginBottom="10dp">
+                    <!--number-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="30dp"
+                        android:fontFamily="@font/roboto_slab_light"
+                        android:text="@string/hint_number" />
+
+                    <TextView
+                        android:id="@+id/numberTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_slab"
+                        android:text="null"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginBottom="10dp">
+                    <!--gender-->
+                    <TextView
+                        android:text="@string/prompt_gender"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_slab_light"
+                        android:layout_marginEnd="30dp"/>
+
+                    <TextView
+                        android:id="@+id/genderTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_slab"
+                        android:text="null"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginBottom="10dp">
+                    <!--clinic-->
+                    <TextView
+                        android:text="@string/title_clinic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_slab_light"
+                        android:layout_marginEnd="30dp"/>
+
+                    <TextView
+                        android:id="@+id/clinicTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_slab"
+                        android:text="null"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginBottom="10dp">
+                    <!--specialty-->
+                    <TextView
+                        android:text="@string/title_specialty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_slab_light"
+                        android:layout_marginEnd="30dp"/>
+
+                    <TextView
+                        android:id="@+id/specialtyTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_slab"
+                        android:text="Add specialty..."
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
+    </android.support.design.widget.CoordinatorLayout>
+
+</FrameLayout>

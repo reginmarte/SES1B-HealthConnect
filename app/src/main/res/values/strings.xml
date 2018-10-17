@@ -1,3 +1,75 @@
 <resources>
     <string name="app_name">HealthConnect</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="action_settings">Toggle Flash</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Login</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email"</string>
+    <string name="google_maps_API_key">AIzaSyD1AZs0PxyEIw4ezqoGlDaf8ADfnJ65Zu4</string>
+
+    <string name="prompt_enter_email">"Enter your email to reset password.</string>
+    <string name="patient_register_title">Health Connect</string>
+    <string name="prompt_patient_doctor">"Are you a patient or doctor?"</string>
+    <string name="action_select_patient">Patient</string>
+    <string name="action_select_doctor">Doctor</string>
+    <string name="prompt_register">"Don't have an account?"</string>
+    <string name="action_register_short">Sign up</string>
+    <string name="action_forgot_password">Forgot your password?</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_number">Contact number</string>
+    <string name="hint_confirm_password">Confirm password</string>
+    <string name="action_change_password">Change password</string>
+    <string name="action_next">"Next"</string>
+    <string name="action_confirm">Confirm</string>
+    <string name="action_save">Save</string>
+    <string name="action_send">Send</string>
+    <string name="action_send_HR">Send your heart rate</string>
+    <string name="hint_sCode">Clinic code</string>
+    <string name="prompt_gender">Gender </string>
+    <string name="action_male_radioBtn">Male</string>
+    <string name="action_female_radioBtn">Female</string>
+    <string name="action_date_of_birth">Date of birth</string>
+    <string name="hint_DOB">dd/mon/year</string>
+    <string name="hint_height">Height (cm)</string>
+    <string name="hint_weight">Weight (kg)</string>
+    <string name="title_clinic">Clinic</string>
+    <string name="title_specialty">Specialty</string>
+    <string name="fresh_config">Fresh Config</string>
+    <string name="cause_crash">Cause Crash</string>
+    <string name="invite_menu_label">Invite</string>
+    <string name="action_delete_account">Delete Account</string>
+    <string name="instruct_heart_rate_sensor">To begin, turn the flash on.</string>
+    <string name="instruct_heart_rate_sensor1">Press your finger against the camera.</string>
+    <string name="instruct_heart_rate_sensor2">Then send.</string>
+    <string name="title_HR">Send your heart rate.</string>
+    <string name="prompt_account_type">Choose account type.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_home_page">Home</string>
+    <string name="title_activity_main_screen">MainScreen</string>
+    <string name="title_messages">Messages</string>
+    <string name="title_map">Map</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_edit_profile">Edit your profile.</string>
+    <string name="title_change_pw">Update your password.</string>
+    <string name="title_setting">Setting</string>
+    <string name="title_activity_messaging">MessagingActivity</string>
+    <string name="title_clinic_list">Doctors available at: </string>
+    <string name="title_list_patients">Patients</string>
+    <string name="title_list_doctors">Doctors</string>
+    <string name="title_existing_chats">Existing Chats</string>
+    <string name="title_no_doctors">Unfortunately, there are no doctors available at this clinic.</string>
+    <string name="title_flash">Flash</string>
+    <string name="title_bpm">0 bpm</string>
+    <string name="title_register">Register here.</string>
 </resources>

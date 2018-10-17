@@ -1,18 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="30dp"
+        android:background="@drawable/white_border"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <!--<TextView-->
+            <!--android:id="@+id/logo"-->
+            <!--android:text="@string/patient_register_title"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_gravity="center" />-->
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:layout_margin="30dp"
+            android:src="@drawable/cardiogram"/>
+
+        <!--email-->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/TIL_email"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            app:errorTextAppearance="@style/ErrorAppearance">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/emailET"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_slab_light"
+                android:hint="@string/prompt_email"
+                android:inputType="textEmailAddress" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <!--password-->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/TIL_password"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            app:passwordToggleEnabled="true"
+            app:errorTextAppearance="@style/ErrorAppearance">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/passwordET"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="serif-monospace"
+                android:hint="@string/prompt_password"
+                android:inputType="textPassword" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/loginBtn"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/primary_patient_button"
+            android:fontFamily="@font/roboto_slab"
+            android:text="@string/action_sign_in_short"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/forgotPasswordBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/roboto_slab"
+            android:text="@string/action_forgot_password"
+            android:textColor="#76D7C4"
+            android:textSize="12sp" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:gravity="center"
+            android:layout_marginTop="60dp">
+
+            <TextView
+                android:id="@+id/prompt_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_slab"
+                android:gravity="right"
+                android:text="@string/prompt_register" />
+
+            <Button
+                android:id="@+id/registerBtn"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/roboto_slab"
+                android:text="@string/action_register_short"
+                android:textAllCaps="false"
+                android:textColor="#76D7C4"
+                android:textSize="12sp" />
+        </TableRow>
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

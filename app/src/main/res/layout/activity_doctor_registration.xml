@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    tools:context=".DoctorRegistrationActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="30dp"
+        android:background="@drawable/white_border"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_gravity="start"
+            android:background="@drawable/backarrow" />
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/roboto_slab_light"
+            android:text="@string/title_register"
+            android:textColor="#2E86C1"
+            android:textSize="25sp" />
+
+        <!--name-->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/TIL_name"
+            android:layout_width="250dp"
+            android:layout_height="80dp"
+            app:errorEnabled="true"
+            app:errorTextAppearance="@style/ErrorAppearance">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/nameET"
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:fontFamily="@font/roboto_slab_light"
+                android:hint="@string/hint_name" />
+        </android.support.design.widget.TextInputLayout>
+
+        <!--email-->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/TIL_email"
+            android:layout_width="250dp"
+            android:layout_height="80dp"
+            app:errorEnabled="true"
+            app:errorTextAppearance="@style/ErrorAppearance">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/emailET"
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:fontFamily="@font/roboto_slab_light"
+                android:hint="@string/prompt_email"
+                android:inputType="textEmailAddress" />
+        </android.support.design.widget.TextInputLayout>
+
+        <!--password-->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/TIL_password"
+            android:layout_width="250dp"
+            android:layout_height="80dp"
+            app:passwordToggleEnabled="true"
+            app:errorEnabled="true"
+            app:errorTextAppearance="@style/ErrorAppearance">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/passwordET"
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:fontFamily="@font/roboto_slab_light"
+                android:hint="@string/prompt_password"
+                android:inputType="textPassword" />
+        </android.support.design.widget.TextInputLayout>
+
+        <!--number-->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/TIL_number"
+            android:layout_width="250dp"
+            android:layout_height="80dp"
+            app:errorEnabled="true"
+            app:errorTextAppearance="@style/ErrorAppearance">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/numberET"
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:fontFamily="@font/roboto_slab_light"
+                android:hint="@string/hint_number"
+                android:inputType="phone" />
+        </android.support.design.widget.TextInputLayout>
+
+        <!--sCode-->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/TIL_sCode"
+            android:layout_width="250dp"
+            android:layout_height="80dp"
+            app:errorEnabled="true"
+            app:errorTextAppearance="@style/ErrorAppearance">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/sCodeET"
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:fontFamily="@font/roboto_slab_light"
+                android:hint="@string/hint_sCode"
+                android:inputType="phone" />
+        </android.support.design.widget.TextInputLayout>
+
+        <RadioGroup
+            android:id="@+id/genderRG"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_margin="10dp">
+
+            <TextView
+                android:id="@+id/genderTV"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/roboto_slab_light"
+                android:gravity="center"
+                android:text="@string/prompt_gender" />
+
+            <!--male-->
+            <RadioButton
+                android:id="@+id/maleRB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/roboto_slab"
+                android:text="@string/action_male_radioBtn" />
+
+            <!--female-->
+            <RadioButton
+                android:id="@+id/femaleRB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_slab"
+                android:text="@string/action_female_radioBtn" />
+        </RadioGroup>
+
+        <ImageButton
+            android:id="@+id/confirmBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:background="@drawable/checked" />
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

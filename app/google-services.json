@@ -1,0 +1,79 @@
+{
+  "project_info": {
+    "project_number": "440103445119",
+    "firebase_url": "https://healthconnect-8c8af.firebaseio.com",
+    "project_id": "healthconnect-8c8af",
+    "storage_bucket": "healthconnect-8c8af.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:440103445119:android:21ad6d92459b377b",
+        "android_client_info": {
+          "package_name": "com.example.regineyo.healthconnect"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "440103445119-mvo9khvo9tbumnl0689o5u3mju2s50sb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.regineyo.healthconnect",
+            "certificate_hash": "e04ebdae0ab3e62b73f89f7a2b38ea191d970ac5"
+          }
+        },
+        {
+          "client_id": "440103445119-cjrcfl8r6nppd12kntoro8vtbmiom447.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.regineyo.healthconnect",
+            "certificate_hash": "25db56642a95035c9f0d0efed25ae3f08c0be291"
+          }
+        },
+        {
+          "client_id": "440103445119-gegajn3fela39u33n8rgqe639tadg2v8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.regineyo.healthconnect",
+            "certificate_hash": "3b2458d5387abf3dc1934190a235feebb096602c"
+          }
+        },
+        {
+          "client_id": "440103445119-t738412q5tusbsecjsatv7p19idkvblv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.regineyo.healthconnect",
+            "certificate_hash": "6da5b313a7f5aae0a48fabf0302e455c74aea99c"
+          }
+        },
+        {
+          "client_id": "440103445119-biq80vf5dfot718bf634c75te0v95ifn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqtLQHNmbaMaoMwkxZVamdRnUNevdyWeA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "440103445119-biq80vf5dfot718bf634c75te0v95ifn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
