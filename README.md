@@ -7,7 +7,7 @@ Browse this repo for a guide on importing this and modifying the project.
 1. Head over to clone or download and copy the link
 ![clone](https://github.com/reginmarte/SES1B-HealthConnect/blob/master/img/Capture322.PNG)
 
-2. Open up android studio and select github
+2. Open up android studio and select file -> new -> project from version control -> github
 ![studio](https://github.com/reginmarte/SES1B-HealthConnect/blob/master/img/studio.png)
 
 3. Paste previously copied link and hit clone
