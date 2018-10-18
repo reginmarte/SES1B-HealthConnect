@@ -1,7 +1,7 @@
 # SES1B-HealthConnect
 HealthConnect includes multiple functions that aid patients in connecting and communicating with a doctor. It also provides features that allow doctors to diagnose this information and directly advise the patient on their condition.
 
-Browse this repo for a guide on importing this and modifying the project.
+Browse this repo for a guide on importing and modifying the project.
 
 # Getting started
 1. Head over to Clone or download and copy the link.
