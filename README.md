@@ -4,8 +4,11 @@ HealthConnect includes multiple functions that aid patients in connecting and co
 Features of HealthConnect include:
 
 Message - Patient can message with doctor so that doctor can directly advise the patient on their condition.
+
 Heart rate sensor - Patient can know their current heart rate.
+
 Map - Patient can know where are the near by clinics and the doctors within the clinic.
+
 Personal profile - Patients and Doctor have their own personal profile which can be view and edit.
 
 Browse this repo for a guide on importing and modifying the project.
