@@ -1,5 +1,5 @@
 # SES1B-HealthConnect
-HealthConnect includes multiple functions in order to aid a patient in getting a doctor and diagnosing what condition they may be suffering from.
+HealthConnect includes multiple functions that aid patients in connecting and communicating with a doctor. It also provides features that allow doctors to diagnose this information and directly advise the patient on their condition.
 
 Browse this repo for a guide on importing this and modifying the project.
 
