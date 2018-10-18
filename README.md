@@ -4,14 +4,14 @@ HealthConnect includes multiple functions that aid patients in connecting and co
 Browse this repo for a guide on importing this and modifying the project.
 
 # Getting started
-1. Head over to clone or download and copy the link
+1. Head over to Clone or download and copy the link.
 ![clone](https://github.com/reginmarte/SES1B-HealthConnect/blob/master/img/Capture322.PNG)
 
-2. Open up android studio and select file -> new -> project from version control -> github
+2. Open up Android Studio V3.1 and select File -> New -> Project from version control -> github.
 ![studio](https://github.com/reginmarte/SES1B-HealthConnect/blob/master/img/studio.png)
 
-3. Paste previously copied link and hit clone
+3. Paste previously copied link and select clone.
 ![studiocloning](https://github.com/reginmarte/SES1B-HealthConnect/blob/master/img/clone.PNG)
 
-4. All done, project successfully imported :)
+4. All done, project is now successfully imported. :)
 ![done](https://github.com/reginmarte/SES1B-HealthConnect/blob/master/img/done.PNG)
