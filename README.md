@@ -11,7 +11,7 @@ Map - Patient can know where are the near by clinics and the doctors within the 
 
 Personal profile - Patients and Doctor have their own personal profile which can be view and edit.
 
-
+-----------------------------------------------------------------------------------------------------------
 
 Browse this repo for a guide on importing and modifying the project.
 
